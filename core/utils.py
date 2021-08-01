@@ -18,10 +18,10 @@ class Controllers:
             rand[(len(rand) // 2)] = instance_id
             return "".join(rand)[:len(str(tolerans[1]))]
 
-    class ProductItem:
+    class Image:
 
         @classmethod
         def img_renamer(cls, instance, file):
             img_name, img_ext = Controllers.File.file_name_ext_getter(file)
             new_img_name = f"{Controllers.File.file_name_creator(instance.id)}{img_ext}"
-            return f"images/product_item/{new_img_name}"
+            return f"images/cache/{new_img_name}"

@@ -1,6 +1,7 @@
 from django.db import models
 from core.models import BaseModel
 from django.utils.translation import gettext_lazy as _, get_language
+from core.utils import *
 
 
 class Category(BaseModel):
@@ -15,6 +16,11 @@ class Category(BaseModel):
         verbose_name=_("Category EN Name"),
         help_text=_("This is english name category item"),
         unique=True,
+    )
+    image = models.ImageField(
+        upload_to=Controllers.Image.img_renamer, null=True, blank=True,
+        verbose_name=_("Category image"),
+        help_text=_("This is image of category item")
     )
 
     @property

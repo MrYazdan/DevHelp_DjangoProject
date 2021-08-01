@@ -2,7 +2,7 @@ from django.db import models
 from core.models import BaseModel , BaseManager
 from category.models import Category
 from django.utils.translation import gettext_lazy as _, get_language
-from .utils import *
+from core.utils import *
 
 
 class ExtraProductManager(models.Manager):
@@ -35,7 +35,7 @@ class Product(BaseModel):
     price = models.IntegerField(verbose_name=_("Price item"), help_text=_("This is price item"))
     discount = models.IntegerField(verbose_name=_("Discount item"), help_text=_("This is discount of item"))
     image = models.ImageField(
-        upload_to=Controllers.ProductItem.img_renamer, null=False, blank=False,
+        upload_to=Controllers.Image.img_renamer, null=False, blank=False,
         verbose_name=_("Product Image"),
         help_text=_("This is image of product item")
     )
