@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _
 class BaseManager(models.Manager):
 
     def get_queryset(self):
-        return super().get_queryset().filter(is_deleted=False)
+        return super().get_queryset().filter(is_deleted=False, active=True)
 
     # define method for access all querysets
     def get_archive(self):

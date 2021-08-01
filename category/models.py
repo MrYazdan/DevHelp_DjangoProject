@@ -22,7 +22,7 @@ class Category(BaseModel):
         return self.name_en if get_language() == "en-US" else self.name_fa
 
     @property
-    def url(self):
+    def url_name(self):
         return self.name_en if " " not in self.name_en else self.name_en.replace(" ", "_")
 
     class Meta:
