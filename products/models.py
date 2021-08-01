@@ -67,7 +67,8 @@ class Product(BaseModel):
     def final_price(self):
         return self.price - self.discount
 
-    def get_product_url(self):
+    @property
+    def product_url(self):
         return f"/products/{self.id}/{self.title_en.replace(' ', '-')}"
 
     def __str__(self):
