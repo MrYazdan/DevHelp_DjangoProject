@@ -8,11 +8,13 @@ class Category(BaseModel):
         max_length=150,
         verbose_name=_("Category FA Name"),
         help_text=_("This is persian name category item"),
+        unique=True,
     )
     name_en = models.CharField(
         max_length=150,
         verbose_name=_("Category EN Name"),
         help_text=_("This is english name category item"),
+        unique=True,
     )
 
     @property
