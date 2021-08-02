@@ -1,14 +1,13 @@
 from django.shortcuts import render
 from category.models import Category
-from settings.models import SochialAccount
+from settings.models import SochialAccount, Site
 from products.models import Product
 
 
 def partial_footer(request, *args, **kwargs):
     context = {
         "sochials": SochialAccount.objects.all(),
-        # "footer_msg": Site.objects.all()
-        "footer_msg": "تیم دولوپر کمکی مشتاق نظرات و پیشنهادات شماست :)"
+        "footer_msg": Site.objects.all()[-1].footer_msg
     }
     return render(request, "landing/partial/footer.html", context)
 
@@ -33,5 +32,7 @@ def partial_search(request, *args, **kwargs):
 
 
 def partial_header(request, *args, **kwargs):
-    context = {}
+    context = {
+        "site": Site.objects.all()[-1]
+    }
     return render(request, "landing/partial/header.html", context)
