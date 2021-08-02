@@ -71,42 +71,9 @@
     {% endfor %}
 </div>
 <!-- offer shop -->
-<div class="relative mt-1 mb-8 max-w-screen-lg w-11/12 mx-auto">
-    <div class="rtl py-6 sm:py-2 md:py-4 grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-4 md:gap-8">
-        {% for item in offer.list %}
-            <a hover-class="anim-shadowly" href="{{ item.url }}" class="relative bg-black bg-opacity-40 bg-strip-sm rounded-lg">
-            <div class="ribbon ribbon-r"><span>{% trans "فروش ویژه" %}</span></div>
-            <div class="relative">
-                <img src="{{ item.image.url }}" alt="{{ item.name_en }}" class=" border-8 border-red-500 rounded-t-lg">
-                <h3 class="yekan-b absolute bg-black trs-all-300 bg-opacity-70 text-white text-2xl sm:text-sm md:text-lg lg:text-2xl pr-2 pl-5 sm:py-1 lg:py-2 py-2 bottom-0 right-0 rounded-tl-3xl">محصول مورد نظر</h3>
-            </div>
-            <p class="p-4 text-justify text-white sm:text-sm">{{ item.short_description }}</p>
-            <div class="bg-black relative bg-strip-sm bg-opacity-30 text-center p-4 rounded-b-lg">
-                <span class="absolute text-2xl sm:text-sm md:text-lg md:bottom-3 right-4 bottom-3 text-gray-400">
-                    <span class="block">{% trans "تومان" %}</span>
-                    <span class="line-through">{{ item.price }}</span>
-                </span>
-                <b class="text-5xl sm:text-2xl md:text-4xl mt-2 sm:mt-0 block text-left text-pink-700 text-shadow-md">{{ item.final_price }}</b>
-            </div>
-        </a>
-        {% endfor %}
-    </div>
-</div>
+{% render_partial "partial_offer" %}
 <!-- click content -->
-<div class="grid grid-cols-1 gap-10 rounded-md sm:grid-cols-2 mx-auto trs-all-300 px-2 mb-8 max-w-screen-lg w-11/12">
-    <a href="" class="text-shadow-md bg-strip-sm text-white block rtl col-span-1 text-center rounded-md bg-pink-600 border-dashed border-white hover:bg-pink-700 border-2 ring-8 ring-pink-600 py-4 px-3 lg:p-8">
-        <i class="gb gb_graphic_eq -mt-1 md:-mt-2 ml-1 text-2xl lg:text-3xl"></i>
-        <span class="yekan font-bold text-lg md:text-xl lg:text-2xl">{% trans "تمام محصولات دولوپرکمکی" %}</span>
-        <div class="border-pink-900 rounded-full my-3 sm:my-4 border"></div>
-        <p class="text-shadow-none text-center">{% trans "محصولاتی متنوع ، مورد نیاز هر نوع سلیقه ای" %}</p>
-    </a>
-    <a href="" class="text-shadow-md bg-strip-sm text-white block rtl col-span-1 text-center rounded-md bg-blue-500 border-dashed border-white hover:bg-blue-600 border-2 ring-8 ring-blue-500 py-4 px-3 lg:p-8">
-        <i class="gb gb_library_add -mt-1 md:-mt-2 ml-1 text-2xl lg:text-3xl"></i>
-        <span class="yekan font-bold text-lg md:text-xl lg:text-2xl">{% trans "درخواست مبحث آموزشی" %}</span>
-        <div class="border-blue-800 rounded-full my-3 sm:my-4 border"></div>
-        <p class="text-shadow-none text-center">{% trans "تیم دولوپر کمکی عاشقانه آماده پاسخگویست" %}</p>
-    </a>
-</div>
+{% include "landing/layout/_ClickItem.html" %}
 <!-- body content -->
 {% block body %}{% endblock %}
 <!-- footer content -->

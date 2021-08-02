@@ -1,5 +1,5 @@
 from django.db import models
-from core.models import BaseModel , BaseManager
+from core.models import BaseModel, BaseManager
 from category.models import Category
 from django.utils.translation import gettext_lazy as _, get_language
 from core.utils import *
@@ -23,6 +23,14 @@ class Product(BaseModel):
     title_fa = models.CharField(
         max_length=150, verbose_name=_("Persian title"),
         help_text=_("This is persian name of product item")
+    )
+    short_description_en = models.CharField(
+        max_length=400 ,verbose_name=_("English short description"),
+        help_text=_("This is english short description of product item")
+    )
+    short_description_fa = models.CharField(
+        max_length=400 ,verbose_name=_("Persian short description"),
+        help_text=_("This is persian short description of product item")
     )
     description_en = models.TextField(
         verbose_name=_("English description"),
@@ -48,6 +56,10 @@ class Product(BaseModel):
         default=0, verbose_name=_("View counts"),
         help_text=_("This is count of view products")
     )
+    is_offer = models.BooleanField(
+        default=False, verbose_name=_("Offer"),
+        help_text=_("This is status of offer product")
+    )
 
     class Meta:
         verbose_name = _("Product")
@@ -58,6 +70,10 @@ class Product(BaseModel):
     @property
     def description(self):
         return self.description_en if get_language() == "en-US" else self.description_fa
+
+    @property
+    def short_description(self):
+        return self.short_description_en if get_language() == "en-US" else self.short_description_fa
 
     @property
     def title(self):
