@@ -61,15 +61,7 @@
            class="col-span-10 md:col-span-11 search-bar-input leading-10 relative text-white irsans-b bg-white bg-opacity-10 text-2xl  px-4 pb-4 rounded-l-md border-r-4 ">
 </form>
 <!-- best category -->
-<div class="mostly-views trs-all-300 grid grid-cols-6 sm:grid-cols-12 max-w-screen-lg relative mx-auto w-11/12 gap-4 rounded-md overflow-hidden py-4">
-    <div timer="1000" timer-dot="1000"
-         class="col-span-6 sm:col-span-12 flex absolute bg-gray-900 irsans-b inset-0 text-white items-center justify-center my-4 rounded bg-opacity-95 text-sm sm:text-lg md:text-xl">
-        {% trans "درحال بارگزاری پربازدید ترین دسته بندی ها" %}
-    </div>
-    {% for cat in category.list %}
-        <a hover-class="animate__animated animate__jello animate__infinite" title="{{ cat.name }}" href="{{ cat.url_name }}"><img src="{{ cat.img.url }}" alt="{{ cat.name_en }}" class="rounded"></a>
-    {% endfor %}
-</div>
+{% render_partial "partial_category" %}
 <!-- offer shop -->
 {% render_partial "partial_offer" %}
 <!-- click content -->
