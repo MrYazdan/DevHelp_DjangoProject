@@ -1,0 +1,490 @@
+/* ==========================================================================
+   Base styles: Dev-Help.ir By MrYazdan :)
+   Website: https://Mryazdan.ir
+   ========================================================================== */
+
+html {
+    color: #222;
+    font-size: 1em;
+    line-height: 1.4;
+    scroll-behavior: smooth;
+}
+
+html::-webkit-scrollbar {
+    width: 8px;
+    background: #2f333a;
+}
+
+html::-webkit-scrollbar-thumb {
+    background-image: linear-gradient(180deg, #D0368A 0%, #708AD4 99%);
+    box-shadow: inset 2px 2px 5px 0 rgba(255, 255, 255, 0.5);
+}
+
+::-moz-selection {
+    background: #f39e0c;
+    text-shadow: none;
+}
+
+::selection {
+    background: #f39e0c;
+    text-shadow: none;
+}
+
+button:focus, input:focus {
+    outline: none;
+}
+
+.ltr {
+    direction: ltr !important;
+}
+
+.rtl {
+    direction: rtl !important;
+}
+
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+    vertical-align: middle;
+}
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.visible {
+    visibility: visible !important;
+}
+
+.none {
+    display: none !important;
+}
+
+.clearfix::before,
+.clearfix::after {
+    content: " ";
+    display: table;
+}
+
+.clearfix::after {
+    clear: both;
+}
+
+@media print,
+(-webkit-min-device-pixel-ratio: 1.25),
+(min-resolution: 1.25dppx),
+(min-resolution: 120dpi) {
+    /* Style adjustments for high resolution devices */
+}
+
+@media print {
+    *,
+    *::before,
+    *::after {
+        background: #fff !important;
+        color: #000 !important;
+        /* Black prints faster */
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+
+    a[href]::after {
+        content: " (" attr(href) ")";
+    }
+
+    abbr[title]::after {
+        content: " (" attr(title) ")";
+    }
+
+    a[href^="#"]::after,
+    a[href^="javascript:"]::after {
+        content: "";
+    }
+
+    pre {
+        white-space: pre-wrap !important;
+    }
+
+    pre,
+    blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
+
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+}
+
+.irsans {
+    font-family: 'IRSans', serif;
+}
+
+.irsans-b {
+    font-family: 'IRSansBold', serif;
+}
+
+.yekan {
+    font-family: 'Yekan', serif !important;
+}
+
+
+/* Start Main Page */
+
+* {
+    font-family: 'IRSans', sans-serif;
+}
+
+body {
+    direction: rtl;
+    background: #34373F;
+}
+
+.text-shadow-header {
+    text-shadow: 0 0 4px #000000;
+    color: #ffffff;
+}
+
+.title {
+    height: 125px;
+    text-align: center;
+    position: relative;
+}
+
+.title > span {
+    font: 45px 'IRSansBold';
+    position: relative;
+    top: 35px;
+}
+
+.title > span > .super-span {
+    font-style: normal !important;
+    position: absolute;
+    top: -25px;
+    right: 55px;
+}
+
+@-moz-document url-prefix() {
+    .title > span > .super-span {
+        margin-right: 1rem;
+    }
+}
+
+.title > svg {
+    position: absolute;
+    right: -50px;
+    top: -60px;
+    width: 240px;
+}
+
+header {
+    position: relative;
+    padding: 50px 0 40px;
+    overflow: hidden;
+    z-index: +1;
+    background: #34373f;
+}
+
+header > span.content {
+    font: 25px 'Yekan';
+    font-weight: bolder;
+    color: #ffffff;
+    border-radius: 10px;
+    margin-right: -10px;
+    padding: 15px 60px 15px 20px;
+    background: #009688;
+    position: relative;
+    z-index: -1;
+}
+
+.header-svg {
+    z-index: -1;
+    position: absolute;
+    top: 90px;
+}
+
+header > span > a.home-link {
+    position: absolute;
+    left: 5px;
+    top: 85px;
+    color: #555;
+    text-shadow: none;
+    font: 20px 'IBM Plex Mono';
+}
+
+header > span > a.home-link > .sub-link {
+    font-size: 12px;
+    display: inline-block;
+    float: right;
+    margin: 5px 0 0 10px;
+}
+
+.custom-shape-divider-top {
+    position: relative;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+    transform: rotate(180deg);
+}
+
+.custom-shape-divider-top svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1px);
+    height: 92px;
+    transform: rotateY(180deg);
+}
+
+.custom-shape-divider-top .shape-fill {
+    fill: #34373F;
+}
+
+.custom-shape-divider-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1px);
+    height: 93px;
+    transform: rotateY(180deg);
+}
+
+.custom-shape-divider-bottom .shape-fill {
+    fill: #34373F;
+}
+
+.color-change-2x {
+    -webkit-animation: color-change-2x 15s linear infinite alternate both;
+    animation: color-change-2x 15s linear infinite alternate both;
+}
+
+.pop-list {
+    top: -100px;
+    z-index: 0;
+    padding: 140px 0 160px 0;
+}
+
+.glassy {
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.item-list {
+    z-index: +1;
+    position: relative;
+}
+
+.item-list > .item {
+    font: 24px 'Aviny';
+    line-height: 48px;
+    height: 68px;
+}
+
+.item-list > .item > img {
+    width: 48px;
+}
+
+.title-list-item {
+    display: inline-block;
+    box-shadow: none;
+    padding: 10px 10px 10px 20px;
+    border-radius: 10px 10px 0 0;
+    margin-bottom: -16px;
+}
+
+.terminal-section {
+    direction: ltr;
+    background: #2a2c316b;
+    border-radius: 10px;
+    padding: 10px 15px 20px 15px;
+}
+
+.terminal-section > .widget:before {
+    content: "";
+    position: relative;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #ff6057;
+    box-shadow: 22px 0 0 #ffbd2f, 44px 0 0 #28c940;
+}
+
+.terminal-section > p {
+    line-height: 28px !important;
+}
+
+.text-purple-custom {
+    color: #E48BFF;
+}
+
+.text-blue-custom {
+    color: #63D4E0;
+}
+
+.text-green-custom {
+    color: #B1E18B;
+}
+
+.blinker {
+    color: #63D4E0;
+}
+
+.blinker > i, .blinker-i {
+    animation: blink 3s infinite;
+    color: #ffb300;
+}
+
+.search-bar-input {
+    font-family: 'Gorbeh Icons', 'IRSansBold', sans-serif;
+}
+
+.trs-all-300, .trs-all-300 * {
+    -webkit-transition: all linear 300ms;
+    -moz-transition: all linear 300ms;
+    -ms-transition: all linear 300ms;
+    -o-transition: all linear 300ms;
+    transition: all linear 300ms;
+}
+
+.text-shadow-md {
+    text-shadow: 0 2px 0 #444;
+}
+
+.text-shadow-none {
+    text-shadow: none;
+}
+
+.bg-strip-sm {
+    background-image: url("../img/assets/stripts.png");
+    background-size: 45px;
+    background-repeat: repeat;
+}
+
+.ribbon {
+    position: absolute;
+    z-index: 1;
+    overflow: hidden;
+    width: 175px;
+    height: 175px;
+    text-align: right;
+}
+
+.ribbon-r {
+    right: -5px;
+    top: -5px;
+}
+
+.ribbon-l {
+    left: -5px;
+    top: -5px;
+}
+
+.ribbon-r span {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    top: 19px;
+    right: -32px;
+}
+
+.ribbon-l span {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    top: 19px;
+    left: -32px;
+}
+
+.ribbon span {
+    font-size: 13px;
+    padding: 0 10px;
+    font-weight: bold;
+    color: #FFF;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 35px;
+    width: 136px;
+    display: block;
+    background: #79A70A;
+    background: linear-gradient(#F70505 0%, #8F0808 100%);
+    box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
+    position: absolute;
+
+}
+
+.ribbon span::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 100%;
+    z-index: -1;
+    border-left: 3px solid #8F0808;
+    border-right: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+    border-top: 3px solid #8F0808;
+}
+
+.ribbon span::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 100%;
+    z-index: -1;
+    border-left: 3px solid transparent;
+    border-right: 3px solid #8F0808;
+    border-bottom: 3px solid transparent;
+    border-top: 3px solid #8F0808;
+}
+
+.bg-gradient {
+    background-image: linear-gradient(180deg, #D0368A 0%, #708AD4 99%);
+    box-shadow: inset 2px 2px 5px 0 rgba(255,255,255, 0.5);
+}

@@ -35,7 +35,7 @@ class Product(BaseModel):
     price = models.IntegerField(verbose_name=_("Price item"), help_text=_("This is price item"))
     discount = models.IntegerField(verbose_name=_("Discount item"), help_text=_("This is discount of item"))
     image = models.ImageField(
-        upload_to=Controllers.Image.img_renamer, null=False, blank=False,
+        upload_to=Controllers.Image.img_renamer,
         verbose_name=_("Product Image"),
         help_text=_("This is image of product item")
     )

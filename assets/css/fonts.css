@@ -1,0 +1,56 @@
+@font-face {
+    font-family: 'IRSans';
+    src: url("../fonts/persian/IRANSansWeb.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'IRSansBold';
+    src: url("../fonts/persian/IRANSansWeb_Bold.woff2") format("woff2");
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Aviny';
+    src: url("../fonts/persian/Aviny.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Aviny';
+    src: url("../fonts/persian/Aviny.woff") format("woff");
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Yekan';
+    src: url("../fonts/persian/iranyekanlight.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: Vazir;
+    src: url( '../fonts/persian/Vazir.eot' );
+    src: url( '../fonts/persian/Vazir.eot?#iefix' ) format( 'embedded-opentype' ),
+    url( '../fonts/persian/Vazir.woff2' ) format( 'woff2' ),
+    url( '../fonts/persian/Vazir.woff' ) format( 'woff' ),
+    url( '../fonts/persian/Vazir.ttf' ) format( 'truetype' );
+    font-weight: normal;
+    font-style: normal;
+}
+
+.Vazir {
+    font-family: Vazir, sans-serif;
+}
+
+@font-face {
+    font-family: 'BPMono';
+    src: url("../fonts/console/bpmono.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}

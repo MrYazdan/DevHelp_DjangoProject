@@ -113,11 +113,11 @@ LOCALE_PATHS = [
     BASE_DIR / "locale",
 ]
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'static/']
+STATIC_URL = '/assets/'
+STATICFILES_DIRS = [BASE_DIR / 'assets']
 
-MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_URL = "/cdn/"
+MEDIA_ROOT = BASE_DIR / "cdn"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
