@@ -1,5 +1,6 @@
 {% load static %}
 {% load i18n %}
+{% load render_partial %}
 {% get_current_language as LANGUAGE_CODE %}
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}">
@@ -106,19 +107,10 @@
         <p class="text-shadow-none text-center">{% trans "تیم دولوپر کمکی عاشقانه آماده پاسخگویست" %}</p>
     </a>
 </div>
-<!-- footer content -->
-<div class="trs-all-300 grid grid-cols-1 bg-black bg-opacity-70 text-white px-4 sm:grid-cols-2 max-w-screen-lg relative mx-auto w-11/12 gap-4 rounded-t-lg overflow-hidden py-4">
-    <div class="">
-        <h6>{% trans "تیم دولوپر کمکی مشتاق نظرات و پیشنهادات شماست :)" %}</h6>
-    </div>
-    <div class="text-left">
-        {% for s in sochial.list %}
-            <a href="{{ s.url }}" title="{{ s.title }}" class="w-6 inline-block text-center"><i class="gb {{ s.gb_ico }}"></i></a>
-        {% endfor %}
-    </div>
-</div>
 <!-- body content -->
 {% block body %}{% endblock %}
+<!-- footer content -->
+{% render_partial 'partial_footer' %}
 <!-- footer refrense -->
 {% include "landing/layout/_Foot.html" %}
 <!-- extra footer -->
