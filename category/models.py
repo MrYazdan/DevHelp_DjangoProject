@@ -29,7 +29,7 @@ class Category(BaseModel):
 
     @property
     def url_name(self):
-        return self.name_en if " " not in self.name_en else self.name_en.replace(" ", "_")
+        return self.name_en if " " not in self.name_en else self.name_en.replace(" ", "-")
 
     class Meta:
         verbose_name = _("Category")
