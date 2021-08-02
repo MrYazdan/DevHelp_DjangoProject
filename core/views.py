@@ -28,7 +28,10 @@ def partial_category(request, *args, **kwargs):
 
 
 def partial_search(request, *args, **kwargs):
-    context = {
-        "categories": Category.objects.all()[:12]
-    }
+    context = {}
     return render(request, "landing/partial/search.html", context)
+
+
+def partial_header(request, *args, **kwargs):
+    context = {}
+    return render(request, "landing/partial/header.html", context)
