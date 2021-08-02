@@ -28,3 +28,6 @@ class SochialAccount(BaseModel):
     @property
     def name(self):
         return self.name_en if get_language() == "en-US" else self.name_fa
+
+    def __str__(self):
+        return self.name
