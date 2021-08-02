@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _
 class BaseManager(models.Manager):
 
     def get_queryset(self):
-        return super().get_queryset().filter(is_deleted=False, active=True)
+        return super().get_queryset().filter(is_deleted=False, is_active=True)
 
     # define method for access all querysets
     def get_archive(self):
@@ -26,7 +26,7 @@ class BaseManager(models.Manager):
 
 
 # BaseModel :
-class BaseModel(BaseManager):
+class BaseModel(models.Model):
 
     # usually columns
     create_time = models.DateTimeField(
