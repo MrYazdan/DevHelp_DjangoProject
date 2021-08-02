@@ -53,13 +53,7 @@
     <div class="clearfix"></div>
 </header>
 <!-- search box -->
-<form class="grid grid-cols-12 gap-0 mt-8 mb-4 mx-auto max-w-screen-lg w-11/12" action="/search" method="get">
-    <label for="search"
-           class="col-span-2 md:col-span-1 bg-white bg-opacity-10 rounded-r-md text-white text-center leading-10 px-3 py-2"><i
-            class="gb gb_search gb_s36"></i></label>
-    <input id="search" name="s" type="search" placeholder="{% trans "جستجو" %} ..."
-           class="col-span-10 md:col-span-11 search-bar-input leading-10 relative text-white irsans-b bg-white bg-opacity-10 text-2xl  px-4 pb-4 rounded-l-md border-r-4 ">
-</form>
+{% render_partial "partial_search" %}
 <!-- best category -->
 {% render_partial "partial_category" %}
 <!-- offer shop -->

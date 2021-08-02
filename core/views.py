@@ -25,3 +25,10 @@ def partial_category(request, *args, **kwargs):
         "categories": Category.objects.all()[:12]
     }
     return render(request, "landing/partial/category.html", context)
+
+
+def partial_search(request, *args, **kwargs):
+    context = {
+        "categories": Category.objects.all()[:12]
+    }
+    return render(request, "landing/partial/search.html", context)
