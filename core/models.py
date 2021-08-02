@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AbstractUser, UserManager
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -27,7 +28,6 @@ class BaseManager(models.Manager):
 
 # BaseModel :
 class BaseModel(models.Model):
-
     # usually columns
     create_time = models.DateTimeField(
         auto_now_add=True,
@@ -55,3 +55,18 @@ class BaseModel(models.Model):
 
     class Meta:
         abstract = True
+
+
+class CustomUserManager(UserManager):
+
+    def create_superuser(self, username=None, email=None, password=None, **extra_fields):
+        username = extra_fields['phone']
+        return super().create_superuser(username, email, password, **extra_fields)
+
+
+class User(AbstractUser):
+    USERNAME_FIELD = 'phone'
+
+    phone = models.CharField(max_length=11, unique=True)
+
+    object = CustomUserManager()
