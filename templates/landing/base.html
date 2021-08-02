@@ -1,2 +1,23 @@
 {% load i18n %}
 {% get_current_language as LANGUAGE_CODE %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <title>{{ site.title }} | {% block title %}{% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- header refrense -->
+    {% include "landing/layout/_Head.html" %}
+    <!-- external header -->
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+<!-- body content -->
+{% block body %}{% endblock %}
+<!-- footer refrense -->
+{% include "landing/layout/_Foot.html" %}
+<!-- extra footer -->
+{% block extra_foot %}{% endblock %}
+</body>
+</html>
