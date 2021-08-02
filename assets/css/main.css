@@ -42,6 +42,14 @@ button:focus, input:focus {
     direction: rtl !important;
 }
 
+img {
+    width: 100%;
+}
+
+.w-auto {
+    width: auto !important;
+}
+
 audio,
 canvas,
 iframe,
