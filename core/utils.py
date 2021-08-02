@@ -14,7 +14,7 @@ class Controllers:
         @classmethod
         def file_name_creator(cls, instance_id, tolerans: tuple = (1000000, 9999999)):
             rand: list = list(str(random.randint(tolerans[0], tolerans[1])))
-            rand[(len(rand) // 2)] = instance_id
+            rand[(len(rand) // 2)] = str(instance_id) if instance_id else str(random.randint(tolerans[0], tolerans[1]))
             return "".join(rand)[:len(str(tolerans[1]))]
 
     class Image:

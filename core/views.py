@@ -7,7 +7,7 @@ from products.models import Product
 def partial_footer(request, *args, **kwargs):
     context = {
         "sochials": SochialAccount.objects.all(),
-        "footer_msg": Site.objects.all()[-1].footer_msg
+        "footer_msg": Site.objects.last().footer_msg
     }
     return render(request, "landing/partial/footer.html", context)
 
@@ -33,6 +33,6 @@ def partial_search(request, *args, **kwargs):
 
 def partial_header(request, *args, **kwargs):
     context = {
-        "site": Site.objects.all()[-1]
+        "site": Site.objects.last()
     }
     return render(request, "landing/partial/header.html", context)
