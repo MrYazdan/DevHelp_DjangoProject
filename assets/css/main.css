@@ -194,13 +194,13 @@ body {
     position: relative;
 }
 
-.title > span {
+.title > a > span {
     font: 45px 'IRSansBold';
     position: relative;
     top: 35px;
 }
 
-.title > span > .super-span {
+.title > a > span > .super-span {
     font-style: normal !important;
     position: absolute;
     top: -25px;
@@ -208,7 +208,7 @@ body {
 }
 
 @-moz-document url-prefix() {
-    .title > span > .super-span {
+    .title > a > span > .super-span {
         margin-right: 1rem;
     }
 }

@@ -73,7 +73,7 @@ class Site(models.Model):
                              help_text=_("This is phone number for your website"))
     mobile = models.CharField(max_length=11, null=True, blank=True, verbose_name=_("Mobile Phone Number"),
                               help_text=_("This is mobile phone number for your website"))
-    email = models.CharField(max_length=11, null=True, blank=True, verbose_name=_("Email Address"),
+    email = models.CharField(max_length=80, null=True, blank=True, verbose_name=_("Email Address"),
                              help_text=_("This is email address for your website"))
     about_fa = models.TextField(verbose_name="Persian About-us", default="Please enter persian about-us text",
                                 help_text=_("This is persian about text for your website"), null=True, blank=True)
