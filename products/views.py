@@ -6,11 +6,11 @@ from .models import Product
 
 
 class Products(ListView):
-    template_name = "products.html"
+    template_name = "landing/products.html"
     paginate_by = 8
 
     def get_queryset(self):
-        return Product.get_active_list()
+        return Product.objects.get_active_list().filter(is_offer=False)
 
 
 class ProductsByCategory(ListView):

@@ -1,3 +1,9 @@
 from django.shortcuts import render
+from django.views.generic import ListView
 
-# Create your views here.
+
+class CategoryProductShow(ListView):
+    template_name = "landing/products.html"
+    paginate_by = 8
+
+    pass

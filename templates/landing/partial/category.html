@@ -5,6 +5,6 @@
         {% trans "درحال بارگزاری پربازدید ترین دسته بندی ها" %}
     </div>
     {% for cat in categories %}
-        <a hover-class="animate__animated animate__jello animate__infinite" title="{{ cat.name }}" href="{{ cat.url_name }}"><img src="{{ cat.image.url }}" alt="{{ cat.name_en }}" class="rounded"></a>
+        <a hover-class="animate__animated animate__jello animate__infinite" title="{{ cat.name }}" href="{{ cat.url_full }}"><img src="{{ cat.image.url }}" alt="{{ cat.name_en }}" class="rounded"></a>
     {% endfor %}
 </div>

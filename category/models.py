@@ -22,14 +22,16 @@ class Category(BaseModel):
         verbose_name=_("Category image"),
         help_text=_("This is image of category item")
     )
+    url = models.SlugField(unique=True, verbose_name=_("Link"),
+                           help_text=_("This is url or link of category -> /category/'url'")
+                           )
 
     @property
     def name(self):
         return self.name_en if get_language() == "en-US" else self.name_fa
 
-    @property
-    def url_name(self):
-        return self.name_en if " " not in self.name_en else self.name_en.replace(" ", "-")
+    def url_full(self):
+        return f"/category/{self.url}"
 
     class Meta:
         verbose_name = _("Category")
