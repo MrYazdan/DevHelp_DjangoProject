@@ -6,7 +6,7 @@ from .models import Product
 
 
 class Products(ListView):
-    template_name = "products_list.html"
+    template_name = "products.html"
     paginate_by = 8
 
     def get_queryset(self):
@@ -25,4 +25,10 @@ class ProductsByCategory(ListView):
 
 
 class ProductDetail(DetailView):
-    template_name = ""
+    template_name = "landing/product_detail.html"
+    model = Product
+    slug_field = "url"
+    # def get_queryset(self):
+    #     return Product.objects.filter(
+    #         id=self.kwargs['pid'],
+    #     )

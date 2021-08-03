@@ -1,9 +1,9 @@
 import random
 import os
+import uuid
 
 
 class Controllers:
-
     class File:
 
         @classmethod
@@ -24,3 +24,12 @@ class Controllers:
             img_name, img_ext = Controllers.File.file_name_ext_getter(file)
             new_img_name = f"{Controllers.File.file_name_creator(instance.id)}{img_ext}"
             return f"images/cache/{new_img_name}"
+
+    class Product:
+
+        @classmethod
+        def url_creator(cls):
+            rand = list(str(random.randint(10, 99999)))
+            _uuid = str(uuid.uuid4()).split("-")[0]
+            rand[len(rand)//2] = _uuid
+            return "".join(rand)[:10]

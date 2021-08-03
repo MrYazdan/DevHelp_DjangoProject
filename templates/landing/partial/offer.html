@@ -2,7 +2,7 @@
 <div class="relative mt-1 mb-8 max-w-screen-lg w-11/12 mx-auto">
     <div class="rtl py-6 sm:py-2 md:py-4 grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-4 md:gap-8">
         {% for item in offers %}
-            <a hover-class="anim-shadowly" href="{{ item.url }}" class="relative bg-black bg-opacity-40 bg-strip-sm rounded-lg">
+            <a hover-class="anim-shadowly" href="{{ item.product_url }}" class="relative bg-black bg-opacity-40 bg-strip-sm rounded-lg">
             <div class="ribbon ribbon-r"><span>{% trans "فروش ویژه" %}</span></div>
             <div class="relative">
                 <img src="{{ item.image.url }}" alt="{{ item.title_en }}" class="border-8 border-red-500 rounded-t-lg">

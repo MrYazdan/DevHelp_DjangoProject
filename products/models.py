@@ -25,11 +25,11 @@ class Product(BaseModel):
         help_text=_("This is persian name of product item")
     )
     short_description_en = models.CharField(
-        max_length=400 ,verbose_name=_("English short description"),
+        max_length=400, verbose_name=_("English short description"),
         help_text=_("This is english short description of product item")
     )
     short_description_fa = models.CharField(
-        max_length=400 ,verbose_name=_("Persian short description"),
+        max_length=400, verbose_name=_("Persian short description"),
         help_text=_("This is persian short description of product item")
     )
     description_en = models.TextField(
@@ -60,6 +60,12 @@ class Product(BaseModel):
         default=False, verbose_name=_("Offer"),
         help_text=_("This is status of offer product")
     )
+    count_inventory = models.IntegerField(verbose_name=_("Count In Inventory"),
+                                          help_text=_("This is count of item in inventory"))
+    count_buy = models.IntegerField(verbose_name=_("Count Of Buy"), default=0,
+                                    help_text=_("This is count of buy item"))
+    url = models.SlugField(verbose_name=_("Link"), default=Controllers.Product.url_creator, unique=True,
+                           help_text=_("This is url or link name item -> /products/'url'"))
 
     class Meta:
         verbose_name = _("Product")
@@ -85,7 +91,7 @@ class Product(BaseModel):
 
     @property
     def product_url(self):
-        return f"/products/{self.id}/{self.title_en.replace(' ', '-')}"
+        return f"/products/{self.url}"
 
     def __str__(self):
         return self.title

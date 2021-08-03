@@ -28,11 +28,15 @@
 <!-- best category -->
 {% render_partial "partial_category" %}
 <!-- offer shop -->
-{% render_partial "partial_offer" %}
-<!-- click content -->
-{% include "landing/layout/_ClickItem.html" %}
+{% block offer %}
+    {% render_partial "partial_offer" %}
+{% endblock %}
 <!-- body content -->
 {% block body %}{% endblock %}
+<!-- click content -->
+{% block click_item %}
+    {% include "landing/layout/_ClickItem.html" %}
+{% endblock %}
 <!-- footer content -->
 {% render_partial 'partial_footer' %}
 <!-- footer refrense -->
