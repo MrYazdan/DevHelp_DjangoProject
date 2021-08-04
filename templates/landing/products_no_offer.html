@@ -5,7 +5,8 @@
     <div class="mt-4 mb-8 max-w-screen-lg w-11/12 mx-auto grid gap-4 grid-cols-1 sm:grid-cols-3 md:grid-cols-4" style="min-height: 50vh;">
         {% if category %}
             <div class="col-span-4 mb-10">
-                <h1 class="font-bold irsans-b text-white text-shadow-md">{{ category.name }}{% trans "درباره دسته :" %}</h1>
+                <h1 class="font-bold irsans-b text-white text-shadow-md"><i class="gb gb_info"></i>&#0160{% trans "درباره دسته " %} {{ category.name }}</h1>
+                <hr class="border-b mb-4 rounded-full border-gray-600">
                 <p class="text-gray-300 text-justify text-xl">{{ category.description }}</p>
             </div>
         {% endif %}

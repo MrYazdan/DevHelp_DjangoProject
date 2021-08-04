@@ -13,5 +13,5 @@ class CategoryProductShow(ListView):
         return Product.extra_objects.get_product_by_category_url(category_url)
 
     def get_context_data(self, *args, object_list=None, **kwargs):
-        kwargs["category"] = Category.objects.filter(url=self.kwargs["url"])
+        kwargs["category"] = Category.objects.filter(url=self.kwargs["url"])[0]
         return super().get_context_data(object_list=object_list, **kwargs)
