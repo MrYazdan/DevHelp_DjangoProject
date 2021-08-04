@@ -1,9 +1,12 @@
 from django.shortcuts import render
 from django.views.generic import ListView
+from products.models import Product
 
 
 class CategoryProductShow(ListView):
-    template_name = "landing/products.html"
+    template_name = "landing/products_no_offer.html"
     paginate_by = 8
 
-    pass
+    def get_queryset(self):
+        category_url = self.kwargs['url']
+        return Product.extra_objects.get_product_by_category_url(category_url)

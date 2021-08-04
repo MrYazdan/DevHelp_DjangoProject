@@ -6,13 +6,15 @@ from core.utils import *
 
 
 class ExtraProductManager(models.Manager):
-    base = BaseManager()
+
+    def get_queryset(self):
+        return super().get_queryset().filter(is_deleted=False, is_active=True)
 
     def get_product_by_id(self, product_id):
-        return self.base.get_queryset().filter(id=product_id)
+        return self.get_queryset().filter(id=product_id)
 
-    def get_product_by_category(self, category_en_name):
-        return self.base.get_queryset().filter(category__name_en__iexact=category_en_name)
+    def get_product_by_category_url(self, category_url):
+        return self.get_queryset().filter(category__url=category_url)
 
 
 class Product(BaseModel):

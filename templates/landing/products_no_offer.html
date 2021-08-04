@@ -1,0 +1,31 @@
+{% extends "landing/base.html" %}
+{% load i18n %}
+{% block offer %}{% endblock %}
+{% block body %}
+    <div class="mt-4 mb-8 max-w-screen-lg w-11/12 mx-auto grid gap-4 grid-cols-1 sm:grid-cols-3 md:grid-cols-4" style="min-height: 50vh;">
+        {% if object_list %}
+            {% for i in object_list %}
+                <a href="{{ i.product_url }}" class="relative rounded-lg block">
+                    {% if i.is_offer %}
+                            <div class="ribbon ribbon-r"><span>{% trans "فروش ویژه" %}</span></div>
+                    {% endif %}
+                    <div class="relative">
+                        <img src="{{ i.image.url }}" alt="{{ i.title_en }}" class=" border-8 border-red-500 rounded-t-lg">
+                        <h3 class="yekan-b absolute bg-black trs-all-300 bg-opacity-70 text-white text-2xl sm:text-sm md:text-lg lg:text-2xl pr-2 pl-5 sm:py-1 lg:py-2 py-2 bottom-0 right-0 rounded-tl-3xl">{{ i.title }}</h3>
+                    </div>
+                    <p class="p-4 bg-black bg-opacity-40 bg-strip-sm  text-justify text-white sm:text-sm">{{ i.short_description }}</p>
+                    <div class="bg-black relative bg-strip-sm bg-opacity-30 text-center p-4 rounded-b-lg">
+                            <span class="absolute text-2xl sm:text-sm md:text-lg md:bottom-3 right-4 bottom-3 text-gray-400">
+                                <span class="block">{% trans "تومان" %}</span>
+                                <span class="line-through">{{ i.price }}</span>
+                            </span>
+                        <b class="text-5xl sm:text-2xl md:text-4xl mt-2 sm:mt-0 block text-left text-pink-700 text-shadow-md">{{ i.final_price }}</b>
+                    </div>
+                </a>
+            {% endfor %}
+        {% else %}
+            <center class="col-span-4"><h1 class="text-gray-500 font-bold">{% trans "آیتمی برای نمایش وجود ندارد!" %}</h1></center>
+        {% endif %}
+    </div>
+{% endblock %}
+{% block click_item %}{% endblock %}
