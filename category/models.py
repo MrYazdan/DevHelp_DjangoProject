@@ -25,6 +25,20 @@ class Category(BaseModel):
     url = models.SlugField(unique=True, verbose_name=_("Link"),
                            help_text=_("This is url or link of category -> /category/'url'")
                            )
+    description_en = models.TextField(
+        default="This is test english category description", blank=True, null=True,
+        verbose_name=_("English description"),
+        help_text=_("This is english description for this category")
+    )
+    description_fa = models.TextField(
+        default="این متن تست برای توضیحات بخش دسته بندی است", blank=True, null=True,
+        verbose_name=_("Persian description"),
+        help_text=_("This is persian description for this category")
+    )
+
+    @property
+    def description(self):
+        return self.description_en if get_language() == "en-US" else self.description_fa
 
     @property
     def name(self):
