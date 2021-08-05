@@ -1,5 +1,5 @@
 from django.db import models
-from core.models import BaseModel, BaseManager
+from core.models import BaseModel
 from category.models import Category
 from django.utils.translation import gettext_lazy as _, get_language
 from core.utils import *
