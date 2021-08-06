@@ -1,3 +1,4 @@
+import uuid
 from django.db import models
 from django.utils import timezone as tz
 from category.models import Category
@@ -31,7 +32,7 @@ class BaseDiscountModel(models.Model):
     active = models.BooleanField(default=True, verbose_name=_("Is Active"), help_text=_("This is time "))
     count_use = models.PositiveIntegerField(default=1, verbose_name=_("Count of use"),
                                             help_text=_("This is count for use off code and expire"))
-    last_used = models.DateTimeField(default=None, null=True, blank=True, hidden=True)
+    last_used = models.DateTimeField(default=None, null=True, blank=True)
 
     objects = BaseDiscountManager()
 
@@ -42,36 +43,36 @@ class BaseDiscountModel(models.Model):
     def deactive(self):
         self.active = False
 
-    def check(self):
-        if (not self.count_use) or (self.active_from < tz.now()):
-            self.deactive()
-
-    def use(self):
-        self.count_use -= 1
-        self.last_used = tz.now()
-        self.check()
+    # def check(self):
+    #     if (not self.count_use) or (self.active_from < tz.now()):
+    #         self.deactive()
+    #
+    # def use(self):
+    #     self.count_use -= 1
+    #     self.last_used = tz.now()
+    #     self.check()
 
     def __str__(self):
         return self.title
 
 
 class OffCode(BaseDiscountModel):
-    code = models.CharField(min_length=3, max_length=80, verbose_name=_("Code for discount"),
+    code = models.CharField(max_length=80, verbose_name=_("Code for discount"),default=str(uuid.uuid4()).split("-")[0],
                             help_text=_("This is unique code for discount"), unique=True)
-    percent = models.PositiveIntegerField(max_length=2, verbose_name=_("Percent of off"),
+    percent = models.PositiveIntegerField(verbose_name=_("Percent of off"),
                                           help_text=_("This is discount percent"))
-    for_users = models.ManyToManyField(to=User, default=None, null=True, blank=True, verbose_name=_("For users"),
+    for_users = models.ManyToManyField(User, default=None, null=True, blank=True, verbose_name=_("For users"),
                                        help_text=_("this is off code availble for selected users")
                                        )
-    for_products = models.ManyToManyField(to=Product, default=None, null=True, blank=True,
+    for_products = models.ManyToManyField(Product, default=None, null=True, blank=True,
                                           verbose_name=_("For products"),
                                           help_text=_("this is off code availble for selected products")
                                           )
-    for_category = models.ManyToManyField(to=Category, default=None, null=True, blank=True,
+    for_category = models.ManyToManyField(Category, default=None, null=True, blank=True,
                                           verbose_name=_("For category"),
                                           help_text=_("this is off code availble for selected category")
                                           )
 
     class Meta:
         verbose_name = _("OFFCode")
-        verbose_plural = _("OFFCodes")
+        verbose_name_plural = _("OFFCodes")

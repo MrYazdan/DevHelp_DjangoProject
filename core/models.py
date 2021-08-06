@@ -69,4 +69,4 @@ class User(AbstractUser):
 
     phone = models.CharField(max_length=11, unique=True)
 
-    object = CustomUserManager()
+    objects = CustomUserManager()
