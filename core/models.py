@@ -70,3 +70,14 @@ class User(AbstractUser):
     phone = models.CharField(max_length=11, unique=True)
 
     objects = CustomUserManager()
+
+
+class Address(models.Model):
+    owner = models.ManyToManyField(to="User", on_delete=models.CASCADE)
+    lat = models.FloatField(null=True, blank=True)
+    lng = models.FloatField(null=True, blank=True)
+    country = models.CharField(max_length=120)
+    city = models.CharField(max_length=120)
+    address = models.TextField()
+    postal_code = models.CharField(max_length=10)
+    no = models.PositiveIntegerField()
