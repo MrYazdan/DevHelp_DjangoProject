@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     # installed modules :
     'django_render_partial',
+    'rest_framework',
 
     # my applications
     'api',
