@@ -73,7 +73,7 @@ class User(AbstractUser):
 
 
 class Address(models.Model):
-    owner = models.ManyToManyField(to="User", on_delete=models.CASCADE)
+    owner = models.ForeignKey(to="User", on_delete=models.CASCADE)
     lat = models.FloatField(null=True, blank=True)
     lng = models.FloatField(null=True, blank=True)
     country = models.CharField(max_length=120)
