@@ -56,16 +56,13 @@ class OffCode(Discount):
                             help_text=_("This is unique code for discount"), unique=True)
     for_users = models.ManyToManyField(User, default=None, null=True, blank=True, verbose_name=_("For users"),
                                        help_text=_("this is off code availble for selected users"))
-    for_products = models.ManyToManyField("Product", default=None, null=True, blank=True,
-                                          verbose_name=_("For products"),
-                                          help_text=_("this is off code availble for selected products"))
-    for_categories = models.ManyToManyField(Category, default=None, null=True, blank=True,
-                                            verbose_name=_("For categories"),
-                                            help_text=_("this is off code availble for selected categories"))
 
     class Meta:
         verbose_name = _("OFFCode")
         verbose_name_plural = _("OFFCodes")
+
+    def checker(self, user: User):
+        return (user in self.for_users) and self.active
 
 
 class ExtraProductManager(models.Manager):

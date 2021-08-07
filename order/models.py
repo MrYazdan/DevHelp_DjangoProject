@@ -42,6 +42,21 @@ class Order(BaseModel):
         verbose_name = 'Order Cart'
         verbose_name_plural = 'Order Carts'
 
+    @property
+    def total_price(self):
+        return sum([order_item.total_price for order_item in self.orderitem_set.all()])
+
+    @property
+    def final_price(self):
+        return sum([order_item.final_price for order_item in self.orderitem_set.all()])
+
+    @property
+    def total_discount(self) -> tuple[int, int]:
+        discount = sum([order_item.total_discount for order_item in self.orderitem_set.all()])
+        check = self.offcode.checker(self.owner) if self.offcode else False
+        off = self.offcode.final_discount(self.final_price) if check else 0
+        return discount, off
+
 
 class OrderItem(models.Model):
     order = models.ForeignKey(to=Order, on_delete=models.CASCADE, verbose_name=_("Order"),
@@ -56,5 +71,13 @@ class OrderItem(models.Model):
         verbose_name_plural = 'Order Items'
 
     @property
-    def get_full_price(self):
-        return self.price * self.count
+    def total_price(self):
+        return self.product.price * self.count
+
+    @property
+    def final_price(self):
+        return self.product.final_price * self.count
+
+    @property
+    def total_discount(self):
+        return self.product.discount_count * self.count
