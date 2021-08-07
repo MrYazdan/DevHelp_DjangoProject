@@ -49,7 +49,6 @@ INSTALLED_APPS = [
     'contact',
     'customer',
     'core',
-    'discount',
     'order',
     'order_item',
     'products',

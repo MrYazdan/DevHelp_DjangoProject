@@ -1,8 +1,71 @@
 from django.db import models
 from core.models import BaseModel
+from core.models import User
 from category.models import Category
 from django.utils.translation import gettext_lazy as _, get_language
 from core.utils import *
+
+
+class DiscountManager(models.Manager):
+
+    def get_queryset(self):
+        return super().get_queryset().filter(active=True)
+
+    def get_all(self):
+        return super().get_queryset()
+
+
+class Discount(models.Model):
+    title_en = models.CharField(
+        max_length=150, verbose_name=_("English title"), help_text=_("This is english name for discount item"))
+    title_fa = models.CharField(
+        max_length=150, verbose_name=_("Persian title"), help_text=_("This is persian name for discount item"))
+    active_from = models.DateTimeField(auto_now_add=True, verbose_name=_("From datetime"),
+                                       help_text=_("This is start discount datetime "))
+    active_to = models.DateTimeField(auto_now_add=True, verbose_name=_("Expire datetime"),
+                                     help_text=_("This is expire discount datetime "))
+    active = models.BooleanField(default=True, verbose_name=_("Is Active"), help_text=_("This is time "))
+    count_use = models.PositiveIntegerField(default=1, verbose_name=_("Count of use"),
+                                            help_text=_("This is count for use off code and expire"))
+    last_used = models.DateTimeField(default=None, null=True, blank=True)
+    max_price = models.PositiveIntegerField(verbose_name=_("Max Discount Price"), default=None, null=True, blank=True,
+                                            help_text=_("This is max discount price item"))
+    percent = models.PositiveIntegerField(verbose_name=_("Discount Percent"),
+                                          help_text=_("This is discount percent"))
+
+    objects = DiscountManager()
+
+    @property
+    def title(self):
+        return self.title_en if get_language() == "en-US" else self.title_fa
+
+    def deactive(self):
+        self.active = False
+
+    def final_discount(self, price: int):
+        _max = self.max_price
+        _discount = round((self.percent * price) / 100)
+        return _max if _discount >= _max else _discount
+
+    def __str__(self):
+        return self.title
+
+
+class OffCode(Discount):
+    code = models.CharField(max_length=80, verbose_name=_("Code for discount"), default=str(uuid.uuid4()).split("-")[0],
+                            help_text=_("This is unique code for discount"), unique=True)
+    for_users = models.ManyToManyField(User, default=None, null=True, blank=True, verbose_name=_("For users"),
+                                       help_text=_("this is off code availble for selected users"))
+    for_products = models.ManyToManyField("Product", default=None, null=True, blank=True,
+                                          verbose_name=_("For products"),
+                                          help_text=_("this is off code availble for selected products"))
+    for_categories = models.ManyToManyField(Category, default=None, null=True, blank=True,
+                                            verbose_name=_("For categories"),
+                                            help_text=_("this is off code availble for selected categories"))
+
+    class Meta:
+        verbose_name = _("OFFCode")
+        verbose_name_plural = _("OFFCodes")
 
 
 class ExtraProductManager(models.Manager):
@@ -42,8 +105,9 @@ class Product(BaseModel):
         verbose_name=_("Persian description"),
         help_text=_("This is persian description of product item")
     )
-    price = models.IntegerField(verbose_name=_("Price item"), help_text=_("This is price item"))
-    discount = models.IntegerField(verbose_name=_("Discount item"), help_text=_("This is discount of item"))
+    price = models.PositiveIntegerField(verbose_name=_("Price item"), help_text=_("This is price item"))
+    discount = models.ForeignKey(to=Discount, on_delete=models.SET_NULL, verbose_name=_("Discount"),
+                                 help_text=_("This is discount for product item"), null=True, blank=True, default=None)
     image = models.ImageField(
         upload_to=Controllers.Image.img_renamer,
         verbose_name=_("Product Image"),
@@ -54,7 +118,7 @@ class Product(BaseModel):
         verbose_name=_("Category of product"),
         help_text=_("This is category of product")
     )
-    view_count = models.IntegerField(
+    view_count = models.PositiveIntegerField(
         default=0, verbose_name=_("View counts"),
         help_text=_("This is count of view products")
     )
@@ -62,10 +126,10 @@ class Product(BaseModel):
         default=False, verbose_name=_("Offer"),
         help_text=_("This is status of offer product")
     )
-    count_inventory = models.IntegerField(verbose_name=_("Count In Inventory"),
-                                          help_text=_("This is count of item in inventory"))
-    count_buy = models.IntegerField(verbose_name=_("Count Of Buy"), default=0,
-                                    help_text=_("This is count of buy item"))
+    count_inventory = models.PositiveIntegerField(verbose_name=_("Count In Inventory"),
+                                                  help_text=_("This is count of item in inventory"))
+    count_buy = models.PositiveIntegerField(verbose_name=_("Count Of Buy"), default=0,
+                                            help_text=_("This is count of buy item"))
     url = models.SlugField(verbose_name=_("Link"), default=Controllers.Product.url_creator, unique=True,
                            help_text=_("This is url or link name item -> /products/'url'"))
 
@@ -89,7 +153,11 @@ class Product(BaseModel):
 
     @property
     def final_price(self):
-        return self.price - self.discount
+        return self.price - self.discount.final_discount(self.price) if self.discount else self.price
+
+    @property
+    def discount_count(self):
+        return self.discount.final_discount(self.price) if self.discount else 0
 
     @property
     def product_url(self):
