@@ -17,8 +17,8 @@ class Status(BaseModel):
         help_text=_("This is persian description of product item"))
 
     class Meta:
-        verbose_name = 'Order Status'
-        verbose_name_plural = 'Order Statuses'
+        verbose_name = _('Order Status')
+        verbose_name_plural = _('Order Statuses')
 
     @property
     def description(self):
@@ -39,8 +39,8 @@ class Order(BaseModel):
                                             help_text=_("This is payment datetime"))
 
     class Meta:
-        verbose_name = 'Order Cart'
-        verbose_name_plural = 'Order Carts'
+        verbose_name = _('Order Cart')
+        verbose_name_plural = _('Order Carts')
 
     @property
     def total_price(self):
@@ -67,8 +67,8 @@ class OrderItem(models.Model):
     count = models.PositiveIntegerField(verbose_name=_("Count"), help_text=_("This is count of this product"))
 
     class Meta:
-        verbose_name = 'Order Item'
-        verbose_name_plural = 'Order Items'
+        verbose_name = _('Order Item')
+        verbose_name_plural = _('Order Items')
 
     @property
     def total_price(self):

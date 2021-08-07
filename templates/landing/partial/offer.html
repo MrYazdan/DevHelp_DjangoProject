@@ -2,21 +2,25 @@
 <div class="relative mt-1 mb-8 max-w-screen-lg w-11/12 mx-auto">
     <div class="rtl py-6 sm:py-2 md:py-4 grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-4 md:gap-8">
         {% for item in offers %}
-            <a hover-class="anim-shadowly" href="{{ item.product_url }}" class="relative bg-black bg-opacity-40 bg-strip-sm rounded-lg">
-            <div class="ribbon ribbon-r"><span>{% trans "فروش ویژه" %}</span></div>
-            <div class="relative">
-                <img src="{{ item.image.url }}" alt="{{ item.title_en }}" class="border-8 border-red-500 rounded-t-lg">
-                <h3 class="yekan-b absolute bg-black trs-all-300 bg-opacity-70 text-white text-2xl sm:text-sm md:text-lg lg:text-2xl pr-2 pl-5 sm:py-1 lg:py-2 py-2 bottom-0 right-0 rounded-tl-3xl">{{ item.title }}</h3>
-            </div>
-            <p class="p-4 text-justify text-white sm:text-sm">{{ item.short_description }}</p>
-            <div class="bg-black relative bg-strip-sm bg-opacity-30 text-center p-4 rounded-b-lg">
-                <span class="absolute text-2xl sm:text-sm md:text-lg md:bottom-3 right-4 bottom-3 text-gray-400">
+            <a hover-class="anim-shadowly" href="{{ item.product_url }}"
+               class="relative bg-black bg-opacity-40 bg-strip-sm rounded-lg">
+                <div class="ribbon ribbon-r"><span>{% trans "فروش ویژه" %}</span></div>
+                <div class="relative">
+                    <img src="{{ item.image.url }}" alt="{{ item.title_en }}"
+                         class="border-8 border-red-500 rounded-t-lg">
+                    <h3 class="yekan-b absolute bg-black trs-all-300 bg-opacity-70 text-white text-2xl sm:text-sm md:text-lg lg:text-2xl pr-2 pl-5 sm:py-1 lg:py-2 py-2 bottom-0 right-0 rounded-tl-3xl">{{ item.title }}</h3>
+                </div>
+                <p class="p-4 text-justify text-white sm:text-sm">{{ item.short_description }}</p>
+                <div class="bg-black relative bg-strip-sm bg-opacity-30 text-center p-4 rounded-b-lg">
+                <span class="absolute text-2xl sm:text-sm md:text-lg right-4 {% if i.discount %}md:bottom-3 bottom-3{% else %}md:bottom-6 bottom-7{% endif %} text-gray-400">
                     <span class="block">{% trans "تومان" %}</span>
-                    <span class="line-through">{{ item.price }}</span>
+                    {% if i.discount %}
+                        <span class="line-through">{{ i.price }}</span>
+                    {% endif %}
                 </span>
-                <b class="text-5xl sm:text-2xl md:text-4xl mt-2 sm:mt-0 block text-left text-pink-700 text-shadow-md">{{ item.final_price }}</b>
-            </div>
-        </a>
+                    <b class="text-5xl sm:text-2xl md:text-4xl mt-2 sm:mt-0 block text-left text-pink-700 text-shadow-md">{{ item.final_price }}</b>
+                </div>
+            </a>
         {% endfor %}
     </div>
 </div>

@@ -22,9 +22,11 @@
                     </div>
                     <p class="p-4 bg-black bg-opacity-40 bg-strip-sm  text-justify text-white sm:text-sm">{{ i.short_description }}</p>
                     <div class="bg-black relative bg-strip-sm bg-opacity-30 text-center p-4 rounded-b-lg">
-                            <span class="absolute text-2xl sm:text-sm md:text-lg md:bottom-3 right-4 bottom-3 text-gray-400">
+                            <span class="absolute text-2xl sm:text-sm md:text-lg right-4 {% if i.discount %}md:bottom-3 bottom-3{% else %}md:bottom-6 bottom-7{% endif %} text-gray-400">
                                 <span class="block">{% trans "تومان" %}</span>
-                                <span class="line-through">{{ i.price }}</span>
+                                {% if i.discount %}
+                                    <span class="line-through">{{ i.price }}</span>
+                                {% endif %}
                             </span>
                         <b class="text-5xl sm:text-2xl md:text-4xl mt-2 sm:mt-0 block text-left text-pink-700 text-shadow-md">{{ i.final_price }}</b>
                     </div>
