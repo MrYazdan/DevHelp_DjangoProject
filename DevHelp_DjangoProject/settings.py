@@ -50,7 +50,6 @@ INSTALLED_APPS = [
     'customer',
     'core',
     'order',
-    'order_item',
     'products',
     'settings',
 ]
