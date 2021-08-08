@@ -36,41 +36,41 @@ class LoginForm(forms.Form):
 
 class RegisterForm(forms.Form):
     phone = forms.CharField(
-        widget=forms.TextInput(attrs={'placeholder': 'لطفا نام کاربری خود را وارد نمایید'}),
-        label='نام کاربری',
+        widget=forms.TextInput(attrs={'placeholder': 'لطفا شماره تماس خود را وارد نمایید',
+                                      'class': "block w-full py-4 rounded-md px-3 bg-black bg-opacity-30 mb-4"}),
         validators=[
-            validators.MaxLengthValidator(limit_value=20,
-                                          message='تعداد کاراکترهای وارد شده نمیتواند بیشتر از 20 باشد'),
-            validators.MinLengthValidator(8, 'تعداد کاراکترهای وارد شده نمیتواند کمتر از 8 باشد')
+            validators.MaxLengthValidator(limit_value=11,
+                                          message=_('تعداد کاراکترهای وارد شده نمیتواند بیشتر از 11 باشد')),
+            validators.MinLengthValidator(8, _('تعداد کاراکترهای وارد شده نمیتواند کمتر از 8 باشد'))
         ]
     )
 
     email = forms.CharField(
-        widget=forms.TextInput(attrs={'placeholder': 'لطفا ایمیل خود را وارد نمایید'}),
-        label='ایمیل',
+        widget=forms.TextInput(attrs={'placeholder': _('لطفا ایمیل خود را وارد نمایید'),
+                                      'class': "block w-full py-4 rounded-md px-3 bg-black bg-opacity-30 mb-4"}),
         validators=[
-            validators.EmailValidator('ایمیل وارد شده معتبر نمیباشد')
+            validators.EmailValidator(_('ایمیل وارد شده معتبر نمیباشد'))
         ]
     )
 
     password = forms.CharField(
-        widget=forms.PasswordInput(attrs={'placeholder': 'لطفا کلمه عبور خود را وارد نمایید'}),
-        label='کلمه ی عبور'
+        widget=forms.PasswordInput(attrs={'placeholder': _('لطفا کلمه عبور خود را وارد نمایید'),
+                                          'class': "block w-full py-4 rounded-md px-3 bg-black bg-opacity-30 mb-4"}),
     )
 
     re_password = forms.CharField(
-        widget=forms.PasswordInput(attrs={'placeholder': 'لطفا تکرار کلمه عبور خود را وارد نمایید'}),
-        label='تکرار کلمه ی عبور'
+        widget=forms.PasswordInput(attrs={'placeholder': _('لطفا تکرار کلمه عبور خود را وارد نمایید'),
+                                          'class': "block w-full py-4 rounded-md px-3 bg-black bg-opacity-30 mb-4"}),
     )
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
         is_exists_user_by_email = User.objects.filter(email=email).exists()
         if is_exists_user_by_email:
-            raise forms.ValidationError('ایمیل وارد شده تکراری میباشد')
+            raise forms.ValidationError(_('ایمیل وارد شده تکراری میباشد'))
 
-        if len(email) > 20:
-            raise forms.ValidationError('تعداد کاراکترهای ایمیل باید کمتر از 20 باشد')
+        if len(email) > 40:
+            raise forms.ValidationError(_('تعداد کاراکترهای ایمیل باید کمتر از 40 باشد'))
 
         return email
 
@@ -79,7 +79,7 @@ class RegisterForm(forms.Form):
         is_exists_user_by_phone = User.objects.filter(phone=phone).exists()
 
         if is_exists_user_by_phone:
-            raise forms.ValidationError('این کاربر قبلا ثبت نام کرده است')
+            raise forms.ValidationError(_('این کاربر قبلا ثبت نام کرده است'))
 
         return phone
 
@@ -90,6 +90,6 @@ class RegisterForm(forms.Form):
         print(re_password)
 
         if password != re_password:
-            raise forms.ValidationError('کلمه های عبور مغایرت دارند')
+            raise forms.ValidationError(_('کلمه های عبور مغایرت دارند'))
 
         return password

@@ -3,7 +3,7 @@ from django.http import Http404
 from django.shortcuts import render, redirect
 from .forms import LoginForm, RegisterForm, EditUserForm
 from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.models import User
+from core.models import User
 from django.utils.translation import gettext_lazy as _
 
 
@@ -38,7 +38,7 @@ def register(request):
         password = register_form.cleaned_data.get('password')
         email = register_form.cleaned_data.get('email')
         User.objects.create_user(phone=phone, email=email, password=password)
-        return redirect('/login')
+        return redirect('login')
 
     context = {
         'register_form': register_form
