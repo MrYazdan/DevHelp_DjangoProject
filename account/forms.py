@@ -4,16 +4,6 @@ from django.core import validators
 from django.utils.translation import gettext_lazy as _
 
 
-class EditUserForm(forms.Form):
-    first_name = forms.CharField(
-        widget=forms.TextInput(attrs={'placeholder': 'لطفا نام خود را وارد نمایید', 'class': 'form-control'}),
-    )
-
-    last_name = forms.CharField(
-        widget=forms.TextInput(attrs={'placeholder': 'لطفا نام خانوادگی خود را وارد نمایید', 'class': 'form-control'}),
-    )
-
-
 class LoginForm(forms.Form):
     phone = forms.CharField(
         widget=forms.TextInput(attrs={'placeholder': _("لطفا شماره همراه خود را وارد نمایید"),

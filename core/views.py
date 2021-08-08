@@ -36,3 +36,10 @@ def partial_header(request, *args, **kwargs):
         "site": Site.objects.last()
     }
     return render(request, "landing/partial/header.html", context)
+
+
+def partial_nav(request, *args, **kwargs):
+    context = {
+        "user": request.user
+    }
+    return render(request, "landing/partial/nav.html", context)

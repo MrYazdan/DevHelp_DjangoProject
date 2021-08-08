@@ -22,7 +22,7 @@ class Discount(models.Model):
         max_length=150, verbose_name=_("Persian title"), help_text=_("This is persian name for discount item"))
     active_from = models.DateTimeField(auto_now_add=True, verbose_name=_("From datetime"),
                                        help_text=_("This is start discount datetime "))
-    active_to = models.DateTimeField(auto_now_add=True, verbose_name=_("Expire datetime"),
+    active_to = models.DateTimeField(verbose_name=_("Expire datetime"),
                                      help_text=_("This is expire discount datetime "))
     active = models.BooleanField(default=True, verbose_name=_("Is Active"), help_text=_("This is time "))
     count_use = models.PositiveIntegerField(default=1, verbose_name=_("Count of use"),

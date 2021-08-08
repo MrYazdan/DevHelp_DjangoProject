@@ -1,0 +1,11 @@
+{% load i18n %}
+<nav class="block p-4 my-8 bg-black bg-opacity-20 rounded-md">
+    <div class="float-right">
+        <a href="" class="float-right ml-3 text-gray-300 text-shadow-md">{% trans "سبد خرید" %}<i class="gb gb_local_mail ml-1"></i></a>
+        <a href="{% url "profile" %}" class="float-right ml-3 text-gray-300 text-shadow-md">{% trans "پروفایل کاربری" %}<i class="gb gb_border_color ml-1"></i></a>
+        <a href="{% url "logout" %}" class="float-right ml-3 text-gray-300 text-shadow-md">{% trans "خروج" %}<i class="gb gb_border_color ml-1"></i></a>
+    </div>
+    <div class="float-left">
+        <span class="float-left text-gray-300 text-shadow-md">{{ user }}<i class="gb gb_account_box mr-1"></i></span>
+    </div>
+</nav>
