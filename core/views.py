@@ -40,6 +40,6 @@ def partial_header(request, *args, **kwargs):
 
 def partial_nav(request, *args, **kwargs):
     context = {
-        "user": request.user
+        "user": request.user if request.user.username else None
     }
     return render(request, "landing/partial/nav.html", context)

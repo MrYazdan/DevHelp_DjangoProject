@@ -44,7 +44,7 @@
     font-style: normal;
 }
 
-.Vazir {
+.Vazir, .Vazir *:not(i) {
     font-family: Vazir, sans-serif;
 }
 

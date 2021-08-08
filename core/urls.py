@@ -7,5 +7,5 @@ urlpatterns = [
     path('_landing/offer', partial_offer, name="partial_offer"),
     path('_landing/search', partial_search, name="partial_search"),
     path('_landing/header', partial_header, name="partial_header"),
-    path('_landing/header', partial_nav, name="partial_nav"),
+    path('_landing/nav', partial_nav, name="partial_nav"),
 ]

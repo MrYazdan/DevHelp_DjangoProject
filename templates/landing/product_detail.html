@@ -7,13 +7,13 @@
         <div class="relative pb-20 sm:border-l-2 px-4 border-opacity-10">
             <h1 class="text-center text-xl border-b border-opacity-10 pb-4 text-yellow-400">{{ object.title }}</h1>
             <div class="relative">
-                <span class="block"><i class="gb gb_widgets ml-2"></i>{% trans "دسته بندی : " %}<a class="text-green-500" href="">{{ object.category }}</a></span>
-                <span class="block my-3"><i class="gb gb_refresh ml-2"></i>{% trans "بروزرسانی :" %}{{ object.modify_time }}</span>
-                <span class="block my-3"><i class="gb gb_person_pin ml-2"></i>{% trans "موجودی انبار : " %}{{ object.count_inventory }}</span>
-                <span class="block my-3"><i class="gb gb_local_offer ml-2"></i>{% trans "تعداد خرید : " %}{{ object.count_buy }}</span>
-                <span class="block my-3"><i class="gb gb_attach_money ml-2"></i>{% trans "قیمت : " %}{{ object.price }}</span>
+                <span class="block"><i class="gb gb_widgets ml-2"></i>{% trans "دسته بندی" %} : <a class="text-green-500" href="/category/{{ object.category.url }}">{{ object.category }}</a></span>
+                <span class="block my-3"><i class="gb gb_refresh ml-2"></i>{% trans "بروزرسانی" %} : {{ object.modify_time }}</span>
+                <span class="block my-3"><i class="gb gb_person_pin ml-2"></i>{% trans "موجودی انبار" %} : {{ object.count_inventory }}</span>
+                <span class="block my-3"><i class="gb gb_local_offer ml-2"></i>{% trans "تعداد خرید" %} : {{ object.count_buy }}</span>
+                <span class="block my-3"><i class="gb gb_attach_money ml-2"></i>{% trans "قیمت" %} : {{ object.price }}</span>
                 {% if object.discount %}
-                    <span class="block my-3"><i class="gb gb_local_atm ml-2"></i>{% trans "تخفیف : " %}{{ object.discount_count }}</span>
+                    <span class="block my-3"><i class="gb gb_local_atm ml-2"></i>{% trans "تخفیف" %} : {{ object.discount_count }}</span>
                 {% endif %}
             </div>
             <a href=""
