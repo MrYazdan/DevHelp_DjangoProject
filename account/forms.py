@@ -19,9 +19,42 @@ class LoginForm(forms.Form):
         phone = self.cleaned_data.get('phone')
         is_exists_user = User.objects.filter(phone=phone).exists()
         if not is_exists_user:
-            raise forms.ValidationError(_('کاربری با مشخصات وارد شده ثبت نام نکرده است'))
+            raise forms.ValidationError(_('کاربری با مشخصات وارد شده وجود ندارد!'))
 
         return phone
+
+
+class ForgetForm(forms.Form):
+    phone = forms.CharField(
+        widget=forms.TextInput(attrs={'placeholder': _("لطفا شماره همراه خود را وارد نمایید"),
+                                      'class': "block w-full py-4 rounded-md px-3 bg-black bg-opacity-30 mb-4"}),
+    )
+
+    email = forms.CharField(
+        widget=forms.TextInput(attrs={'placeholder': _('لطفا ایمیل خود را وارد نمایید'),
+                                      'class': "block w-full py-4 rounded-md px-3 bg-black bg-opacity-30 mb-4"}),
+        validators=[
+            validators.EmailValidator(_('ایمیل وارد شده معتبر نمیباشد'))
+        ]
+    )
+
+    def clean_phone(self):
+        phone = self.cleaned_data.get('phone')
+        is_exists_user = User.objects.filter(phone=phone).exists()
+        if not is_exists_user:
+            raise forms.ValidationError(_('کاربری با شماره تماس وارد شده وجود ندارد!'))
+        return phone
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        is_exists_user_by_email = User.objects.filter(email=email).exists()
+        if not is_exists_user_by_email:
+            raise forms.ValidationError(_('ایمیل وارد شده صحیح نمیباشد میباشد'))
+
+        if len(email) > 40:
+            raise forms.ValidationError(_('تعداد کاراکترهای ایمیل باید کمتر از 40 باشد'))
+
+        return email
 
 
 class RegisterForm(forms.Form):

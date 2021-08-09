@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import render, redirect
-from .forms import LoginForm, RegisterForm
+from .forms import LoginForm, RegisterForm, ForgetForm
 from django.contrib.auth import login, authenticate, logout
 from core.models import User
 from django.utils.translation import gettext_lazy as _
@@ -49,6 +49,24 @@ def register(request):
 def log_out(request):
     logout(request)
     return redirect('login')
+
+
+def forget_password(request):
+    forget_form = ForgetForm(request.POST or None)
+    if forget_form.is_valid():
+        phone = forget_form.cleaned_data.get('phone')
+        email = forget_form.cleaned_data.get('email')
+        user = User.objects.filter(phone=phone, email=email)
+        if user:
+            # send mail
+            print(f"Sendig mail! for {user[0].phone}")
+        else:
+            forget_form.add_error('phone', _('کاربری با مشخصات وارد شده وجود ندارد!'))
+
+    context = {
+        'forget_form': forget_form
+    }
+    return render(request, "account/forget_password.html", context)
 
 
 @login_required(login_url='/account/login')
