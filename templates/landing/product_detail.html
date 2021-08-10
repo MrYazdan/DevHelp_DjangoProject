@@ -16,7 +16,7 @@
                     <span class="block my-3"><i class="gb gb_local_atm ml-2"></i>{% trans "تخفیف" %} : {{ object.discount_count }}</span>
                 {% endif %}
             </div>
-            <a href=""
+            <a href="/cart/add?item_id={{ object.id }}"
                class="absolute block bottom-4 right-0 left-0 z-20 mx-4 text-center bg-blue-500 text-white rounded-lg py-2"
                title="{% trans "افزودن به سبد خرید" %}"><i class="gb gb_add_circle_outline ml-1 text-xl"></i>{% trans "افزودن به سبد خرید" %}</a>
         </div>

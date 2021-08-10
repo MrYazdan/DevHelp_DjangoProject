@@ -47,15 +47,19 @@ class Order(BaseModel):
         return sum([order_item.total_price for order_item in self.orderitem_set.all()])
 
     @property
-    def final_price(self):
-        return sum([order_item.final_price for order_item in self.orderitem_set.all()])
+    def total_discount(self) -> int:
+        discount = sum([order_item.total_discount for order_item in self.orderitem_set.all()])
+        return discount
 
     @property
-    def total_discount(self) -> tuple[int, int]:
-        discount = sum([order_item.total_discount for order_item in self.orderitem_set.all()])
+    def total_offcode(self) -> int:
         check = self.offcode.checker(self.owner) if self.offcode else False
         off = self.offcode.final_discount(self.final_price) if check else 0
-        return discount, off
+        return off
+
+    @property
+    def final_price(self):
+        return sum([order_item.final_price for order_item in self.orderitem_set.all()])
 
 
 class OrderItem(models.Model):

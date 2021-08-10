@@ -62,7 +62,7 @@ class OffCode(Discount):
         verbose_name_plural = _("OFFCodes")
 
     def checker(self, user: User):
-        return (user in self.for_users) and self.active
+        return (user in self.for_users.all()) and self.active
 
 
 class ExtraProductManager(models.Manager):

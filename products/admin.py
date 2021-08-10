@@ -16,3 +16,4 @@ class ProductModelAdmin(admin.ModelAdmin):
 @admin.register(OffCode)
 class ProductModelAdmin(admin.ModelAdmin):
     list_display = ['__str__', 'active_to', 'code', 'count_use', 'percent', 'last_used', 'active']
+    filter_horizontal = ['for_users']
