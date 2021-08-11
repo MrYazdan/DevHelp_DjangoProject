@@ -28,6 +28,9 @@ class Status(BaseModel):
     def state(self):
         return self.state_en if get_language() == "en-US" else self.state_fa
 
+    def __str__(self):
+        return self.state
+
 
 class Order(BaseModel):
     owner = models.ForeignKey(to=User, on_delete=models.CASCADE, verbose_name=_("Order Owner"),
@@ -61,6 +64,9 @@ class Order(BaseModel):
     def final_price(self):
         return sum([order_item.final_price for order_item in self.orderitem_set.all()])
 
+    def __str__(self):
+        return str(self.owner.username)
+
 
 class OrderItem(models.Model):
     order = models.ForeignKey(to=Order, on_delete=models.CASCADE, verbose_name=_("Order"),
@@ -85,3 +91,6 @@ class OrderItem(models.Model):
     @property
     def total_discount(self):
         return self.product.discount_count * self.count
+
+    def __str__(self):
+        return "salam"

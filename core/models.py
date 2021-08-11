@@ -85,3 +85,8 @@ class Address(models.Model):
     address = models.TextField()
     postal_code = models.CharField(max_length=10)
     no = models.PositiveIntegerField()
+
+    def __str__(self):
+        return self.address
+
+

@@ -8,8 +8,8 @@ from products.models import Product, OffCode
 
 
 def cart(request):
-    order = Order.objects.filter(owner=request.user, payment_datetime=None).first()
-    if order:
+    if request.user.is_authenticated:
+        order = Order.objects.filter(owner=request.user, payment_datetime=None).first()
         offcode = order.offcode if order.offcode else None
         context = {
             "empty": False,
@@ -18,12 +18,13 @@ def cart(request):
             "offcode": offcode,
             "items": order.orderitem_set.all(),
         }
+        return render(request, "landing/cart.html", context)
     else:
         context = {
             "empty": True,
             "user": request.user if request.user.username else None,
         }
-    return render(request, "landing/cart.html", context)
+        return render(request, "landing/cart.html", context)
 
 
 @login_required(login_url="/account/login")

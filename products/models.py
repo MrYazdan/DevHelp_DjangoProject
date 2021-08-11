@@ -56,6 +56,10 @@ class OffCode(Discount):
                             help_text=_("This is unique code for discount"), unique=True)
     for_users = models.ManyToManyField(User, default=None, null=True, blank=True, verbose_name=_("For users"),
                                        help_text=_("this is off code availble for selected users"))
+    # for_products = models.ManyToManyField(User, default=None, null=True, blank=True, verbose_name=_("For users"),
+    #                                    help_text=_("this is off code availble for selected users"))
+    # for_categories = models.ManyToManyField(User, default=None, null=True, blank=True, verbose_name=_("For users"),
+    #                                    help_text=_("this is off code availble for selected users"))
 
     class Meta:
         verbose_name = _("OFFCode")
