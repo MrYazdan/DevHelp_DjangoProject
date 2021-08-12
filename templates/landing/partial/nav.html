@@ -12,7 +12,11 @@
         {% if user %}
             <span class="float-left text-gray-300 text-shadow-md">{{ user }}<i class="gb gb_account_box mr-2"></i></span>
         {% else %}
-            <a href="{% url "login" %}" class="float-right trs-all-300 hover:text-green-400 text-gray-300 text-shadow-md"><i class="gb gb_lock_open ml-2"></i>{% trans "ورود" %}</a>
+            <span class="float-right trs-all-300 text-gray-300 text-shadow-md"><i class="gb gb_lock_open ml-1"></i>
+                <a class="trs-all-300 hover:text-pink-400" href="{% url "login" %}">{% trans "ورود" %}</a>
+                <i class="gb mx-1">/</i>
+                <a class="trs-all-300 hover:text-blue-400" href="{% url "register" %}">{% trans "ثبت نام" %}</a>
+            </span>
         {% endif %}
     </div>
     <div class="clearfix"></div>

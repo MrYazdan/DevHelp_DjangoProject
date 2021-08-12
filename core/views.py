@@ -21,7 +21,7 @@ def partial_offer(request, *args, **kwargs):
 
 def partial_category(request, *args, **kwargs):
     context = {
-        "categories": Category.objects.all()[:12]
+        "categories": Category.objects.all()[:12] if len(Category.objects.all()) >= 12 else Category.objects.all()[:6]
     }
     return render(request, "landing/partial/category.html", context)
 

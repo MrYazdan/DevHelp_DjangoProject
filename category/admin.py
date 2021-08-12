@@ -6,3 +6,8 @@ from .models import Category
 class CategoryModelAdmin(admin.ModelAdmin):
     list_display = ['name', 'url', 'description', 'is_active', 'is_deleted']
     list_editable = ['is_active']
+
+    def get_queryset(self, request):
+        return Category.objects.get_archive()
+
+
