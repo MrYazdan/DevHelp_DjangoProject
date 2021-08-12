@@ -1,35 +1,24 @@
 from rest_framework import permissions
-from api.permissions import IsOwner
+
+from api.permissions import IsAdminEdit
 from products.models import Product
 from category.models import Category
 from products.serializers import ProductSerializer
 from category.serializers import CategorySerializer
 from rest_framework.generics import GenericAPIView, mixins, ListCreateAPIView, RetrieveUpdateDestroyAPIView, \
-    RetrieveUpdateAPIView
+    RetrieveUpdateAPIView, ListAPIView
 from core.serializers import UserSerializer, AddressSerializer
 from core.models import User, Address
 
 
-class ProductListView(GenericAPIView, mixins.CreateModelMixin, mixins.ListModelMixin):
+class ProductListView(ListAPIView):
     serializer_class = ProductSerializer
     queryset = Product.objects.all()
 
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
 
-    def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
-
-
-class CategoryListView(GenericAPIView, mixins.CreateModelMixin, mixins.ListModelMixin):
+class CategoryListView(ListAPIView):
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
-
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
-
-    def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
 
 
 class ProductDetailView(GenericAPIView, mixins.DestroyModelMixin, mixins.UpdateModelMixin, mixins.RetrieveModelMixin):
@@ -37,6 +26,7 @@ class ProductDetailView(GenericAPIView, mixins.DestroyModelMixin, mixins.UpdateM
     queryset = Product.objects.all()
     lookup_url_kwarg = "url"
     lookup_field = "url"
+    permission_classes = [IsAdminEdit]
 
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
@@ -51,12 +41,14 @@ class ProductDetailView(GenericAPIView, mixins.DestroyModelMixin, mixins.UpdateM
         instance.is_deleted = True
 
     def patch(self, request, *args, **kwargs):
+        self.permission_classes = [permissions.IsAdminUser]
         return self.partial_update(request, *args, **kwargs)
 
 
 class CategoryDetailView(GenericAPIView, mixins.DestroyModelMixin, mixins.UpdateModelMixin, mixins.RetrieveModelMixin):
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
+    permission_classes = [IsAdminEdit]
     lookup_url_kwarg = "url"
     lookup_field = "url"
 
@@ -85,18 +77,16 @@ class UserListView(ListCreateAPIView):
 class AddressListView(ListCreateAPIView):
     serializer_class = AddressSerializer
     queryset = Address.objects.all()
-    permission_classes = [IsOwner]
+    permission_classes = [permissions.IsAdminUser]
 
 
 class AddressDetailView(RetrieveUpdateDestroyAPIView):
     serializer_class = AddressSerializer
     queryset = Address.objects.all()
-
-    def get_queryset(self):
-        return super().get_queryset().filter(owner=self.request.user)
+    permission_classes = [permissions.IsAuthenticated, permissions.IsAdminUser]
 
 
 class UserDetailView(RetrieveUpdateAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
-    permission_classes = [IsOwner]
+    permission_classes = [permissions.IsAuthenticated, permissions.IsAdminUser]

@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 
@@ -13,7 +13,7 @@ def cart(request):
         offcode = order.offcode if order.offcode else None
         context = {
             "empty": False,
-            "user": request.user if request.user.username else None,
+            "user": request.user,
             "order": order,
             "offcode": offcode,
             "items": order.orderitem_set.all(),
@@ -58,3 +58,19 @@ def add_to_cart(request, **kwargs):
             order.offcode = offcode
             order.save()
         return redirect(reverse('cart'))
+
+
+# @login_required(login_url="/account/login")
+# def modify_offer(request, **kwargs):
+#     code = kwargs.get("code")
+#     offcode = OffCode.objects.get(code=code)
+#     check = offcode.checker(request.user)
+#     order = Order.objects.filter(owner=request.user, payment_datetime=None).first()
+#
+#     if order and check:
+#         order.offcode = offcode
+#         order.save()
+#         status = "OK"
+#         return JsonResponse({
+#             "status": status
+#         })

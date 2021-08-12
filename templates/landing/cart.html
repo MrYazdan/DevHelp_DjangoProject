@@ -10,22 +10,21 @@
         {% if user %}
             {% if empty %}
                 <center class="col-span-4"><h1
-                    class="text-gray-500 font-bold">{% trans "سبد خرید شما خالی است" %}</h1></center>
+                        class="text-gray-500 font-bold">{% trans "سبد خرید شما خالی است" %}</h1></center>
             {% else %}
                 <h3 class="text-center absolute mx-auto inset-x-0 -top-8">
-        <span class="irsans-b text-xl bg-black bg-opacity-40 rounded-t-md border-t border-r border-l border-black py-1 px-8 text-white">
-            <i class="gb gb_local_mall ml-1"></i>{% trans "سبد خرید" %}</span>
-            </h3>
+                    <span class="irsans-b text-xl bg-black bg-opacity-40 rounded-t-md border-t border-r border-l border-black py-1 px-8 text-white">
+                    <i class="gb gb_local_mall ml-1"></i>{% trans "سبد خرید" %}</span>
+                </h3>
                 <div class="mt-2 grid grid-cols-12 pb-2">
                     <span class="Vazir col-span-6 inline-block text-right mr-6 text-gray-500 text-sm sm:text-sm md:text-lg">{% trans "نام محصول" %}</span>
                     <span class="Vazir col-span-2 inline-block text-center text-gray-500 text-sm sm:text-sm md:text-lg">{% trans "قیمت" %}</span>
                     <span class="Vazir col-span-2 inline-block text-center text-gray-500 text-sm sm:text-sm md:text-lg">{% trans "تعداد" %}</span>
                     <span class="Vazir col-span-2 inline-block text-center text-gray-500 text-sm sm:text-sm md:text-lg">{% trans "حذف" %}</span>
                 </div>
-                <form id="cart" action="" method="post">
+                <div id="cart">
                     {% for item in items %}
                         <div class="item-in-cart grid grid-cols-6 text-right mt-4 border-t-2 border-gray-600 pr-6 pt-6 text-white">
-                            <input type="text" name="product" hidden value="">
                             <b class="block col-span-3 Vazir text-xs sm:text-lg md:text-lg">{{ item.product.title }}</b>
                             <b class="block col-span-1 Vazir text-xs sm:text-lg md:text-lg text-blue-300 text-center">{{ item.price }}</b>
                             <input type="number" name="count" min="1" max="{{ item.product.count_inventory }}"
@@ -35,52 +34,54 @@
                                class="deleter-ico block text-center text-red-500 cursor-pointer gb gb_delete_forever gb_s24 active:outline-none"></i>
                         </div>
                     {% endfor %}
-                </form>
+                </div>
 
 
-                    <div class="factor relative grid grid-cols-3 sm:grid-cols-6 gap-6 text-right mt-4 border-t-2 border-gray-600 pr-6 pt-6 text-white">
-                        <div class="col-span-3 text-shadow-md pl-6 sm:pl-0">
+                <div class="factor relative grid grid-cols-3 sm:grid-cols-6 gap-6 text-right mt-4 border-t-2 border-gray-600 pr-6 pt-6 text-white">
+                    <div class="col-span-3 text-shadow-md pl-6 sm:pl-0">
                         <span class="block Vazir text-lg"><i
-                                class="gb gb_assessment text-3xl ml-2 mb-1"></i>{% trans "تعداد" %} : <span
-                                id="counter"></span></span>
-                            <span class="block Vazir text-lg"><i
-                                    class="gb gb_attach_money text-3xl ml-2 mb-1"></i>{% trans "قیمت کلی" %} : {{ order.total_price }}</span>
-                            <span class="block Vazir text-lg"><i
-                                    class="gb gb_money_off text-3xl ml-2 mb-1"></i>{% trans "تخفیف محصولات" %} : {{ order.total_discount }}</span>
-                            {% if offcode %}
-                                <div class="bg-red-500 p-4 rounded-md my-4 relative">
-                                    <a href=""
-                                       class="absolute left-4 -top-4 border-4 border-red-500 bg-red-800 py-2 pl-3 pr-2 rounded-xl"><i
-                                            class="gb gb_close ml-1 mb-1"></i>{% trans "لغو" %}</a>
-                                    <span class="block Vazir text-lg"><i class="gb gb_mode_edit text-3xl ml-2 mb-1"></i>{% trans "عنوان کد" %} : {{ offcode.title }}</span>
-                                    <span class="block Vazir text-lg"><i class="gb gb_monetization_on text-3xl ml-2 mb-1"></i>{% trans "میزان تخفیف کد" %} : {{ order.total_offcode }}</span>
-                                </div>
-                            {% endif %}
-                        </div>
-                        <div class="col-span-3 text-shadow-md pl-6 pb-8 sm:pb-0 relative flex items-center justify-center">
-                            <div class="">
-                                <span class="block irsans-b text-lg text-center">{% trans "قیمت نهایی" %} :</span>
-                                <span class="block Vazir text-lg text-center text-4xl font-bold mt-8">{{ order.final_price|sub:order.total_offcode }} {% trans "تومان" %}</span>
+                                class="gb gb_assessment text-3xl ml-2 mb-1"></i>{% trans "تعداد" %} : <span id="counter"></span></span>
+                        <span class="block Vazir text-lg"><i
+                                class="gb gb_attach_money text-3xl ml-2 mb-1"></i>{% trans "قیمت کلی" %} : <span id="total_price">{{ order.total_price }}</span></span>
+                        <span class="block Vazir text-lg"><i
+                                class="gb gb_money_off text-3xl ml-2 mb-1"></i>{% trans "تخفیف محصولات" %} : <span id="total_discount">{{ order.total_discount }}</span></span>
+                        {% if offcode %}
+                            <div class="bg-red-500 p-4 rounded-md my-4 relative">
+                                <a class="absolute left-4 cursor-pointer -top-4 border-4 border-red-500 bg-red-800 py-2 pl-3 pr-2 rounded-xl"
+                                   id="DisableOffer">
+                                    <i class="gb gb_close ml-1 mb-1"></i>{% trans "لغو" %}
+                                </a>
+                                <span class="block Vazir text-lg"><i
+                                        class="gb gb_mode_edit text-3xl ml-2 mb-1"></i>{% trans "عنوان کد" %} : <span id="offcode_title">{{ offcode.title }}</span></span>
+                                <span class="block Vazir text-lg"><i
+                                        class="gb gb_monetization_on text-3xl ml-2 mb-1"></i>{% trans "میزان تخفیف کد" %} : <span id="total_offcode">{{ order.total_offcode }}</span></span>
                             </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-span-3 text-shadow-md pl-6 pb-8 sm:pb-0 relative flex items-center justify-center">
+                        <div class="">
+                            <span class="block irsans-b text-lg text-center">{% trans "قیمت نهایی" %} :</span>
+                            <span class="block Vazir text-lg text-center text-4xl font-bold mt-8"><span id="final">{{ order.final_price|sub:order.total_offcode }}</span> {% trans "تومان" %}</span>
                         </div>
                     </div>
-                    <div class="grid grid-cols-2 absolute w-full gap-4 bottom-0">
-                        <input type="submit"
-                               class="block w-full bg-green-500 bg-opacity-80 text-shadow-md py-2 text-center mt-4 rounded-md text-white font-bold hover:bg-opacity-100 cursor-pointer m-2 ml-0"
-                               value="{% trans "ادامه" %}">
-                        <div class="pl-2 col-span-1">
-                            <form action="{% url "add_to_cart" %}" method="post">
-                                {% csrf_token %}
-                                <div class="grid grid-cols-12 gap-2">
-                                    <input name="code" type="text" placeholder="{% trans "کد تخفیف" %}"
-                                           class="bg-black bg-opacity-20 text-shadow-md py-2 text-center mt-4 rounded-md text-white hover:bg-opacity-100 col-span-9">
-                                    <input type="submit"
-                                           class="bg-yellow-500 bg-opacity-80 text-shadow-md text-center mt-4 rounded-md text-white  hover:bg-opacity-100 cursor-pointer col-span-3"
-                                           value="{% trans "اعمال" %}">
-                                </div>
-                            </form>
-                        </div>
+                </div>
+                <div class="grid grid-cols-2 absolute w-full gap-4 bottom-0">
+                    <input type="submit"
+                           class="block w-full bg-green-500 bg-opacity-80 text-shadow-md py-2 text-center mt-4 rounded-md text-white font-bold hover:bg-opacity-100 cursor-pointer m-2 ml-0"
+                           value="{% trans "ادامه" %}">
+                    <div class="pl-2 col-span-1">
+                        <form action="{% url "add_to_cart" %}" method="post">
+                            {% csrf_token %}
+                            <div class="grid grid-cols-12 gap-2">
+                                <input name="code" type="text" placeholder="{% trans "کد تخفیف" %}"
+                                       class="bg-black bg-opacity-20 text-shadow-md py-2 text-center mt-4 rounded-md text-white hover:bg-opacity-100 col-span-9">
+                                <input type="submit"
+                                       class="bg-yellow-500 bg-opacity-80 text-shadow-md text-center mt-4 rounded-md text-white  hover:bg-opacity-100 cursor-pointer col-span-3"
+                                       value="{% trans "اعمال" %}">
+                            </div>
+                        </form>
                     </div>
+                </div>
             {% endif %}
         {% else %}
             <center class="col-span-4"><h1
@@ -88,13 +89,19 @@
         {% endif %}
     </div>
     <script>
-        $counter = 0
+        let $counter = 0
 
         $('.item-in-cart>input[type=number]').each(function () {
             $counter += Number($(this).val())
         })
 
-        $('#counter')[0].innerText = $counter
+        $('#counter')[0].text(String($counter))
+
+        $("#DisableOffer").click(
+            $.get("", {'code': $(this).val()}, function (data) {
+                console.log(data)
+            })
+        )
     </script>
 {% endblock %}
 {% block click_item %}{% endblock %}
