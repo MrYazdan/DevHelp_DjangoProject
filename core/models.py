@@ -56,6 +56,9 @@ class BaseModel(models.Model):
     class Meta:
         abstract = True
 
+    def deleter(self):
+        self.is_deleted = True
+
 
 class CustomUserManager(UserManager):
 
@@ -88,5 +91,3 @@ class Address(models.Model):
 
     def __str__(self):
         return self.address
-
-

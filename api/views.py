@@ -12,9 +12,10 @@ from api.permissions import *
 
 
 # Category
-class CategoryListView(ListAPIView):
+class CategoryListView(ListCreateAPIView):
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
+    permission_classes = [AdminEditable]
 
 
 class CategoryDetailView(RetrieveUpdateDestroyAPIView):
@@ -28,7 +29,7 @@ class CategoryDetailView(RetrieveUpdateDestroyAPIView):
         return self.destroy(request, *args, **kwargs)
 
     def perform_destroy(self, instance):
-        instance.is_deleted = True
+        instance.deleter()
 
 
 # Contact
@@ -70,7 +71,7 @@ class OrderListView(ListCreateAPIView):
 
     def create(self, request, *args, **kwargs):
         return super().create(request, *args, **kwargs) if self.get_queryset().last().payment_datetime else \
-            response.Response({"detail": _("You have an unpaid order.")}, status=status.HTTP_406_NOT_ACCEPTABLE)
+            response.Response({"error": _("You have an unpaid order.")}, status=status.HTTP_406_NOT_ACCEPTABLE)
 
 
 class OrderDetailView(RetrieveUpdateDestroyAPIView):
@@ -78,27 +79,40 @@ class OrderDetailView(RetrieveUpdateDestroyAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        return orderitem_queryset(self)
+        return order_queryset(self)
+
+    def perform_destroy(self, instance):
+        instance.deleter()
 
 
 class OrderItemListView(ListCreateAPIView):
     serializer_class = OrderItemSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        return user_queryset(self, OrderItem)
+        return orderitem_queryset(self)
+
+    def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs) if self.get_queryset().last().order.payment_datetime else \
+            response.Response({"error": _("This order is closed.")}, status=status.HTTP_406_NOT_ACCEPTABLE)
 
 
 class OrderItemDetailView(RetrieveUpdateDestroyAPIView):
     serializer_class = OrderItemSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        return user_queryset(self, OrderItem)
+        return orderitem_queryset(self)
+
+    def perform_destroy(self, instance):
+        instance.deleter()
 
 
 # Products
-class ProductListView(ListAPIView):
+class ProductListView(ListCreateAPIView):
     serializer_class = ProductSerializer
     queryset = Product.objects.all()
+    permission_classes = [AdminEditable]
 
 
 class ProductDetailView(RetrieveUpdateDestroyAPIView):
@@ -112,7 +126,7 @@ class ProductDetailView(RetrieveUpdateDestroyAPIView):
         instance.is_deleted = True
 
 
-class DiscountListView(ListAPIView):
+class DiscountListView(ListCreateAPIView):
     serializer_class = DiscountSerializer
     queryset = Discount.objects.all()
     permission_classes = [AdminEditable]
@@ -123,8 +137,11 @@ class DiscountDetailView(RetrieveUpdateDestroyAPIView):
     queryset = Discount.objects.all()
     permission_classes = [permissions.IsAdminUser]
 
+    def perform_destroy(self, instance):
+        instance.deactive()
 
-class OffCodeListView(ListAPIView):
+
+class OffCodeListView(ListCreateAPIView):
     serializer_class = OffCodeSerializer
     queryset = OffCode.objects.all()
     permission_classes = [permissions.IsAdminUser]
@@ -134,3 +151,6 @@ class OffCodeDetailView(RetrieveUpdateDestroyAPIView):
     serializer_class = OffCodeSerializer
     queryset = OffCode.objects.all()
     permission_classes = [permissions.IsAdminUser]
+
+    def perform_destroy(self, instance):
+        instance.deactive()
