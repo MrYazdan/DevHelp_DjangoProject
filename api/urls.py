@@ -22,5 +22,5 @@ urlpatterns = [
     path('discounts/', DiscountListView.as_view()),
     path('discounts/detail/<int:pk>', DiscountDetailView.as_view()),
     path('offcodes/', OffCodeListView.as_view()),
-    path('offcodes/detail/<int:pk>', OffCodeDetailView.as_view()),
+    path('offcodes/detail/<str:code>', OffCodeDetailView.as_view()),
 ]

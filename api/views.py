@@ -127,6 +127,7 @@ class ProductDetailView(RetrieveUpdateDestroyAPIView):
 
     def perform_destroy(self, instance):
         instance.is_deleted = True
+        super().perform_destroy(instance)
 
 
 class DiscountListView(ListCreateAPIView):
@@ -142,6 +143,7 @@ class DiscountDetailView(RetrieveUpdateDestroyAPIView):
 
     def perform_destroy(self, instance):
         instance.deactive()
+        super().perform_destroy(instance)
 
 
 class OffCodeListView(ListCreateAPIView):
@@ -152,8 +154,14 @@ class OffCodeListView(ListCreateAPIView):
 
 class OffCodeDetailView(RetrieveUpdateDestroyAPIView):
     serializer_class = OffCodeSerializer
-    queryset = OffCode.objects.all()
-    permission_classes = [permissions.IsAdminUser]
+    lookup_field = "code"
+    lookup_url_kwarg = "code"
+    permission_classes = [permissions.IsAuthenticated, AdminEditable]
+
+    def get_queryset(self):
+        offcodes = OffCode.objects.filter(for_users__username=self.request.user.username)
+        return OffCode.objects.all() if self.request.user.is_superuser else offcodes
 
     def perform_destroy(self, instance):
         instance.deactive()
+        super().perform_destroy(instance)
