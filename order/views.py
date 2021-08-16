@@ -9,10 +9,10 @@ from products.models import Product, OffCode
 
 def cart(request):
     if request.user.is_authenticated:
-        order = Order.objects.filter(owner=request.user, payment_datetime=None).first()
+        order = Order.objects.get(owner=request.user, payment_datetime=None)
         offcode = order.offcode if order.offcode else None
         context = {
-            "empty": False,
+            "empty": False if order.orderitem_set.all() else True,
             "user": request.user,
             "order": order,
             "offcode": offcode,
@@ -29,13 +29,13 @@ def cart(request):
 
 @login_required(login_url="/account/login")
 def add_to_cart(request, **kwargs):
-    order = Order.objects.filter(payment_datetime=None).first()
+    order = Order.objects.get(payment_datetime=None)
     if request.method == "GET":
         if order is None:
             status = Status.objects.get(id=1)
             order = Order.objects.create(owner=request.user, status=status)
-        # filter products by id
-        product = Product.objects.filter(id=request.GET.get('item_id')).first()
+        # get products by id
+        product = Product.objects.get(id=request.GET.get('item_id'))
         # check for orderitem in cart
         orderitem = order.orderitem_set.filter(product=product).first()
         if orderitem:

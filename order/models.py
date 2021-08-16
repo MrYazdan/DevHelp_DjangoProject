@@ -68,7 +68,7 @@ class Order(BaseModel):
         return str(self.owner.username)
 
 
-class OrderItem(models.Model):
+class OrderItem(BaseModel):
     order = models.ForeignKey(to=Order, on_delete=models.CASCADE, verbose_name=_("Order"),
                               help_text=_("This is order cart"))
     product = models.ForeignKey(to=Product, on_delete=models.CASCADE, verbose_name=_("Product"),
@@ -93,4 +93,4 @@ class OrderItem(models.Model):
         return self.product.discount_count * self.count
 
     def __str__(self):
-        return "salam"
+        return f"item: {self.order.owner}"

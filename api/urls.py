@@ -12,9 +12,9 @@ urlpatterns = [
     path('addresses/', AddressListView.as_view()),
     path('addresses/detail/<int:pk>', AddressDetailView.as_view()),
     # Order
-    path('orders/', OrderListView.as_view()),
+    path('orders/', OrderListView.as_view(), name="orders"),
     path('orders/detail/<int:pk>', OrderDetailView.as_view()),
-    path('orderitems/', OrderItemListView.as_view()),
+    path('orderitems/', OrderItemListView.as_view(), name="orderitems"),
     path('orderitems/detail/<int:pk>', OrderItemDetailView.as_view()),
     # Products
     path('products/', ProductListView.as_view()),

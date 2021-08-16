@@ -1,5 +1,5 @@
+from time import sleep
 from rest_framework import status, response
-from order.models import Order, OrderItem
 from order.serializer import OrderSerializer, OrderItemSerializer
 from products.models import Product, Discount, OffCode, Category
 from products.serializers import ProductSerializer, DiscountSerializer, OffCodeSerializer, CategorySerializer
@@ -48,6 +48,7 @@ class UserDetailView(RetrieveUpdateAPIView):
     permission_classes = [permissions.IsAuthenticated, permissions.IsAdminUser]
 
 
+# TODO : ADDRESS CHECKED!!!
 class AddressListView(ListCreateAPIView):
     serializer_class = AddressSerializer
     queryset = Address.objects.all()
@@ -102,10 +103,12 @@ class OrderItemDetailView(RetrieveUpdateDestroyAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
+        sleep(1)
         return orderitem_queryset(self)
 
     def perform_destroy(self, instance):
         instance.deleter()
+        super().perform_destroy(instance)
 
 
 # Products
