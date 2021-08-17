@@ -25,11 +25,9 @@ class CategoryDetailView(RetrieveUpdateDestroyAPIView):
     lookup_url_kwarg = "url"
     lookup_field = "url"
 
-    def delete(self, request, *args, **kwargs):
-        return self.destroy(request, *args, **kwargs)
-
     def perform_destroy(self, instance):
         instance.deleter()
+        super().perform_destroy(instance)
 
 
 # Contact
@@ -84,6 +82,7 @@ class OrderDetailView(RetrieveUpdateDestroyAPIView):
 
     def perform_destroy(self, instance):
         instance.deleter()
+        super().perform_destroy(instance)
 
 
 class OrderItemListView(ListCreateAPIView):

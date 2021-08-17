@@ -26,6 +26,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
 class OffCodeSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
+    title = serializers.CharField()
 
     class Meta:
         model = OffCode

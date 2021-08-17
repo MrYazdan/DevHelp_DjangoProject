@@ -16,7 +16,7 @@
                     <center class="col-span-4"><h1
                             class="text-gray-500 font-bold">{% trans "سبد خرید شما خالی است" %}</h1></center>
                 {% else %}
-                    <h3 class="text-center absolute mx-auto inset-x-0 -top-8">
+                    <h3 class="text-center absolute mx-auto inset-x-0 -top-8 text-shadow-md">
                     <span class="irsans-b text-xl bg-black bg-opacity-40 rounded-t-md border-t border-r border-l border-black py-1 px-8 text-white">
                     <i class="gb gb_local_mall ml-1"></i>{% trans "سبد خرید" %}</span>
                     </h3>
@@ -50,20 +50,20 @@
                             <span class="block Vazir text-lg"><i
                                     class="gb gb_money_off text-3xl ml-2 mb-1"></i>{% trans "تخفیف محصولات" %} : <span
                                     id="total_discount">{{ order.total_discount }}</span></span>
-                            {% if offcode %}
-                                <div id="offcode-main" class="bg-red-500 p-4 rounded-md my-4 relative">
-                                    <a class="absolute left-4 cursor-pointer -top-4 border-4 border-red-500 bg-red-800 py-2 pl-3 pr-2 rounded-xl"
-                                       id="DisableOffer">
-                                        <i class="gb gb_close ml-1 mb-1"></i>{% trans "لغو" %}
-                                    </a>
-                                    <span class="block Vazir text-lg"><i
-                                            class="gb gb_mode_edit text-3xl ml-2 mb-1"></i>{% trans "عنوان کد" %} : <span
-                                            id="offcode_title">{{ offcode.title }}</span></span>
-                                    <span class="block Vazir text-lg"><i
-                                            class="gb gb_monetization_on text-3xl ml-2 mb-1"></i>{% trans "میزان تخفیف کد" %} : <span
-                                            id="total_offcode">{{ order.total_offcode }}</span></span>
-                                </div>
-                            {% endif %}
+                            <div id="offcode-containar">
+                                {% if offcode %}
+                                    <div id="offcode-main" class="bg-red-500 p-4 rounded-md my-4 relative">
+                                        <a class="absolute left-4 cursor-pointer -top-4 border-4 border-red-500 bg-red-800 py-2 pl-3 pr-2 rounded-xl"
+                                           id="DisableOffer"><i class="gb gb_close ml-1 mb-1"></i>{% trans "لغو" %}</a>
+                                        <span class="block Vazir text-lg"><i
+                                                class="gb gb_mode_edit text-3xl ml-2 mb-1"></i>{% trans "عنوان کد" %} : <span
+                                                id="offcode_title">{{ offcode.title }}</span></span>
+                                        <span class="block Vazir text-lg"><i
+                                                class="gb gb_monetization_on text-3xl ml-2 mb-1"></i>{% trans "میزان تخفیف کد" %} : <span
+                                                id="total_offcode">{{ order.total_offcode }}</span></span>
+                                    </div>
+                                {% endif %}
+                            </div>
                         </div>
                         <div class="col-span-3 text-shadow-md pl-6 pb-8 sm:pb-0 relative flex items-center justify-center">
                             <div class="">
@@ -78,16 +78,12 @@
                                class="block w-full bg-green-500 bg-opacity-80 text-shadow-md py-2 text-center mt-4 rounded-md text-white font-bold hover:bg-opacity-100 cursor-pointer m-2 ml-0"
                                value="{% trans "ادامه" %}">
                         <div class="pl-2 col-span-1">
-                            <form action="{% url "add_to_cart" %}" method="post">
-                                {% csrf_token %}
-                                <div class="grid grid-cols-12 gap-2">
-                                    <input name="code" type="text" placeholder="{% trans "کد تخفیف" %}"
-                                           class="bg-black bg-opacity-20 text-shadow-md py-2 text-center mt-4 rounded-md text-white hover:bg-opacity-100 col-span-9">
-                                    <input type="submit"
-                                           class="bg-yellow-500 bg-opacity-80 text-shadow-md text-center mt-4 rounded-md text-white  hover:bg-opacity-100 cursor-pointer col-span-3"
-                                           value="{% trans "اعمال" %}">
-                                </div>
-                            </form>
+                            <div class="grid grid-cols-12 gap-2">
+                                <input name="code" id="code" type="text" placeholder="{% trans "کد تخفیف" %}"
+                                       class="bg-black bg-opacity-20 text-shadow-md py-2 text-center mt-4 rounded-md text-white hover:bg-opacity-100 col-span-9">
+                                <button id="offcode-btn"
+                                        class="bg-yellow-500 bg-opacity-80 text-shadow-md text-center mt-4 rounded-md text-white  hover:bg-opacity-100 cursor-pointer col-span-3">{% trans "اعمال" %}</button>
+                            </div>
                         </div>
                     </div>
                 {% endif %}
@@ -122,6 +118,21 @@
         })
 
         $('#counter')[0].innerText = $counter
+
+        // cart updater
+        function cart_update() {
+            // get order offcode discount
+            $.getJSON("/api/orders/detail/{{ order.id }}", function (data) {
+                // set in markup id :
+                $('#total_discount').text(String(data["total_discount"]))
+                $('#total_offcode').text(String(data["total_offcode"]))
+                $('#total_price').text(String(data["total_price"]))
+                $('#final').text(String(data["final_price"]))
+            }).done(function () {
+                // enable offer remover
+                offcode_remover()
+            })
+        }
 
         // blur function
         $('*[filter-class]').each(function () {
@@ -183,74 +194,140 @@
 
         })
 
-        // off code remover
-        $('#DisableOffer').on('click', function () {
-            let el_blur = $('[filter-class]')
-            let filter = el_blur.attr('filter-class')
-            let spiner = el_blur.attr('filter-spin')
-            el_blur.addClass(filter)
-            $(spiner).removeClass('invisible')
+        // offcode submitter
+        $('#offcode-btn').click(function () {
+            let code = $('#code').val()
+            $.getJSON("/api/offcodes/detail/" + code)
+                .done(function (data) {
+                    Swal.fire({
+                        position: 'top-center',
+                        icon: 'success',
+                        title: '{% trans "کد تخفیف وارد شده اعمال شد" %}',
+                        showConfirmButton: false, timer: 3500, timerProgressBar: true,
+                    })
 
-            let el_final = $('#final')
-            let el_total_offcode = $('#total_offcode')
+                    let offcode_id = data["id"]
+                    let title_offcode = data["title"]
 
-            $.ajax({
-                url: "{% url "api:orders" %}detail/" + $OrderID,
-                type: 'PATCH',
-                contentType: 'application/json',
-                data: JSON.stringify({"offcode": null}),
-                success: function (){
-                    $('#offcode-main').remove()
-                    el_final.text(String(Number(el_final.text())+Number(el_total_offcode.text())))
-                }
-            })
+                    $('#offcode-containar').html(
+                        '<div id="offcode-main" class="bg-red-500 p-4 rounded-md my-4 relative">' +
+                        '<a class="absolute left-4 cursor-pointer -top-4 border-4 border-red-500 bg-red-800 py-2 pl-3 pr-2 rounded-xl" id="DisableOffer"><i class="gb gb_close ml-1 mb-1"></i>{% trans "لغو" %}</a>' +
+                        '<span class="block Vazir text-lg"><i class="gb gb_mode_edit text-3xl ml-2 mb-1"></i>{% trans "عنوان کد" %} : <span id="offcode_title">' + title_offcode + '</span></span>' +
+                        '<span class="block Vazir text-lg"><i class="gb gb_monetization_on text-3xl ml-2 mb-1"></i>{% trans "میزان تخفیف کد" %} : <span id="total_offcode"></span></span>' +
+                        '</div>'
+                    )
 
-            $(document).ajaxStop(function () {
-                el_blur.removeClass(filter)
-                $(spiner).addClass('invisible')
+                    $.ajax({
+                        url: "{% url "api:orders" %}detail/{{ order.id }}",
+                        type: 'PATCH',
+                        contentType: 'application/json',
+                        data: JSON.stringify({"offcode": offcode_id}),
+                        success: function () {
+                            cart_update()
+                        }
+                    })
+
+                }).fail(function (err) {
+                // show error msg
+                Swal.fire({
+                    position: 'top-center',
+                    icon: 'error',
+                    title: '{% trans "کد تخفیف وارد شده نادرست است!" %}',
+                    showConfirmButton: false, timer: 3500, timerProgressBar: true,
+                })
             })
         })
 
+
+        // offcode remover
+        function offcode_remover() {
+            $('#DisableOffer').on('click', function () {
+                let el_blur = $('[filter-class]')
+                let filter = el_blur.attr('filter-class')
+                let spiner = el_blur.attr('filter-spin')
+                el_blur.addClass(filter)
+                $(spiner).removeClass('invisible')
+
+                $.ajax({
+                    url: "{% url "api:orders" %}detail/{{ order.id }}",
+                    type: 'PATCH',
+                    contentType: 'application/json',
+                    data: JSON.stringify({"offcode": null}),
+                    success: function () {
+                        $('#offcode-containar').html('')
+                        cart_update()
+                    }
+                })
+
+                $(document).ajaxStop(function () {
+                    el_blur.removeClass(filter)
+                    $(spiner).addClass('invisible')
+                })
+            })
+        }
+
+        offcode_remover()
+
         // delete item
         $('.deleter-ico').on('click', function () {
-            let el_blur = $('[filter-class]')
-            let filter = el_blur.attr('filter-class')
-            let spiner = el_blur.attr('filter-spin')
-            el_blur.addClass(filter)
-            $(spiner).removeClass('invisible')
 
-            let item_id = $(this).parent().children('input[type=hidden]').attr('id')
-            let item = $(this).parent()
+            Swal.fire({
+                title: '{% trans "آیا قصد حذف این محصول از سبد را دارید؟" %}',
+                icon: 'warning',
+                showClass: {popup: 'animate__animated animate__flipInX'},
+                hideClass: {popup: 'animate__animated animate__flipOutX'},
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: '{% trans "لغو" %}',
+                confirmButtonText: '{% trans "بله حذف شود" %}'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: '{% trans "محصول مورد نظر با موفقیت از سبد شما حذف گردید" %}',
+                        icon: 'success'
+                    })
 
-            if (item.parent().children('.item-in-cart').length === 1) {
-                $('#cart').parent().html('<center class="col-span-4"><h1 class="text-gray-500 font-bold">{% trans "سبد خرید شما خالی است" %}</h1></center>')
-            } else {
-                let el_counter = $('#counter')
-                let el_total_price = $('#total_price')
-                let el_total_discount = $('#total_discount')
-                let el_total_offcode = $('#total_offcode')
-                let el_final = $('#final')
+                    let el_blur = $('[filter-class]')
+                    let filter = el_blur.attr('filter-class')
+                    let spiner = el_blur.attr('filter-spin')
+                    el_blur.addClass(filter)
+                    $(spiner).removeClass('invisible')
 
-                el_counter.text(String(Number(el_counter.text()) - Number(item.children('input[type=number]').val())))
-                el_total_price.text(String(Number(el_total_price.text()) - Number(Number(item.children('input[type=number]').val()) * Number(item.children('b.price-count').text()))))
+                    let item_id = $(this).parent().children('input[type=hidden]').attr('id')
+                    let item = $(this).parent()
 
-                $.getJSON("{% url "api:orderitems" %}detail/" + item_id, function (data) {
-                    el_total_discount.text(String(Number(el_total_discount.text()) - (Number(data.product["final_discount"]) * Number(item.children('input[type=number]').val()))))
-                    el_final.text(String(Number(el_total_price.text()) - Number(el_total_discount.text()) - Number(el_total_offcode.text())))
-                })
-            }
+                    if (item.parent().children('.item-in-cart').length === 1) {
+                        $('#cart').parent().html('<center class="col-span-4"><h1 class="text-gray-500 font-bold">{% trans "سبد خرید شما خالی است" %}</h1></center>')
+                    } else {
+                        let el_counter = $('#counter')
+                        let el_total_price = $('#total_price')
+                        let el_total_discount = $('#total_discount')
+                        let el_total_offcode = $('#total_offcode')
+                        let el_final = $('#final')
 
-            $.ajax({
-                url: "{% url "api:orderitems" %}detail/" + item_id,
-                type: 'DELETE',
-                success: function (result) {
-                    item.remove()
+                        el_counter.text(String(Number(el_counter.text()) - Number(item.children('input[type=number]').val())))
+                        el_total_price.text(String(Number(el_total_price.text()) - Number(Number(item.children('input[type=number]').val()) * Number(item.children('b.price-count').text()))))
+
+                        $.getJSON("{% url "api:orderitems" %}detail/" + item_id, function (data) {
+                            el_total_discount.text(String(Number(el_total_discount.text()) - (Number(data.product["final_discount"]) * Number(item.children('input[type=number]').val()))))
+                            el_final.text(String(Number(el_total_price.text()) - Number(el_total_discount.text()) - Number(el_total_offcode.text())))
+                        })
+                    }
+
+                    $.ajax({
+                        url: "{% url "api:orderitems" %}detail/" + item_id,
+                        type: 'DELETE',
+                        success: function (result) {
+                            item.remove()
+                        }
+                    })
+
+                    $(document).ajaxStop(function () {
+                        el_blur.removeClass(filter)
+                        $(spiner).addClass('invisible')
+                    })
                 }
-            })
-
-            $(document).ajaxStop(function () {
-                el_blur.removeClass(filter)
-                $(spiner).addClass('invisible')
             })
 
         })

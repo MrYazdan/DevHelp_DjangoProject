@@ -14,6 +14,13 @@ class OrderSerializer(serializers.ModelSerializer):
     # owner = UserSerializer(read_only=True)
     # status = StatusSerializer(read_only=True)
     # offcode = OffCodeSerializer(read_only=True)
+    total_offcode = serializers.IntegerField()
+    total_discount = serializers.IntegerField()
+    total_price = serializers.IntegerField()
+    final_price = serializers.SerializerMethodField()
+
+    def get_final_price(self, obj):
+        return obj.total_price - obj.total_discount - obj.total_offcode
 
     class Meta:
         model = Order
