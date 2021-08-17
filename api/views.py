@@ -42,8 +42,10 @@ class UserListView(ListCreateAPIView):
 
 class UserDetailView(RetrieveUpdateAPIView):
     serializer_class = UserSerializer
-    queryset = User.objects.all()
-    permission_classes = [permissions.IsAuthenticated, permissions.IsAdminUser]
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return User.objects.all() if self.request.user.is_superuser else User.objects.filter(id=self.request.user.id)
 
 
 # TODO : ADDRESS CHECKED!!!
