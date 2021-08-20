@@ -1,15 +1,16 @@
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-
-from order.models import OrderItem, Order, Status
+from core.models import Address
+from order.models import Order, Status
 from products.models import Product, OffCode
 
 
 def cart(request):
     if request.user.is_authenticated:
-        order = Order.objects.get(owner=request.user, payment_datetime=None)
+        order = Order.objects.get(owner=request.user, payment_datetime=None) if \
+            Order.objects.filter(owner=request.user, payment_datetime=None) else \
+            Order.objects.create(owner=request.user, status=Status.objects.get(id=1))
         offcode = order.offcode if order.offcode else None
         context = {
             "empty": False if order.orderitem_set.all() else True,
@@ -29,7 +30,9 @@ def cart(request):
 
 @login_required(login_url="/account/login")
 def add_to_cart(request, **kwargs):
-    order = Order.objects.get(payment_datetime=None)
+    order = Order.objects.get(owner=request.user, payment_datetime=None) if \
+            Order.objects.filter(owner=request.user, payment_datetime=None) else \
+            Order.objects.create(owner=request.user, status=Status.objects.get(id=1))
     if request.method == "GET":
         if order is None:
             status = Status.objects.get(id=1)
@@ -60,17 +63,18 @@ def add_to_cart(request, **kwargs):
         return redirect(reverse('cart'))
 
 
-# @login_required(login_url="/account/login")
-# def modify_offer(request, **kwargs):
-#     code = kwargs.get("code")
-#     offcode = OffCode.objects.get(code=code)
-#     check = offcode.checker(request.user)
-#     order = Order.objects.filter(owner=request.user, payment_datetime=None).first()
-#
-#     if order and check:
-#         order.offcode = offcode
-#         order.save()
-#         status = "OK"
-#         return JsonResponse({
-#             "status": status
-#         })
+@login_required(login_url="/account/login")
+def final(request, **kwargs):
+    if request.method == "GET":
+        order = Order.objects.get(owner=request.user, payment_datetime=None) if \
+            Order.objects.filter(owner=request.user, payment_datetime=None) else \
+            Order.objects.create(owner=request.user, status=Status.objects.get(id=1))
+        if not order.orderitem_set.all():
+            # redirect user if your cart is empty !
+            return redirect(reverse(cart))
+
+        context = {
+            "order": order,
+            "addresses": Address.objects.filter(owner=request.user)
+        }
+        return render(request, "landing/final.html", context)

@@ -1,5 +1,5 @@
 from django.db import models
-from core.models import User, BaseModel
+from core.models import User, BaseModel, Address
 from products.models import Product, OffCode
 from django.utils.translation import gettext_lazy as _, get_language
 
@@ -40,6 +40,8 @@ class Order(BaseModel):
     offcode = models.ForeignKey(to=OffCode, on_delete=models.SET_NULL, null=True, blank=True, default=None)
     payment_datetime = models.DateTimeField(blank=True, null=True, default=None, verbose_name=_("Payment Datetime"),
                                             help_text=_("This is payment datetime"))
+    address = models.ForeignKey(to=Address, on_delete=models.SET_NULL, null=True, blank=True,
+                                verbose_name=_("User address"), help_text=_("This is user address for your order"))
 
     class Meta:
         verbose_name = _('Order Cart')

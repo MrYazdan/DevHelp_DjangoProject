@@ -71,7 +71,7 @@ class OrderListView(ListCreateAPIView):
         return order_queryset(self)
 
     def create(self, request, *args, **kwargs):
-        return super().create(request, *args, **kwargs) if self.get_queryset().last().payment_datetime else \
+        return super().create(request, *args, **kwargs) if self.get_queryset().first().payment_datetime else \
             response.Response({"error": _("You have an unpaid order.")}, status=status.HTTP_406_NOT_ACCEPTABLE)
 
 

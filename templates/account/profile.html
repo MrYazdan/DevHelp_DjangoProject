@@ -21,6 +21,8 @@
                     <input class="trs-all-300 inline-block py-4 w-full rounded-md px-3 bg-black bg-opacity-30 mb-4 text-white" type="text" id="last_name" name="last_name" value="{{ user.last_name }}" placeholder="{% trans "لطفا نام خانوادگی خود را وارد کنید" %}"><br>
                     <label for="ncode" class="inline-block w-full mb-2 mr-3 text-white">{% trans "کدملی" %} : </label>
                     <input class="trs-all-300 inline-block py-4 w-full rounded-md px-3 bg-black bg-opacity-30 mb-4 text-white" min="10" max="10" type="text" id="ncode" name="ncode" value="{{ user.ncode }}" placeholder="{% trans "لطفا کد ملی خود را وارد کنید" %}"><br>
+                    <label for="ncode2" class="inline-block w-full mb-2 mr-3 text-white">{% trans "کدملی" %} : </label>
+                    <input class="trs-all-300 inline-block py-4 w-full rounded-md px-3 bg-black bg-opacity-30 mb-4 text-white" type="text" id="ncode2" name="ncode" value="{{ user.ncode2 }}" placeholder="{% trans "لطفا کد ملی خود را وارد کنید" %}"><br>
                     <label for="phone" class="inline-block w-full mb-2 mr-3 text-white">{% trans "شماره تماس" %} :</label>
                     <input class="trs-all-300 inline-block py-4 w-full rounded-md px-3 bg-black bg-opacity-30 mb-4 text-gray-400 cursor-not-allowed" disabled title="{% trans "غیر قابل ویرایش" %}" type="text" id="phone" name="phone" value="{{ user.phone }}"><br>
                     <label for="email" class="inline-block w-full mb-2 mr-3 text-white">{% trans "ایمیل" %} : </label>
@@ -66,11 +68,12 @@
             let el_fname = $('#first_name')
             let el_lname = $('#last_name')
             let el_ncode = $('#ncode')
+            let el_ncode2 = $('#ncode2')
 
             $.ajax({
                 url: '/api/users/detail/{{ user.id }}',
                 type: 'PATCH', contentType: 'application/json',
-                data: JSON.stringify({'first_name': el_fname.val(),'last_name': el_lname.val(), 'ncode': el_ncode.val()}),
+                data: JSON.stringify({'first_name': el_fname.val(),'last_name': el_lname.val(), 'ncode': el_ncode.val(), 'ncode2': el_ncode2.val()}),
                 error: function(xhr, status, error) {
                     let err = JSON.parse(xhr.responseText);
                     let _text = ""
@@ -83,7 +86,7 @@
                         icon: 'error',
                         title: '{% trans "ورودی هارا کنترل کنید!" %}',
                         text: _text,
-                        showConfirmButton: false, timer: 5500, timerProgressBar: true,
+                        showConfirmButton: false, timer: 8500, timerProgressBar: true,
                     })
                 }
             }).done(function(){

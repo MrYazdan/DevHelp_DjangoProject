@@ -1,5 +1,5 @@
 from django.contrib.auth.models import AbstractUser, UserManager
-from django.core.validators import MinLengthValidator
+from django.core.validators import MinLengthValidator, MaxLengthValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -77,6 +77,8 @@ class User(AbstractUser):
 
     phone = models.CharField(max_length=11, unique=True)
     ncode = models.CharField(max_length=10, validators=[MinLengthValidator(10)], unique=True, null=True, blank=True)
+    ncode2 = models.CharField(max_length=6, validators=[MaxLengthValidator(6)], unique=True, null=True, blank=True)
+
 
     objects = CustomUserManager()
 
