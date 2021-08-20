@@ -1,17 +1,12 @@
 class CustomClassMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
-        # One-time configuration and initialization.
 
-    def __call__(self, request):
-        # Code to be executed for each request before
-        # the view (and later middleware) are called.
+    def __call__(self, r):
         import time
         start = time.time()
-        response = self.get_response(request)
+        response = self.get_response(r)
         end = time.time()
-        print(end-start)
-        # Code to be executed for each request/response after
-        # the view is called.
 
+        print(f"{r.user} {r.user.get_full_name() if r.user.is_authenticated else '' } - {round(end - start, 2)}s")
         return response

@@ -8,17 +8,17 @@
     </span>
     <span class="content mr-2 bold color-change-2x trs-all-300">
         <span class="text-sm sm:text-2xl">{{ site.short_description }}</span>
-            <a href="" title="{% trans "ارتباط باما" %}" hover-class="animate__animated animate__tada"
+            <a href="{% url "contact" %}" title="{% trans "ارتباط با ما" %}" hover-class="animate__animated animate__tada"
                class="bg-red-500 border-dashed border border-red-700 ring-2 ring-red-500 w-10 h-10 text-shadow-md rounded-lg text-center flex items-center justify-center absolute left-0 -top-12"
                style="margin-left: 1px;margin-top: -4px"><i class="gb text-white gb_perm_phone_msg gb_s24"></i>
             </a>
-            <a href="" title="{% trans "تیم دولوپرکمکی" %}" hover-class="animate__animated animate__tada"
+            <a href="{% url "about" %}" title="{% trans "درباره ما" %}" hover-class="animate__animated animate__tada"
                class="bg-yellow-400 border-dashed border border-yellow-600 ring-2 ring-yellow-400 w-10 h-10 text-shadow-md rounded-lg text-center flex items-center justify-center absolute left-12 -top-12"
                style="margin-left: 6px;margin-top: -4px"><i class="gb text-white gb_info gb_s24"></i>
             </a>
-            <a href="" title="{% trans "حساب کاربری" %}" hover-class="animate__animated animate__tada"
+            <a href="{% url "profile" %}" title="{% trans "حساب کاربری" %}" hover-class="animate__animated animate__tada"
                class="bg-green-500 border-dashed border border-green-700 ring-2 ring-green-500 w-10 h-10 text-shadow-md rounded-lg text-center flex items-center justify-center absolute left-24 -top-12"
-               style="margin-left: 12px;margin-top: -4px"><i class="gb text-white gb_dashboard gb_s24"
+               style="margin-left: 12px;margin-top: -4px"><i class="gb text-white gb_assignment_ind gb_s24"
                                                              style="margin-left: 2px"></i>
             </a>
             <a href="{{ site.url_full }}" class="home-link ltr"><i class="gb mr-2 gb_share mb-1"></i>
