@@ -1,12 +1,14 @@
 from time import sleep
 from rest_framework import status, response
 from order.serializer import OrderSerializer, OrderItemSerializer
+from settings.models import Contact
+from settings.serializers import ContactSerializer
 from products.models import Product, Discount, OffCode, Category
 from products.serializers import ProductSerializer, DiscountSerializer, OffCodeSerializer, CategorySerializer
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, ListAPIView, RetrieveUpdateAPIView
 from core.serializers import UserSerializer, AddressSerializer
 from core.models import User, Address
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext_lazy as _, gettext as _g
 from .utils import *
 from api.permissions import *
 
@@ -166,3 +168,13 @@ class OffCodeDetailView(RetrieveUpdateDestroyAPIView):
     def perform_destroy(self, instance):
         instance.deactive()
         super().perform_destroy(instance)
+
+
+# Contact
+class ContactCreateListView(ListCreateAPIView):
+    serializer_class = ContactSerializer
+    queryset = Contact.objects.all()
+
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs) if self.request.user.is_superuser else \
+            response.Response({_g("detail"): _g("Authentication credentials were not provided.")}, status=403)

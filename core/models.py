@@ -77,8 +77,6 @@ class User(AbstractUser):
 
     phone = models.CharField(max_length=11, unique=True)
     ncode = models.CharField(max_length=10, validators=[MinLengthValidator(10)], unique=True, null=True, blank=True)
-    ncode2 = models.CharField(max_length=6, validators=[MaxLengthValidator(6)], unique=True, null=True, blank=True)
-
 
     objects = CustomUserManager()
 

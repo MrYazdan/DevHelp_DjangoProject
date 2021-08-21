@@ -23,4 +23,6 @@ urlpatterns = [
     path('discounts/detail/<int:pk>', DiscountDetailView.as_view()),
     path('offcodes/', OffCodeListView.as_view()),
     path('offcodes/detail/<str:code>', OffCodeDetailView.as_view(), name="offcode_detail"),
+    # Contact
+    path('contacts/', ContactCreateListView.as_view(), name="contact"),
 ]

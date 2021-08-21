@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'api',
     'account',
     'category',
-    'contact',
     'core',
     'order',
     'products',

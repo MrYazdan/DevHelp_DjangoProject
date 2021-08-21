@@ -1,7 +1,7 @@
+from django.core import validators
 from django.db import models
-from core.models import BaseModel
+from core.models import BaseModel, User
 from django.utils.translation import gettext_lazy as _, get_language
-
 from core.utils import Controllers
 
 
@@ -86,7 +86,7 @@ class Site(models.Model):
         upload_to=Controllers.Image.img_renamer, verbose_name=_("Large Logo"), null=True, blank=True, default="",
         help_text=_("This is large image logo for website"))
     footer_msg_fa = models.CharField(max_length=360, null=True, blank=True, verbose_name=_("Persian Footer Message"),
-                                     default="لطفا در قسمت ادمین - قسمت پیام پایینی - پیام مورد نظر خود را وارد کنید",
+                                     default=_("لطفا در قسمت ادمین - قسمت پیام پایینی - پیام مورد نظر خود را وارد کنید"),
                                      help_text=_("This is persian footer message"))
     footer_msg_en = models.CharField(max_length=360, null=True, blank=True, verbose_name=_("English Footer Message"),
                                      default="Please complete footer message in admin - settings",
@@ -134,3 +134,20 @@ class Site(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Contact(models.Model):
+    user = models.ForeignKey(to=User, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_("User contact"),
+                             help_text=_("This user id to send message"))
+    name = models.CharField(max_length=50, verbose_name=_("Sender Name"), help_text=_("This is name of sender message"))
+    phone_regex = validators.RegexValidator(regex=r'^\+?1?\d{10,13}$',
+                                            message=_("Phone number must be entered in the true format."))
+    phone = models.CharField(validators=[phone_regex], max_length=17, verbose_name=_("Phone"),
+                             help_text=_("This is phone number of sender"))
+    email = models.CharField(max_length=80, verbose_name=_("Email"), help_text=_("This is mail address of sender"),
+                             null=True, blank=True, validators=[validators.EmailValidator])
+    msg = models.TextField(verbose_name=_("Message"), help_text=_("This is message of sender"))
+
+    class Meta:
+        verbose_name = _("Contact Message")
+        verbose_name_plural = _("Contact Messages")
