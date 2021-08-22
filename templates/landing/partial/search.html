@@ -59,6 +59,7 @@
 
             // get product list :
             $.getJSON("{% url "api:products" %}", function (data) {
+                search_box.children("div").children("div").html('')
                 $.each(data, function (k, v) {
 
                     // product

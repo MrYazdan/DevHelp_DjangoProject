@@ -44,6 +44,7 @@ class Category(BaseModel):
     def name(self):
         return self.name_en if get_language() == "en-US" else self.name_fa
 
+    @property
     def url_full(self):
         return f"/category/{self.url}"
 
