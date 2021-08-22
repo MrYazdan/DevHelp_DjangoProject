@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django_render_partial',
     'mathfilters',
     'rest_framework',
+    'django_jalali',
 
     # my applications
     'api',

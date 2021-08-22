@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser, UserManager
-from django.core.validators import MinLengthValidator, MaxLengthValidator
+from django.core.validators import MinLengthValidator
 from django.db import models
+from django_jalali.db import models as jmodels
 from django.utils.translation import gettext_lazy as _
 
 
@@ -30,12 +31,12 @@ class BaseManager(models.Manager):
 # BaseModel :
 class BaseModel(models.Model):
     # usually columns
-    create_time = models.DateTimeField(
+    create_time = jmodels.jDateTimeField(
         auto_now_add=True,
         verbose_name=_("Created time"),
         help_text=_("This is created time")
     )
-    modify_time = models.DateTimeField(
+    modify_time = jmodels.jDateTimeField(
         auto_now=True,
         verbose_name=_("Modified time"),
         help_text=_("This is modified time")

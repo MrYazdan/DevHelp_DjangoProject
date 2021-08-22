@@ -1,4 +1,5 @@
 from django.db import models
+from django_jalali.db import models as jmodels
 from core.models import BaseModel
 from core.models import User
 from category.models import Category
@@ -20,14 +21,14 @@ class Discount(models.Model):
         max_length=150, verbose_name=_("English title"), help_text=_("This is english name for discount item"))
     title_fa = models.CharField(
         max_length=150, verbose_name=_("Persian title"), help_text=_("This is persian name for discount item"))
-    active_from = models.DateTimeField(auto_now_add=True, verbose_name=_("From datetime"),
+    active_from = jmodels.jDateTimeField(auto_now_add=True, verbose_name=_("From datetime"),
                                        help_text=_("This is start discount datetime "))
-    active_to = models.DateTimeField(verbose_name=_("Expire datetime"),
+    active_to = jmodels.jDateTimeField(verbose_name=_("Expire datetime"),
                                      help_text=_("This is expire discount datetime "))
     active = models.BooleanField(default=True, verbose_name=_("Is Active"), help_text=_("This is time "))
     count_use = models.PositiveIntegerField(default=1, verbose_name=_("Count of use"),
                                             help_text=_("This is count for use off code and expire"))
-    last_used = models.DateTimeField(default=None, null=True, blank=True)
+    last_used = jmodels.jDateTimeField(default=None, null=True, blank=True)
     max_price = models.PositiveIntegerField(verbose_name=_("Max Discount Price"), default=None, null=True, blank=True,
                                             help_text=_("This is max discount price item"))
     percent = models.PositiveIntegerField(verbose_name=_("Discount Percent"),
@@ -163,6 +164,12 @@ class Product(BaseModel):
     @property
     def product_url(self):
         return f"/products/{self.url}"
+
+    @property
+    def viewed(self):
+        self.view_count += 1
+        self.save()
+        return self.view_count
 
     def __str__(self):
         return self.title
