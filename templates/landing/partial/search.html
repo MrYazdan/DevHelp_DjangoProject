@@ -1,8 +1,46 @@
+{% load static %}
 {% load i18n %}
-<form class="grid grid-cols-12 gap-0 mt-8 mb-4 mx-auto max-w-screen-lg w-11/12" action="/search" method="get">
-    <label for="search"
-           class="col-span-2 md:col-span-1 bg-white bg-opacity-10 rounded-r-md text-white text-center leading-10 px-3 py-2"><i
-            class="gb gb_search gb_s36"></i></label>
-    <input id="search" name="s" type="search" placeholder="{% trans "جستجو" %} ..."
-           class="col-span-10 md:col-span-11 search-bar-input leading-10 relative text-white irsans-b bg-white bg-opacity-10 text-2xl  px-4 pb-4 rounded-l-md border-r-4 ">
+<form class="mt-8 mb-4 mx-auto max-w-screen-lg trs-all-300 w-11/12 relative">
+    <div id="spiner-search" class="absolute inset-0 flex justify-center trs-all-300 items-center invisible z-30">
+        <i class="gb block text-5xl gb_cached gb_animate_spin text-white text-shadow-md"></i>
+    </div>
+    <div id="filter-search" class="grid grid-cols-12 gap-0 w-full trs-all-300 z-20 filter relative">
+        <label for="search"
+               class="col-span-2 md:col-span-1 bg-white bg-opacity-10 rounded-r-md text-white text-center leading-10 px-3 py-2">
+            <i class="gb gb_search gb_s36"></i>
+        </label>
+        <input id="search" type="text" placeholder="{% trans "جستجو" %} ..."
+               class="col-span-10 md:col-span-11 search-bar-input leading-10 relative text-white irsans-b bg-white bg-opacity-10 text-2xl  px-4 pb-4 rounded-l-md border-r-4 ">
+    </div>
 </form>
+<script>
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+
+    $.ajaxSetup({
+        beforeSend: function (xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
+            }
+        }
+    });
+
+    $("#search").on("input", function () {
+        const spiner = $("#spiner-search")
+        const filter = $("#filter-search")
+        const len = $(this).val().length
+
+        if (len >= 3) {
+            filter.addClass("blur-sm")
+            spiner.removeClass("invisible")
+
+
+            $("#search").ajaxStop(function () {
+                filter.removeClass("blur-sm")
+                spiner.addClass('invisible')
+            })
+        }
+    })
+</script>
