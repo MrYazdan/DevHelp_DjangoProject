@@ -5,8 +5,9 @@ from settings.models import Contact
 from settings.serializers import ContactSerializer
 from products.models import Product, Discount, OffCode, Category
 from products.serializers import ProductSerializer, DiscountSerializer, OffCodeSerializer, CategorySerializer
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, ListAPIView, RetrieveUpdateAPIView
-from core.serializers import UserSerializer, AddressSerializer
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, RetrieveUpdateAPIView, \
+    UpdateAPIView
+from core.serializers import UserSerializer, AddressSerializer, ChangePasswordSerializer
 from core.models import User, Address
 from django.utils.translation import gettext_lazy as _, gettext as _g
 from .utils import *
@@ -48,6 +49,15 @@ class UserDetailView(RetrieveUpdateAPIView):
 
     def get_queryset(self):
         return User.objects.all() if self.request.user.is_superuser else User.objects.filter(id=self.request.user.id)
+
+
+class ChangePasswordView(UpdateAPIView):
+    serializer_class = ChangePasswordSerializer
+    queryset = User.objects.all()
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_object(self, queryset=None):
+        return self.request.user
 
 
 # TODO : ADDRESS CHECKED!!!
