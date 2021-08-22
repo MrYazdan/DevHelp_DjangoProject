@@ -19,3 +19,4 @@ class CategoryProductShow(ListView):
 class Categories(ListView):
     template_name = "landing/categories.html"
     queryset = Category.objects.get_active_list()
+    paginate_by = 4

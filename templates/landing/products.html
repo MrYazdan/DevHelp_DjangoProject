@@ -24,6 +24,27 @@
                     </div>
                 </a>
             {% endfor %}
+            <section class="container col-span-1 sm:md:col-span-3 md:col-span-4 text-center Vazir">
+                <nav class="pagination block">
+                    {% if page_obj.has_previous %}
+                        <a href="?page={{ page_obj.previous_page_number }}" class="prev">&laquo;</a>
+                    {% else %}
+                        <a disabled="disabled">&laquo;</a>
+                    {% endif %}
+                    {% for i in page_obj.paginator.page_range %}
+                        {% if page_obj.number == i %}
+                            <span>{{ i }}</span>
+                        {% else %}
+                            <a href="?page={{ i }}">{{ i }}</a>
+                        {% endif %}
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}" class="next">&raquo;</a>
+                    {% else %}
+                        <a disabled="disabled">&raquo;</a>
+                    {% endif %}
+                </nav>
+            </section>
         {% else %}
             <center class="col-span-4"><h1
                     class="text-gray-500 font-bold">{% trans "آیتمی برای نمایش وجود ندارد!" %}</h1></center>
