@@ -53,11 +53,12 @@ class UserDetailView(RetrieveUpdateAPIView):
 
 class ChangePasswordView(UpdateAPIView):
     serializer_class = ChangePasswordSerializer
-    queryset = User.objects.all()
-    permission_classes = [permissions.IsAuthenticated]
 
-    def get_object(self, queryset=None):
-        return self.request.user
+    def update(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save()
+        return response.Response({'success': _("Password updated successfully.")}, status=status.HTTP_200_OK)
 
 
 # TODO : ADDRESS CHECKED!!!

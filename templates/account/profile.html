@@ -6,41 +6,69 @@
 {% block body %}
     <div class="trs-all-300 relative max-w-screen-lg relative mx-auto w-11/12 gap-4 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 rounded-md bg-black mt-8 bg-opacity-30 mb-8 z-10 overflow-hidden">
         <div class="right bg-black bg-opacity-30 border-l border-white border-opacity-30">
-            <div id="account" class="cursor-pointer text-shadow-md text-white irsans-b py-5 text-center border-b border-white border-opacity-30 trs-all-300 bg-white bg-opacity-0 hover:bg-opacity-10">{% trans "پروفایل کاربری" %}</div>
-            <div id="address" class="cursor-pointer text-shadow-md text-white irsans-b py-5 text-center border-b border-white border-opacity-30 trs-all-300 bg-white bg-opacity-0 hover:bg-opacity-10">{% trans "آدرس های ثبت شده" %}</div>
-            <div id="order" class="cursor-pointer text-shadow-md text-white irsans-b py-5 text-center border-b border-white border-opacity-30 trs-all-300 bg-white bg-opacity-0 hover:bg-opacity-10">{% trans "سفارش های پرداخت شده" %}</div>
-            <div id="offcode" class="cursor-pointer text-shadow-md text-white irsans-b py-5 text-center border-b border-white border-opacity-30 trs-all-300 bg-white bg-opacity-0 hover:bg-opacity-10">{% trans "کد های تخفیف فعال" %}</div>
+            <div id="account"
+                 class="cursor-pointer text-shadow-md text-white irsans-b py-5 text-center border-b border-white border-opacity-30 trs-all-300 bg-white bg-opacity-0 hover:bg-opacity-10">{% trans "پروفایل کاربری" %}</div>
+            <div id="address"
+                 class="cursor-pointer text-shadow-md text-white irsans-b py-5 text-center border-b border-white border-opacity-30 trs-all-300 bg-white bg-opacity-0 hover:bg-opacity-10">{% trans "آدرس های ثبت شده" %}</div>
+            <div id="order"
+                 class="cursor-pointer text-shadow-md text-white irsans-b py-5 text-center border-b border-white border-opacity-30 trs-all-300 bg-white bg-opacity-0 hover:bg-opacity-10">{% trans "سفارش های پرداخت شده" %}</div>
+            <div id="offcode"
+                 class="cursor-pointer text-shadow-md text-white irsans-b py-5 text-center border-b border-white border-opacity-30 trs-all-300 bg-white bg-opacity-0 hover:bg-opacity-10">{% trans "کد های تخفیف فعال" %}</div>
         </div>
         <div id="main" class="left col-span-1 sm:col-span-2 md:col-span-3 py-4 pl-4">
-            <div id="account-data" >
+            <div id="account-data">
                 <h2 class="text-center text-white text-shadow-md irsans-b mt-2 mb-6 border-b-2 border-gray-400 rounded-full pb-4">{% trans "اطلاعات کاربری" %}</h2>
                 <form action="">
-                    <label for="first_name" class="inline-block w-full mb-2 mr-3 text-white">{% trans "نام" %} : </label>
-                    <input class="trs-all-300 inline-block py-4 w-full rounded-md px-3 bg-black bg-opacity-30 mb-4 text-white" type="text" id="first_name" name="first_name" value="{{ user.first_name }}" placeholder="{% trans "لطفا نام خود را وارد کنید" %}"><br>
-                    <label for="last_name" class="inline-block w-full mb-2 mr-3 text-white">{% trans "نام خانوادگی" %} : </label>
-                    <input class="trs-all-300 inline-block py-4 w-full rounded-md px-3 bg-black bg-opacity-30 mb-4 text-white" type="text" id="last_name" name="last_name" value="{{ user.last_name }}" placeholder="{% trans "لطفا نام خانوادگی خود را وارد کنید" %}"><br>
+                    <label for="first_name" class="inline-block w-full mb-2 mr-3 text-white">{% trans "نام" %}
+                        : </label>
+                    <input class="trs-all-300 inline-block py-4 w-full rounded-md px-3 bg-black bg-opacity-30 mb-4 text-white"
+                           type="text" id="first_name" name="first_name" value="{{ user.first_name }}"
+                           placeholder="{% trans "لطفا نام خود را وارد کنید" %}"><br>
+                    <label for="last_name" class="inline-block w-full mb-2 mr-3 text-white">{% trans "نام خانوادگی" %}
+                        : </label>
+                    <input class="trs-all-300 inline-block py-4 w-full rounded-md px-3 bg-black bg-opacity-30 mb-4 text-white"
+                           type="text" id="last_name" name="last_name" value="{{ user.last_name }}"
+                           placeholder="{% trans "لطفا نام خانوادگی خود را وارد کنید" %}"><br>
                     <label for="ncode" class="inline-block w-full mb-2 mr-3 text-white">{% trans "کدملی" %} : </label>
-                    <input class="trs-all-300 inline-block py-4 w-full rounded-md px-3 bg-black bg-opacity-30 mb-4 text-white" min="10" max="10" type="text" id="ncode" name="ncode" value="{{ user.ncode }}" placeholder="{% trans "لطفا کد ملی خود را وارد کنید" %}"><br>
-                    <label for="phone" class="inline-block w-full mb-2 mr-3 text-white">{% trans "شماره تماس" %} :</label>
-                    <input class="trs-all-300 inline-block py-4 w-full rounded-md px-3 bg-black bg-opacity-30 mb-4 text-gray-400 cursor-not-allowed" disabled title="{% trans "غیر قابل ویرایش" %}" type="text" id="phone" name="phone" value="{{ user.phone }}"><br>
+                    <input class="trs-all-300 inline-block py-4 w-full rounded-md px-3 bg-black bg-opacity-30 mb-4 text-white"
+                           min="10" max="10" type="text" id="ncode" name="ncode" value="{{ user.ncode }}"
+                           placeholder="{% trans "لطفا کد ملی خود را وارد کنید" %}"><br>
+                    <label for="phone" class="inline-block w-full mb-2 mr-3 text-white">{% trans "شماره تماس" %}
+                        :</label>
+                    <input class="trs-all-300 inline-block py-4 w-full rounded-md px-3 bg-black bg-opacity-30 mb-4 text-gray-400 cursor-not-allowed"
+                           disabled title="{% trans "غیر قابل ویرایش" %}" type="text" id="phone" name="phone"
+                           value="{{ user.phone }}"><br>
                     <label for="email" class="inline-block w-full mb-2 mr-3 text-white">{% trans "ایمیل" %} : </label>
-                    <input class="trs-all-300 inline-block py-4 w-full rounded-md px-3 bg-black bg-opacity-30 mb-4 text-gray-400 cursor-not-allowed" disabled title="{% trans "غیر قابل ویرایش" %}" type="text" id="email" name="email" value="{{ user.email }}"><br>
+                    <input class="trs-all-300 inline-block py-4 w-full rounded-md px-3 bg-black bg-opacity-30 mb-4 text-gray-400 cursor-not-allowed"
+                           disabled title="{% trans "غیر قابل ویرایش" %}" type="text" id="email" name="email"
+                           value="{{ user.email }}"><br>
                     <div class="grid grid-cols-1 gap-4 mt-2 ltr text-white">
-                        <button onclick="ProfileUpdater($(this))" type="button" class="text-center py-3 rounded-md trs-all-300 bg-green-600  hover:bg-green-700 text-shadow-md cursor-pointer">{% trans "ذخیره" %}</button>
+                        <button onclick="ProfileUpdater($(this))" type="button"
+                                class="text-center py-3 rounded-md trs-all-300 bg-green-600  hover:bg-green-700 text-shadow-md cursor-pointer">{% trans "ذخیره" %}</button>
                     </div>
                 </form>
 
                 <!-- change password -->
                 <h2 class="text-center text-white text-shadow-md irsans-b mt-8 mb-6 border-b-2 border-gray-400 rounded-full pb-4">{% trans "تغییر رمز" %}</h2>
                 <form action="">
-                    <label for="old" class="inline-block w-full mb-2 mr-3 text-white">{% trans "رمز قدیمی" %} : </label>
-                    <input class="trs-all-300 inline-block py-4 w-full rounded-md px-3 bg-black bg-opacity-30 mb-4 text-white" type="password" id="old" name="old" placeholder="{% trans "لطفا رمز قدیمی خود را وارد کنید" %}"><br>
-                    <label for="pass_1" class="inline-block w-full mb-2 mr-3 text-white">{% trans "رمز جدید" %} : </label>
-                    <input class="trs-all-300 inline-block py-4 w-full rounded-md px-3 bg-black bg-opacity-30 mb-4 text-white" type="password" id="pass_1" name="pass_1" placeholder="{% trans "لطفا رمز جدید خود را وارد کنید" %}"><br>
-                    <label for="pass_2" class="inline-block w-full mb-2 mr-3 text-white">{% trans "تکرار رمز جدید" %} : </label>
-                    <input class="trs-all-300 inline-block py-4 w-full rounded-md px-3 bg-black bg-opacity-30 mb-4 text-white" type="password" id="pass_2" name="pass_2" placeholder="{% trans "لطفا تکرار رمز جدید خود را وارد کنید" %}"><br>
+                    <label for="old_password" class="inline-block w-full mb-2 mr-3 text-white">{% trans "رمز قدیمی" %}
+                        : </label>
+                    <input class="trs-all-300 inline-block py-4 w-full rounded-md px-3 bg-black bg-opacity-30 mb-4 text-white"
+                           type="password" id="old_password" name="old_password"
+                           placeholder="{% trans "لطفا رمز قدیمی خود را وارد کنید" %}"><br>
+                    <label for="new_password1" class="inline-block w-full mb-2 mr-3 text-white">{% trans "رمز جدید" %}
+                        : </label>
+                    <input class="trs-all-300 inline-block py-4 w-full rounded-md px-3 bg-black bg-opacity-30 mb-4 text-white"
+                           type="password" id="new_password1" name="new_password1"
+                           placeholder="{% trans "لطفا رمز جدید خود را وارد کنید" %}"><br>
+                    <label for="new_password2"
+                           class="inline-block w-full mb-2 mr-3 text-white">{% trans "تکرار رمز جدید" %} : </label>
+                    <input class="trs-all-300 inline-block py-4 w-full rounded-md px-3 bg-black bg-opacity-30 mb-4 text-white"
+                           type="password" id="new_password2" name="new_password2"
+                           placeholder="{% trans "لطفا تکرار رمز جدید خود را وارد کنید" %}"><br>
                     <div class="grid grid-cols-1 gap-4 mt-2 ltr text-white">
-                        <input type="submit" value="{% trans "تغییر رمز" %}" class="text-center py-3 rounded-md trs-all-300 bg-green-600  hover:bg-green-700 text-shadow-md cursor-pointer">
+                        <button onclick="PasswordUpdater($(this))" type="button"
+                                class="text-center py-3 rounded-md trs-all-300 bg-green-600  hover:bg-green-700 text-shadow-md cursor-pointer">{% trans "تغییر رمز" %}</button>
                     </div>
                 </form>
             </div>
@@ -70,13 +98,17 @@
             $.ajax({
                 url: '/api/users/detail/{{ user.id }}',
                 type: 'PATCH', contentType: 'application/json',
-                data: JSON.stringify({'first_name': el_fname.val(),'last_name': el_lname.val(), 'ncode': el_ncode.val()}),
-                error: function(xhr, status, error) {
+                data: JSON.stringify({
+                    'first_name': el_fname.val(),
+                    'last_name': el_lname.val(),
+                    'ncode': el_ncode.val()
+                }),
+                error: function (xhr, status, error) {
                     let err = JSON.parse(xhr.responseText);
                     let _text = ""
                     $.each(err, function (k, v) {
-                        let key = $("[for="+k+"]").text()
-                        _text += key+v+"\n"
+                        let key = $("[for=" + k + "]").text()
+                        _text += key + v + "\n"
                     })
 
                     Swal.fire({
@@ -86,11 +118,53 @@
                         showConfirmButton: false, timer: 8500, timerProgressBar: true,
                     })
                 }
-            }).done(function(){
+            }).done(function () {
                 Swal.fire({
                     icon: 'success',
                     title: '{% trans "تغییرات اعمال شد" %}',
                     showConfirmButton: false, timer: 3500, timerProgressBar: true,
+                })
+            })
+        }
+
+        function PasswordUpdater(el) {
+            let el_old = $('#old_password')
+            let el_new = $('#new_password1')
+            let el_confirm = $('#new_password2')
+
+            $.ajax({
+                url: '{% url "api:change_password" pk=user.id %}',
+                type: 'PATCH', contentType: 'application/json',
+                data: JSON.stringify({
+                    'old_password': el_old.val(),
+                    'new_password1': el_new.val(),
+                    'new_password2': el_confirm.val()
+                }),
+                error: function (xhr, status, error) {
+                    let err = JSON.parse(xhr.responseText);
+                    let _text = ""
+                    $.each(err, function (k, v) {
+                        let key = $("[for=" + k + "]").text()
+                        _text += "<p>" + key + v + "</p>"
+                    })
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: '{% trans "ورودی هارا کنترل کنید!" %}',
+                        html: _text,
+                        showConfirmButton: false, timer: 8500, timerProgressBar: true,
+                    })
+                }
+            }).done(function () {
+                Swal.fire({
+                    icon: 'success',
+                    title: '{% trans "رمز جدید با موفقیت تغییر یافت!" %}',
+                    text: '{% trans 'تغییر مسیر به صفحه ورود ، لطفا دوباره وارد شوید' %}',
+                    showConfirmButton: false, timer: 4000, timerProgressBar: true,
+                }).then((result) => {
+                    if (result.dismiss) {
+                        window.location.replace("{% url "login" %}");
+                    }
                 })
             })
         }
