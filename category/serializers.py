@@ -3,6 +3,7 @@ from category.models import Category
 
 
 class CategorySerializer(serializers.ModelSerializer):
+    name = serializers.CharField()
 
     class Meta:
         model = Category

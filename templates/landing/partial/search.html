@@ -10,37 +10,100 @@
             <i class="gb gb_search gb_s36"></i>
         </label>
         <input id="search" type="text" placeholder="{% trans "جستجو" %} ..."
-               class="col-span-10 md:col-span-11 search-bar-input leading-10 relative text-white irsans-b bg-white bg-opacity-10 text-2xl  px-4 pb-4 rounded-l-md border-r-4 ">
+               class="col-span-10 md:col-span-11 search-bar-input leading-10 relative text-white irsans-b bg-white bg-opacity-10 text-2xl px-4 pb-4 rounded-l-md border-r-4 ">
+        <div id="search_box" class="col-span-12 relative -top-4 hidden">
+            <div class="w-full p-4">
+                <div class="bg-white rounded-b-md bg-opacity-10 p-4 pb-1">
+                    <a href="#"
+                       class="item-search bg-black grid grid-cols-12 rounded-md mb-4 w-full bg-opacity-10 p-4 hover:bg-opacity-20 trs-all-300">
+                        <img src="{% static "img/android.png" %}" class="float-right col-span-2 rounded-md">
+                        <div class="float-right mr-6 inline col-span-10">
+                            <h1 class="Vazir font-bold text-shadow-md text-xl text-white">این قسمت عنوان مطلب منه</h1>
+                            <p class="float-right text-gray-300 irsans-b">{% trans "دسته بندی" %} : اچ تی ام ال</p>
+                            <br><br>
+                            <p class="Vazir text-gray-300">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و
+                                با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان
+                                که لازم است</p>
+                        </div>
+                    </a>
+                    <a class="bg-black grid grid-cols-12 rounded-md mb-4 w-full bg-opacity-10 p-4 trs-all-300 text-center">
+                        <h1 class="Vazir col-span-12 font-bold text-shadow-md text-2xl text-white">{% trans "چیزی یافت نشد :(" %}</h1>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 </form>
 <script>
-    function csrfSafeMethod(method) {
-        // these HTTP methods do not require CSRF protection
-        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-    }
 
-    $.ajaxSetup({
-        beforeSend: function (xhr, settings) {
-            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
-            }
-        }
-    });
+    window.addEventListener('keydown',function(e){if(e.keyIdentifier=='U+000A'||e.keyIdentifier=='Enter'||e.keyCode==13){if(e.target.nodeName=='INPUT'&&e.target.type=='text'){e.preventDefault();return false;}}},true);
+
 
     $("#search").on("input", function () {
         const spiner = $("#spiner-search")
         const filter = $("#filter-search")
+        let search_box = $("#search_box")
+        $is_empty = true
         const len = $(this).val().length
 
         if (len >= 3) {
+            const value = $(this).val().toLowerCase()
+
+            // add blur filter
             filter.addClass("blur-sm")
             spiner.removeClass("invisible")
 
+            // show main box
+            search_box.removeClass("hidden").removeClass("animate__animated animate__fadeOut").addClass("animate__animated animate__fadeIn")
+            search_box.children("div").children("div").html('')
 
-            $("#search").ajaxStop(function () {
+            // get product list :
+            $.getJSON("{% url "api:products" %}", function (data) {
+                $.each(data, function (k, v) {
+
+                    // product
+                    if (v["title_en"].toLowerCase().includes(value) || v["title_fa"].toLowerCase().includes(value)) {
+                        $is_empty = false
+
+                        search_box.children("div").children("div").append(
+                            '<a href="' + v["product_url"] + '" class="item-search bg-black grid grid-cols-12 rounded-md mb-4 w-full bg-opacity-10 p-4 hover:bg-opacity-20 trs-all-300">' +
+                            '<img src="' + v["image"] + '" class="float-right col-span-3 rounded-md" style="height: 100%">' +
+                            '<div class="float-right mr-6 inline col-span-9">' +
+                            '<h1 class="Vazir font-bold text-shadow-md text-xl text-white">' + v["title"] + '</h1>' +
+                            '<p class="float-right text-gray-300 irsans-b">{% trans "دسته بندی" %} : ' + v["category"]["name"] + '</p>' +
+                            '<br><br>' +
+                            '<p class="Vazir text-gray-300">' + v['short_description'] + '</p>' +
+                            '</div>' +
+                            '</a>'
+                        )
+                    }
+
+                    // category :
+                    if (v["category"]["name_en"].toLowerCase().includes(value) || v["category"]["name_fa"].toLowerCase().includes(value)) {
+                    }
+                })
+
+                if ($is_empty) {
+                    search_box.children("div").children("div").html('')
+                    search_box.children("div").children("div").prepend(
+                        '<a class="bg-black grid grid-cols-12 rounded-md mb-4 w-full bg-opacity-10 p-4 trs-all-300 text-center">' +
+                        '<h1 class="Vazir col-span-12 font-bold text-shadow-md text-2xl text-white">{% trans "چیزی یافت نشد :(" %}</h1>' +
+                        '</a>'
+                    )
+                }
+            })
+            $(document).ajaxStop(function () {
                 filter.removeClass("blur-sm")
                 spiner.addClass('invisible')
             })
+        }
+
+        // empty :
+        if (len === 0) {
+            search_box.removeClass("animate__animated animate__fadeIn").addClass("animate__animated animate__fadeOut")
+            setTimeout(function () {
+                search_box.addClass("hidden")
+            }, 700)
         }
     })
 </script>

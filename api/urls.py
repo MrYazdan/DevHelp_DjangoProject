@@ -17,7 +17,7 @@ urlpatterns = [
     path('orderitems/', OrderItemListView.as_view(), name="orderitems"),
     path('orderitems/detail/<int:pk>', OrderItemDetailView.as_view()),
     # Products
-    path('products/', ProductListView.as_view()),
+    path('products/', ProductListView.as_view(), name="products"),
     path('products/detail/<slug:url>', ProductDetailView.as_view()),
     path('discounts/', DiscountListView.as_view()),
     path('discounts/detail/<int:pk>', DiscountDetailView.as_view()),

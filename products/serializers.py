@@ -12,6 +12,10 @@ class DiscountSerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
+    title = serializers.CharField()
+    product_url = serializers.CharField()
+    short_description = serializers.CharField()
+    description = serializers.CharField()
     category = CategorySerializer(read_only=True)
     discount = DiscountSerializer(read_only=True)
     final_discount = serializers.SerializerMethodField()

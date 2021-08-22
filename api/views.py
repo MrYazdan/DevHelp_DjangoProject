@@ -120,6 +120,10 @@ class ProductListView(ListCreateAPIView):
     queryset = Product.objects.all()
     permission_classes = [AdminEditable]
 
+    def get_queryset(self):
+        sleep(1)
+        return super().get_queryset()
+
 
 class ProductDetailView(RetrieveUpdateDestroyAPIView):
     serializer_class = ProductSerializer
