@@ -1,8 +1,6 @@
 import uuid
-
 from jdatetime import datetime as dt
 from django.db import models
-from django.utils import timezone
 from django_jalali.db import models as jmodels
 from core.models import User, BaseModel, Address
 from products.models import Product, OffCode

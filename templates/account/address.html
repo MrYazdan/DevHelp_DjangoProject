@@ -11,11 +11,11 @@
             <a href="{% url "address" %}" id="addrss"
                  class="cursor-pointer block text-shadow-md text-white irsans-b py-5 text-center border-b border-white border-opacity-30 trs-all-300 bg-white bg-opacity-10">{% trans "آدرس های ثبت شده" %}</a>
             <a href="{% url "user_orders" %}" id="order"
-                 class="cursor-pointer block text-shadow-md text-white irsans-b py-5 text-center border-b border-white border-opacity-30 trs-all-300 bg-white bg-opacity-0 hover:bg-opacity-10">{% trans "سفارش های ثبت شده" %}</a>
+                 class="cursor-pointer block text-shadow-md text-white irsans-b py-5 text-center border-b border-white border-opacity-30 trs-all-300 bg-white bg-opacity-0 hover:bg-opacity-10">{% trans "سفارش های ثبت  شده" %}</a>
             <a href="{% url "user_offcode" %}" id="offcode"
                  class="cursor-pointer block text-shadow-md text-white irsans-b py-5 text-center border-b border-white border-opacity-30 trs-all-300 bg-white bg-opacity-0 hover:bg-opacity-10">{% trans "کد های تخفیف فعال" %}</a>
         </div>
-        <div id="main" class="left col-span-1 sm:col-span-2 md:col-span-3 py-4 pt-0 pl-4">
+        <div id="main" class="left col-span-1 sm:col-span-2 md:col-span-3 py-4 pt-0 pl-4 pr-4 sm:pr-0">
             {% if object_list %}
                 {% for address in object_list %}
                     <div id="{{ address.id }}"

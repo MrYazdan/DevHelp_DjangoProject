@@ -16,19 +16,22 @@
             <a href="{% url "user_offcode" %}" id="offcode"
                class="cursor-pointer block text-shadow-md text-white irsans-b py-5 text-center border-b border-white border-opacity-30 trs-all-300 bg-white bg-opacity-10">{% trans "کد های تخفیف فعال" %}</a>
         </div>
-        <div id="main" class="left col-span-1 sm:col-span-2 md:col-span-3 py-8 pl-8 pr-4" style="min-height: 40vh">
+        <div id="main" class="left col-span-1 sm:col-span-2 md:col-span-3 py-4 sm:py-8 pl-4 sm:pl-8 pr-4" style="min-height: 40vh">
             {% if object_list %}
-                <div class="grid grid-cols-1 gap-8">
-                    {% for order in object_list %}
-                        <a href="{% url "recepie" order.recepie_id %}" title="{% trans "نمایش جزئیات" %}" class="relative block text-white rounded-md trs-all-300 py-6 pb-12 px-4 bg-black bg-opacity-20 hover:bg-opacity-40">
-                            <span class="absolute right-4 text-shadow-md Vazir">{% trans "شماره سفارش" %} : {{ order.recepie_id }}</span>
-                            <span class="absolute left-4 text-shadow-md Vazir">{{ order.payment_datetime|jformat:"%d / %m / %Y" }}</span>
-                        </a>
+                <div class="grid grid-cols-1 gap-4 sm:gap-8">
+                    {% for offcode in object_list %}
+                        <div class="relative block text-white rounded-md trs-all-300 h-32 bg-red-500 hover:bg-red-600">
+                            <span class="absolute inset-x-0 top-2 text-xl font-bold mx-auto text-center text-shadow-md Vazir rounded-full">{% trans "حد استفاده" %} : {{ offcode.count_use }}</span>
+                            <span class="absolute right-6 top-10 text-shadow-md ">{% trans "کد" %} : <span class="ltr irsans-b px-4 py-1 rounded-lg border-dashed border-2 border-white bg-black bg-opacity-20">{{ offcode.code }}</span></span>
+                            <span class="absolute right-6 top-20 text-shadow-md Vazir">{% trans "درصد" %} : {{ offcode.percent }}</span>
+                            <span class="absolute left-6 top-10 text-shadow-md Vazir">{% trans "تاریخ انقضا" %} : {{ offcode.active_to|jformat:"%d / %m / %Y" }}</span>
+                            <span class="absolute left-6 top-20 text-shadow-md Vazir">{% trans "حداکثر تخفیف" %} : {{ offcode.max_price }}</span>
+                        </div>
                     {% endfor %}
                 </div>
             {% else %}
                 <center class="col-span-2">
-                    <h1 class="text-3xl text-gray-400 irsans-b text-shadow-md">{% trans "سفارش پرداخت شده ای برای نمایش وجود ندارد" %}</h1>
+                    <h1 class="text-3xl text-gray-400 irsans-b text-shadow-md">{% trans "کد تخفیف فعالی برای نمایش وجود ندارد" %}</h1>
                 </center>
             {% endif %}
         </div>

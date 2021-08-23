@@ -2,6 +2,7 @@ from django.contrib.auth import mixins
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, ListView
 from order.models import Order
+from products.models import OffCode
 from .forms import LoginForm, RegisterForm, ForgetForm
 from django.contrib.auth import login, authenticate
 from core.models import User, Address
@@ -81,3 +82,10 @@ class UserOrders(mixins.LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return Order.objects.filter(payment_datetime__isnull=False)
+
+
+class UserOffCodes(mixins.LoginRequiredMixin, ListView):
+    template_name = "account/offcode.html"
+
+    def get_queryset(self):
+        return OffCode.objects.filter(for_users__username=self.request.user, active=True)

@@ -16,7 +16,7 @@
             <a href="{% url "user_offcode" %}" id="offcode"
                class="cursor-pointer block text-shadow-md text-white irsans-b py-5 text-center border-b border-white border-opacity-30 trs-all-300 bg-white bg-opacity-0 hover:bg-opacity-10">{% trans "کد های تخفیف فعال" %}</a>
         </div>
-        <div id="main" class="left col-span-1 sm:col-span-2 md:col-span-3 py-8 pl-8 pr-4" style="min-height: 40vh">
+        <div id="main" class="left col-span-1 sm:col-span-2 md:col-span-3 py-8 pl-8 pr-8 sm:pr-4" style="min-height: 40vh">
             {% if object_list %}
                 <div class="grid grid-cols-1 gap-8">
                     {% for order in object_list %}
