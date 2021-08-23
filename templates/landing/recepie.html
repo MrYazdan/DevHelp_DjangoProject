@@ -1,0 +1,79 @@
+{% extends "landing/base.html" %}
+{% load mathfilters %}
+{% load i18n %}
+{% block extra_head %}
+{% endblock %}
+{% block title %}{% trans "رسید پرداخت" %}{% endblock %}
+{% block offer %}{% endblock %}
+{% block body %}
+    <div class="main relative">
+        <div class="trs-all-300 grid grid-cols-1 sm:grid-cols-2 relative max-w-screen-lg relative mx-auto w-11/12 gap-8 rounded-md p-8 bg-black mt-16 bg-opacity-40 mb-8 z-10 filter ">
+            <h3 class="text-center absolute mx-auto inset-x-0 -top-8 text-shadow-md">
+                <span class="irsans-b text-xl bg-black bg-opacity-40 rounded-t-md border-t border-r border-l border-black py-1 px-8 text-white">
+                <i class="gb gb_assignment ml-3"></i>{% trans "رسید سفارش شما" %}</span>
+            </h3>
+            <div class="text-white col-span-1 sm:col-span-2">
+                <h2 class="text-center irsans-b pb-4 text-shadow-md border-b text-xl border-white border-opacity-20">{% trans "شماره سفارش شما" %}
+                    : {{ order.recepie_id }}</h2>
+            </div>
+            <div class="text-white col-span-1 sm:col-span-2 mt-8 blink">
+                <div class="swal2-icon swal2-success swal2-icon-show" style="display: flex;">
+                    <div class="swal2-success-circular-line-left" style="background-color: rgba(255, 255, 255, 0);"></div>
+                    <span class="swal2-success-line-tip"></span> <span class="swal2-success-line-long"></span>
+                    <div class="swal2-success-ring"></div>
+                    <div class="swal2-success-fix" style="background-color: rgba(255, 255, 255, 0);"></div>
+                    <div class="swal2-success-circular-line-right" style="background-color: rgba(255, 255, 255, 0);"></div>
+                </div>
+            </div>
+            <div class="text-white col-span-1 sm:col-span-2">
+                <p class="text-center irsans-b p-2 sm:p-8">{% trans "سفارش شما ثبت گردید و از این پس داخل پروفایل شما قابل دسترسی است." %}</p>
+                <p class="text-center text-gray-300 Vazir px-2 sm:px-8">{% trans "از انتخاب تیم ما صمیمانه مچکریم!" %}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block extra_foot %}
+    <script>
+        function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
+                }
+            }
+        });
+
+        $('.address').click(function () {
+            $("#final_cart").removeAttr("disabled").removeClass("cursor-not-allowed")
+            $(this).addClass("selected")
+            $('.address').not(this).removeClass("selected")
+        })
+
+        $("#final_cart").click(function () {
+            if (!($(this).attr("disabled") || $(this).hasClass("cursor-not-allowed"))) {
+                $.ajax({
+                    url: "{% url "final-cart" %}",
+                    type: "POST",
+                    data: {'address_id': $(".address.selected").attr("id")},
+                }).done(function () {
+                    Swal.fire({
+                        icon: 'success',
+                        title: '{% trans "سفارش شما ثبت شد" %}',
+                        text: '{% trans "به صفحه رسید خود هدایت میشوید" %}',
+                        showConfirmButton: false, timer: 3500, timerProgressBar: true,
+                    })
+                    setTimeout(function () {
+                        window.location.replace("{% url "recepie" order.recepie_id %}")
+                    }, 3600)
+                })
+            }
+        })
+
+
+    </script>
+{% endblock %}
+{% block click_item %}{% endblock %}

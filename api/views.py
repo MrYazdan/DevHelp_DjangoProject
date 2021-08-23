@@ -33,9 +33,6 @@ class CategoryDetailView(RetrieveUpdateDestroyAPIView):
         super().perform_destroy(instance)
 
 
-# Contact
-
-
 # Core
 class UserListView(ListCreateAPIView):
     serializer_class = UserSerializer
@@ -61,7 +58,6 @@ class ChangePasswordView(UpdateAPIView):
         return response.Response({'success': _("Password updated successfully.")}, status=status.HTTP_200_OK)
 
 
-# TODO : ADDRESS CHECKED!!!
 class AddressListView(ListCreateAPIView):
     serializer_class = AddressSerializer
     permission_classes = [permissions.IsAuthenticated]
@@ -72,6 +68,8 @@ class AddressListView(ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
         super().perform_create(serializer)
+
+
 
 
 class AddressDetailView(RetrieveUpdateDestroyAPIView):
