@@ -84,8 +84,8 @@ class User(AbstractUser):
 
 class Address(models.Model):
     owner = models.ForeignKey(to="User", on_delete=models.CASCADE)
-    lat = models.FloatField(null=True, blank=True)
-    lng = models.FloatField(null=True, blank=True)
+    lat = models.FloatField(null=True, blank=True, default=None)
+    lng = models.FloatField(null=True, blank=True, default=None)
     country = models.CharField(max_length=120)
     city = models.CharField(max_length=120)
     address = models.TextField()

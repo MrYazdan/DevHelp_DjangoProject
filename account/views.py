@@ -1,9 +1,8 @@
 from django.contrib.auth.decorators import login_required
-from django.http import Http404
 from django.shortcuts import render, redirect
 from .forms import LoginForm, RegisterForm, ForgetForm
 from django.contrib.auth import login, authenticate, logout
-from core.models import User
+from core.models import User, Address
 from django.utils.translation import gettext_lazy as _
 
 
@@ -72,3 +71,8 @@ def forget_password(request):
 @login_required(login_url='/account/login')
 def profile(request):
     return render(request, 'account/profile.html', {"user": request.user})
+
+
+@login_required(login_url='/account/login')
+def address(request):
+    return render(request, 'account/address.html', {"addresses": Address.objects.filter(owner=request.user)})

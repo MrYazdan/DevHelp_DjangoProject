@@ -64,18 +64,25 @@ class ChangePasswordView(UpdateAPIView):
 # TODO : ADDRESS CHECKED!!!
 class AddressListView(ListCreateAPIView):
     serializer_class = AddressSerializer
-    queryset = Address.objects.all()
-    permission_classes = [permissions.IsAdminUser]
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return Address.objects.filter(owner=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+        super().perform_create(serializer)
 
 
 class AddressDetailView(RetrieveUpdateDestroyAPIView):
     serializer_class = AddressSerializer
-    queryset = Address.objects.all()
-    permission_classes = [permissions.IsAdminUser]
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return Address.objects.filter(owner=self.request.user)
 
 
 # Order
-
 class OrderListView(ListCreateAPIView):
     serializer_class = OrderSerializer
     permission_classes = [permissions.IsAuthenticated]

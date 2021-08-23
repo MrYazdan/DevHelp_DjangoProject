@@ -1,0 +1,147 @@
+{% extends 'landing/base.html' %}
+{% load i18n %}
+{% block title %}{% trans "آدرس ها" %}{% endblock %}
+{% block offer %}{% endblock %}
+{% block click_item %}{% endblock %}
+{% block body %}
+    <div class="trs-all-300 relative max-w-screen-lg relative mx-auto w-11/12 gap-4 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 rounded-md bg-black mt-8 bg-opacity-30 mb-8 z-10 overflow-hidden">
+        <div class="right bg-black bg-opacity-30 border-l border-white border-opacity-30">
+            <a href="{% url "profile" %}" id="account"
+               class="block cursor-pointer text-shadow-md text-white irsans-b py-5 text-center border-b border-white border-opacity-30 trs-all-300 bg-white bg-opacity-0 hover:bg-opacity-10">{% trans "پروفایل کاربری" %}</a>
+            <div id="addrss"
+                 class="cursor-pointer text-shadow-md text-white irsans-b py-5 text-center border-b border-white border-opacity-30 trs-all-300 bg-white bg-opacity-10">{% trans "آدرس های ثبت شده" %}</div>
+            <div id="order"
+                 class="cursor-pointer text-shadow-md text-white irsans-b py-5 text-center border-b border-white border-opacity-30 trs-all-300 bg-white bg-opacity-0 hover:bg-opacity-10">{% trans "سفارش های پرداخت شده" %}</div>
+            <div id="offcode"
+                 class="cursor-pointer text-shadow-md text-white irsans-b py-5 text-center border-b border-white border-opacity-30 trs-all-300 bg-white bg-opacity-0 hover:bg-opacity-10">{% trans "کد های تخفیف فعال" %}</div>
+        </div>
+        <div id="main" class="left col-span-1 sm:col-span-2 md:col-span-3 py-4 pt-0 pl-4">
+            {% if addresses %}
+                {% for address in addresses %}
+                    <div id="{{ address.id }}"
+                         class="address text-white Vazir mt-5 bg-gray-700 rounded-md grid grid-cols-2 p-4 gap-4 cursor-pointer hover:bg-gray-600 trs-all-300 selected">
+                        <p class="">{% trans "کشور" %} : {{ address.country }}</p>
+                        <p class="">{% trans "شهر" %} : {{ address.city }}</p>
+                        <p class="">{% trans "کدپستی" %} : {{ address.postal_code }}</p>
+                        <p class="">{% trans "پلاک" %} : {{ address.no }}</p>
+                        <p class="col-span-2">{% trans "آدرس" %} : {{ address.address }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <center class="col-span-2">
+                    <h1 class="text-3xl text-gray-400 irsans-b text-shadow-md">{% trans "آدرسی برای نمایش وجود ندارد" %}</h1>
+                </center>
+            {% endif %}
+            <div id="account-data" class="mt-8">
+                <h2 class="text-center text-white text-shadow-md irsans-b mt-2 mb-6 border-b-2 border-gray-400 rounded-full pb-4">{% trans "ثبت آدرس جدید" %}</h2>
+                <form>
+                    {% csrf_token %}
+                    <label for="lat" class="inline-block w-full mb-2 mr-3 text-white">{% trans "عرض جغرافیایی" %}
+                        : </label>
+                    <input class="trs-all-300 inline-block py-4 w-full rounded-md px-3 bg-black bg-opacity-30 mb-4 text-white"
+                           type="number" id="lat" name="lat"
+                           placeholder="{% trans "(اختیاری)" %}"><br>
+                    <label for="lng" class="inline-block w-full mb-2 mr-3 text-white">{% trans "طول جغرافیایی" %}
+                        : </label>
+                    <input class="trs-all-300 inline-block py-4 w-full rounded-md px-3 bg-black bg-opacity-30 mb-4 text-white"
+                           type="number" id="lng" name="lng"
+                           placeholder="{% trans "(اختیاری)" %}"><br>
+                    <label for="country" class="inline-block w-full mb-2 mr-3 text-white">{% trans "کشور" %} : </label>
+                    <input class="trs-all-300 inline-block py-4 w-full rounded-md px-3 bg-black bg-opacity-30 mb-4 text-white"
+                           type="text" id="country" name="country"
+                           placeholder="{% trans "لطفا کشور خود را وارد کنید" %}"><br>
+                    <label for="city" class="inline-block w-full mb-2 mr-3 text-white">{% trans "شهر" %}
+                        :</label>
+                    <input class="trs-all-300 inline-block py-4 w-full rounded-md px-3 bg-black bg-opacity-30 mb-4 text-white"
+                           type="text" id="city" name="city"
+                           placeholder="{% trans "لطفا شهر خود را وارد کنید" %}"><br>
+                    <label for="address" class="inline-block w-full mb-2 mr-3 text-white">{% trans "آدرس" %}
+                        :</label>
+                    <input class="trs-all-300 inline-block py-4 w-full rounded-md px-3 bg-black bg-opacity-30 mb-4 text-white"
+                           type="text" id="address" name="address"
+                           placeholder="{% trans "لطفا آدرس خود را وارد کنید" %}"><br>
+                    <label for="postal_code" class="inline-block w-full mb-2 mr-3 text-white">{% trans "کد پستی" %}
+                        :</label>
+                    <input class="trs-all-300 inline-block py-4 w-full rounded-md px-3 bg-black bg-opacity-30 mb-4 text-white"
+                           type="number" id="postal_code" name="postal_code"
+                           placeholder="{% trans "لطفا کد پستی خود را وارد کنید" %}"><br>
+                    <label for="no" class="inline-block w-full mb-2 mr-3 text-white">{% trans "پلاک" %}
+                        :</label>
+                    <input class="trs-all-300 inline-block py-4 w-full rounded-md px-3 bg-black bg-opacity-30 mb-4 text-white"
+                           type="number" id="no" name="no"
+                           placeholder="{% trans "لطفا پلاک خود را وارد کنید" %}"><br>
+                    <div class="grid grid-cols-1 gap-4 mt-2 ltr text-white">
+                        <button type="button" onclick="AddAddress()"
+                                class="text-center py-3 rounded-md trs-all-300 bg-green-600  hover:bg-green-700 text-shadow-md cursor-pointer">{% trans "ذخیره" %}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block extra_foot %}
+    <script>
+        function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
+                }
+            }
+        });
+
+        function AddAddress() {
+            let el_lat = $('#lat')
+            let el_lng = $('#lng')
+
+            let el_country = $('#country')
+            let el_city = $('#city')
+            let el_address = $('#address')
+            let el_postal_code = $('#postal_code')
+            let el_no = $('#no')
+
+            $.ajax({
+                url: '{% url "api:address" %}',
+                type: 'POST', contentType: 'application/json',
+                data: JSON.stringify({
+                    'lat': el_lat.val() || null,
+                    'lng': el_lng.val() || null,
+                    'country': el_country.val(),
+                    'city': el_city.val(),
+                    'address': el_address.val(),
+                    'postal_code': el_postal_code.val(),
+                    'no': el_no.val(),
+                }),
+                error: function (xhr, status, error) {
+                    let err = JSON.parse(xhr.responseText);
+                    let _text = ""
+                    $.each(err, function (k, v) {
+                        let key = $("[for=" + k + "]").text()
+                        _text += "<p>" + key + v + "</p>"
+                    })
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: '{% trans "ورودی هارا کنترل کنید!" %}',
+                        html: _text,
+                        showConfirmButton: false, timer: 8500, timerProgressBar: true,
+                    })
+                }
+            }).done(function () {
+                Swal.fire({
+                    icon: 'success',
+                    title: '{% trans "آدرس جدید افزوده شد!" %}',
+                    showConfirmButton: false, timer: 3000, timerProgressBar: true,
+                }).then((result) => {
+                    if (result.dismiss) {
+                        window.location.replace("{% url "address" %}");
+                    }
+                })
+            })
+        }
+    </script>
+{% endblock %}

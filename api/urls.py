@@ -10,7 +10,7 @@ urlpatterns = [
     path('users/', UserListView.as_view()),
     path('users/detail/<int:pk>', UserDetailView.as_view()),
     path('users/passwords/update/<int:pk>', ChangePasswordView.as_view(), name="change_password"),
-    path('addresses/', AddressListView.as_view()),
+    path('addresses/', AddressListView.as_view(), name="address"),
     path('addresses/detail/<int:pk>', AddressDetailView.as_view()),
     # Order
     path('orders/', OrderListView.as_view(), name="orders"),
