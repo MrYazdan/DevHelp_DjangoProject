@@ -1,5 +1,7 @@
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
+from django.views.generic import TemplateView
+
 from .forms import LoginForm, RegisterForm, ForgetForm
 from django.contrib.auth import login, authenticate, logout
 from core.models import User, Address
@@ -68,11 +70,9 @@ def forget_password(request):
     return render(request, "account/forget_password.html", context)
 
 
-@login_required(login_url='/account/login')
-def profile(request):
-    return render(request, 'account/profile.html', {"user": request.user})
+class Profile(LoginRequiredMixin, TemplateView):
+    template_name = "account/profile.html"
 
 
-@login_required(login_url='/account/login')
 def address(request):
     return render(request, 'account/address.html', {"addresses": Address.objects.filter(owner=request.user)})

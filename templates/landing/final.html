@@ -84,6 +84,16 @@
                     url: "{% url "final-cart" %}",
                     type: "POST",
                     data: {'address_id': $(".address.selected").attr("id")},
+                }).done(function () {
+                    Swal.fire({
+                        icon: 'success',
+                        title: '{% trans "سفارش شما ثبت شد" %}',
+                        text: '{% trans "به صفحه رسید خود هدایت میشوید" %}',
+                        showConfirmButton: false, timer: 3500, timerProgressBar: true,
+                    })
+                    setTimeout(function () {
+                        window.location.replace("{% url "recepie" order.recepie_id %}")
+                    }, 3600)
                 })
             }
         })

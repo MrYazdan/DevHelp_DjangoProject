@@ -108,6 +108,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOGIN_URL = "/account/login"
+
 LANGUAGE_CODE = 'fa-IR'
 
 TIME_ZONE = 'UTC'

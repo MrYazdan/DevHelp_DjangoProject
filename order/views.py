@@ -86,7 +86,7 @@ def final(request, **kwargs):
             address = Address.objects.get(id=address_id)
             order.address = address
             order.save()
-            # check off code used
+            # check offcode used
             if order.offcode:
                 offcode = order.offcode
                 if offcode.expire_checker():
@@ -101,6 +101,6 @@ def final(request, **kwargs):
                 product.sell(i.count)
                 product.save()
             # redirect in recepie page :
-            return redirect(reverse('recepie'), recepie_id=order.recepie_id)
+            return redirect(reverse('profile'))
         else:
             return redirect(reverse('cart'))

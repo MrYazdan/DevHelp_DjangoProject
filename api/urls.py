@@ -8,7 +8,7 @@ urlpatterns = [
     path('categories/detail/<slug:url>', CategoryDetailView.as_view()),
     # Core
     path('users/', UserListView.as_view()),
-    path('users/detail/<int:pk>', UserDetailView.as_view()),
+    path('users/detail/<int:pk>', UserDetailView.as_view(), name="user_detail"),
     path('users/passwords/update/<int:pk>', ChangePasswordView.as_view(), name="change_password"),
     path('addresses/', AddressListView.as_view(), name="address"),
     path('addresses/detail/<int:pk>', AddressDetailView.as_view()),
