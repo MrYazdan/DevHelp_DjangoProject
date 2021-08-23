@@ -4,6 +4,7 @@ from core.models import BaseModel
 from core.models import User
 from category.models import Category
 from django.utils.translation import gettext_lazy as _, get_language
+from jdatetime import datetime as dt
 from core.utils import *
 
 
@@ -22,9 +23,9 @@ class Discount(models.Model):
     title_fa = models.CharField(
         max_length=150, verbose_name=_("Persian title"), help_text=_("This is persian name for discount item"))
     active_from = jmodels.jDateTimeField(auto_now_add=True, verbose_name=_("From datetime"),
-                                       help_text=_("This is start discount datetime "))
+                                         help_text=_("This is start discount datetime "))
     active_to = jmodels.jDateTimeField(verbose_name=_("Expire datetime"),
-                                     help_text=_("This is expire discount datetime "))
+                                       help_text=_("This is expire discount datetime "))
     active = models.BooleanField(default=True, verbose_name=_("Is Active"), help_text=_("This is time "))
     count_use = models.PositiveIntegerField(default=1, verbose_name=_("Count of use"),
                                             help_text=_("This is count for use off code and expire"))
@@ -42,11 +43,19 @@ class Discount(models.Model):
 
     def deactive(self):
         self.active = False
+        self.save()
 
     def final_discount(self, price: int):
         _max = self.max_price
         _discount = round((self.percent * price) / 100)
         return _max if _discount >= _max else _discount
+
+    def expire_checker(self):
+        now = dt.now()
+        if self.active_from <= now < self.active_to:
+            return True
+        self.deactive()
+        return False
 
     def __str__(self):
         return self.title
@@ -57,6 +66,7 @@ class OffCode(Discount):
                             help_text=_("This is unique code for discount"), unique=True)
     for_users = models.ManyToManyField(User, default=None, null=True, blank=True, verbose_name=_("For users"),
                                        help_text=_("this is off code availble for selected users"))
+
     # for_products = models.ManyToManyField(User, default=None, null=True, blank=True, verbose_name=_("For users"),
     #                                    help_text=_("this is off code availble for selected users"))
     # for_categories = models.ManyToManyField(User, default=None, null=True, blank=True, verbose_name=_("For users"),
@@ -170,6 +180,13 @@ class Product(BaseModel):
         self.view_count += 1
         self.save()
         return self.view_count
+
+    def sell(self, count):
+        self.count_inventory -= count
+        self.count_buy += count
+        if self.count_inventory <= 0:
+            self.is_active = False
+        self.save()
 
     def __str__(self):
         return self.title

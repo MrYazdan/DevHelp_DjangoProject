@@ -184,8 +184,7 @@ class OffCodeDetailView(RetrieveUpdateDestroyAPIView):
     permission_classes = [permissions.IsAuthenticated, AdminEditable]
 
     def get_queryset(self):
-        offcodes = OffCode.objects.filter(for_users__username=self.request.user.username)
-        return OffCode.objects.all() if self.request.user.is_superuser else offcodes
+        return OffCode.objects.filter(for_users__username=self.request.user.username, active=True)
 
     def perform_destroy(self, instance):
         instance.deactive()

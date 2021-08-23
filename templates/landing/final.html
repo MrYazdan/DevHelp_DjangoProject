@@ -25,12 +25,12 @@
                 <h2 class="text-center irsans-b pb-4 text-shadow-md border-b text-xl border-white border-opacity-20">{% trans "آدرس ها" %}
                     : </h2>
                 <a href="{% url "address" %}"
-                   class="text-right block irsans-b py-4 mb-2 text-yellow-400 hover:text-yellow-600">{% trans "شما میتوانید آدرس های خود را در بخش پروفایل کاربری مدیریت کنید! ورود به بخش آدرس ها‌" %}</a>
-                <div class="grid grid-cols-2 gap-4">
+                   class="text-right block irsans-b py-4 mb-6 text-yellow-400 hover:text-yellow-600 blink trs-all-300">{% trans "شما میتوانید آدرس های خود را در بخش پروفایل کاربری مدیریت کنید! - ورود به بخش آدرس ها‌" %}</a>
+                <div class="grid grid-cols-2 gap-4 sm:gap-8">
                     {% if addresses %}
                         {% for address in addresses %}
                             <div id="{{ address.id }}"
-                                 class="address Vazir mt-5 bg-gray-700 rounded-md grid grid-cols-2 p-4 gap-4 cursor-pointer hover:bg-gray-600 trs-all-300 selected">
+                                 class="address Vazir bg-gray-700 rounded-md grid grid-cols-2 p-4 gap-4 cursor-pointer hover:bg-gray-600 trs-all-300">
                                 <p class="">{% trans "کشور" %} : {{ address.country }}</p>
                                 <p class="">{% trans "شهر" %} : {{ address.city }}</p>
                                 <p class="">{% trans "کدپستی" %} : {{ address.postal_code }}</p>
@@ -51,8 +51,8 @@
                         id="final">{{ order.final_price|sub:order.total_offcode }}</span> {% trans "تومان" %}</span>
             </div>
             <div class="text-white relative col-span-2 sm:col-span-1">
-                <a href=""
-                   class="rounded-lg py-8 bg-yellow-600 border-b-2 border-yellow-700 irsans-b text-2xl block text-center hover:bg-yellow-800 trs-all-300 w-full">{% trans "پرداخت" %}</a>
+                <button type="button" id="final_cart" disabled="disabled"
+                        class="cursor-not-allowed rounded-lg py-8 bg-yellow-600 border-b-2 border-yellow-700 irsans-b text-2xl block text-center hover:bg-yellow-800 trs-all-300 w-full">{% trans "پرداخت" %}</button>
             </div>
         </div>
     </div>
@@ -73,8 +73,19 @@
         });
 
         $('.address').click(function () {
+            $("#final_cart").removeAttr("disabled").removeClass("cursor-not-allowed")
             $(this).addClass("selected")
             $('.address').not(this).removeClass("selected")
+        })
+
+        $("#final_cart").click(function () {
+            if (!($(this).attr("disabled") || $(this).hasClass("cursor-not-allowed"))) {
+                $.ajax({
+                    url: "{% url "final-cart" %}",
+                    type: "POST",
+                    data: {'address_id': $(".address.selected").attr("id")},
+                })
+            }
         })
 
 

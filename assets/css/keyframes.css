@@ -53,6 +53,16 @@
     }
 }
 
+.blink {
+    -webkit-animation: blink infinite 3s ease-in-out;
+    -o-animation: blink infinite 3s ease-in-out;
+    animation: blink infinite 3s ease-in-out;
+}
+
+.blink:hover {
+    animation: none;
+}
+
 @-webkit-keyframes bg-colori {
     0% {
         background: #ee3c2e;

@@ -1,4 +1,9 @@
+import uuid
+
+from jdatetime import datetime as dt
 from django.db import models
+from django.utils import timezone
+from django_jalali.db import models as jmodels
 from core.models import User, BaseModel, Address
 from products.models import Product, OffCode
 from django.utils.translation import gettext_lazy as _, get_language
@@ -38,10 +43,13 @@ class Order(BaseModel):
     status = models.ForeignKey(verbose_name=_("Status State"), to=Status, on_delete=models.CASCADE,
                                help_text=_("This is status for paid order"))
     offcode = models.ForeignKey(to=OffCode, on_delete=models.SET_NULL, null=True, blank=True, default=None)
-    payment_datetime = models.DateTimeField(blank=True, null=True, default=None, verbose_name=_("Payment Datetime"),
-                                            help_text=_("This is payment datetime"))
+    payment_datetime = jmodels.jDateTimeField(blank=True, null=True, default=None, verbose_name=_("Payment Datetime"),
+                                              help_text=_("This is payment datetime"))
     address = models.ForeignKey(to=Address, on_delete=models.SET_NULL, null=True, blank=True,
                                 verbose_name=_("User address"), help_text=_("This is user address for your order"))
+    recepie_id = models.CharField(max_length=64, verbose_name=_("Recepie ID"),
+                                  help_text=_("This is recepie id for this order"), default="".join(
+            list(filter(lambda x: x.isnumeric(), str(uuid.uuid4()).split("-")[0]))))
 
     class Meta:
         verbose_name = _('Order Cart')
@@ -65,6 +73,11 @@ class Order(BaseModel):
     @property
     def final_price(self):
         return sum([order_item.final_price for order_item in self.orderitem_set.all()])
+
+    def paid(self):
+        self.status = Status.objects.get(id=2)
+        self.payment_datetime = dt.now()
+        self.save()
 
     def __str__(self):
         return str(self.owner.username)

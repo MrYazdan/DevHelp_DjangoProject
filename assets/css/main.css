@@ -575,3 +575,8 @@ header > span > a.home-link > .sub-link {
 .pagination a[disabled]:hover {
     background-color: unset !important;
 }
+
+#final_cart.cursor-not-allowed {
+    filter: grayscale(100%);
+    opacity: 0.3;
+}
