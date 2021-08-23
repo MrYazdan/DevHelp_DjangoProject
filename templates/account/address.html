@@ -8,16 +8,16 @@
         <div class="right bg-black bg-opacity-30 border-l border-white border-opacity-30">
             <a href="{% url "profile" %}" id="account"
                class="block cursor-pointer text-shadow-md text-white irsans-b py-5 text-center border-b border-white border-opacity-30 trs-all-300 bg-white bg-opacity-0 hover:bg-opacity-10">{% trans "پروفایل کاربری" %}</a>
-            <div id="addrss"
-                 class="cursor-pointer text-shadow-md text-white irsans-b py-5 text-center border-b border-white border-opacity-30 trs-all-300 bg-white bg-opacity-10">{% trans "آدرس های ثبت شده" %}</div>
-            <div id="order"
-                 class="cursor-pointer text-shadow-md text-white irsans-b py-5 text-center border-b border-white border-opacity-30 trs-all-300 bg-white bg-opacity-0 hover:bg-opacity-10">{% trans "سفارش های پرداخت شده" %}</div>
-            <div id="offcode"
-                 class="cursor-pointer text-shadow-md text-white irsans-b py-5 text-center border-b border-white border-opacity-30 trs-all-300 bg-white bg-opacity-0 hover:bg-opacity-10">{% trans "کد های تخفیف فعال" %}</div>
+            <a href="{% url "address" %}" id="addrss"
+                 class="cursor-pointer block text-shadow-md text-white irsans-b py-5 text-center border-b border-white border-opacity-30 trs-all-300 bg-white bg-opacity-10">{% trans "آدرس های ثبت شده" %}</a>
+            <a href="{% url "user_orders" %}" id="order"
+                 class="cursor-pointer block text-shadow-md text-white irsans-b py-5 text-center border-b border-white border-opacity-30 trs-all-300 bg-white bg-opacity-0 hover:bg-opacity-10">{% trans "سفارش های ثبت شده" %}</a>
+            <a href="{% url "user_offcode" %}" id="offcode"
+                 class="cursor-pointer block text-shadow-md text-white irsans-b py-5 text-center border-b border-white border-opacity-30 trs-all-300 bg-white bg-opacity-0 hover:bg-opacity-10">{% trans "کد های تخفیف فعال" %}</a>
         </div>
         <div id="main" class="left col-span-1 sm:col-span-2 md:col-span-3 py-4 pt-0 pl-4">
-            {% if addresses %}
-                {% for address in addresses %}
+            {% if object_list %}
+                {% for address in object_list %}
                     <div id="{{ address.id }}"
                          class="address text-white Vazir mt-5 bg-gray-700 rounded-md grid grid-cols-2 p-4 gap-4 cursor-pointer hover:bg-gray-600 trs-all-300 selected">
                         <p class="">{% trans "کشور" %} : {{ address.country }}</p>

@@ -1,9 +1,9 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import mixins
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView
-
+from django.views.generic import TemplateView, ListView
+from order.models import Order
 from .forms import LoginForm, RegisterForm, ForgetForm
-from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth import login, authenticate
 from core.models import User, Address
 from django.utils.translation import gettext_lazy as _
 
@@ -47,11 +47,6 @@ def register(request):
     return render(request, 'account/register.html', context)
 
 
-def log_out(request):
-    logout(request)
-    return redirect('login')
-
-
 def forget_password(request):
     forget_form = ForgetForm(request.POST or None)
     if forget_form.is_valid():
@@ -70,9 +65,19 @@ def forget_password(request):
     return render(request, "account/forget_password.html", context)
 
 
-class Profile(LoginRequiredMixin, TemplateView):
+class Profile(mixins.LoginRequiredMixin, TemplateView):
     template_name = "account/profile.html"
 
 
-def address(request):
-    return render(request, 'account/address.html', {"addresses": Address.objects.filter(owner=request.user)})
+class AddressView(mixins.LoginRequiredMixin, ListView):
+    template_name = "account/address.html"
+
+    def get_queryset(self):
+        return Address.objects.filter(owner=self.request.user)
+
+
+class UserOrders(mixins.LoginRequiredMixin, ListView):
+    template_name = "account/paid.html"
+
+    def get_queryset(self):
+        return Order.objects.filter(payment_datetime__isnull=False)
