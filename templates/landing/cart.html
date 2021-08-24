@@ -1,7 +1,7 @@
 {% extends "landing/base.html" %}
 {% load i18n %}
 {% load mathfilters %}
-{% block title %}{% trans "سبد خرید" %}{% endblock %}
+{% block title %}{% trans "Cart" %}{% endblock %}
 {% block offer %}{% endblock %}
 {% block cart %}{% endblock %}
 {% block body %}
@@ -14,17 +14,17 @@
             {% if user %}
                 {% if empty %}
                     <center class="col-span-4"><h1
-                            class="text-gray-500 font-bold">{% trans "سبد خرید شما خالی است" %}</h1></center>
+                            class="text-gray-500 font-bold">{% trans "Your shopping cart is empty!" %}</h1></center>
                 {% else %}
                     <h3 class="text-center absolute mx-auto inset-x-0 -top-8 text-shadow-md">
                     <span class="irsans-b text-xl bg-black bg-opacity-40 rounded-t-md border-t border-r border-l border-black py-1 px-8 text-white">
-                    <i class="gb gb_local_mall ml-1"></i>{% trans "سبد خرید" %}</span>
+                    <i class="gb gb_local_mall ml-1"></i>{% trans "Cart" %}</span>
                     </h3>
                     <div class="mt-2 grid grid-cols-12 pb-2">
-                        <span class="Vazir col-span-6 inline-block text-right mr-6 text-gray-500 text-sm sm:text-sm md:text-lg">{% trans "نام محصول" %}</span>
-                        <span class="Vazir col-span-2 inline-block text-center text-gray-500 text-sm sm:text-sm md:text-lg">{% trans "قیمت" %}</span>
-                        <span class="Vazir col-span-2 inline-block text-center text-gray-500 text-sm sm:text-sm md:text-lg">{% trans "تعداد" %}</span>
-                        <span class="Vazir col-span-2 inline-block text-center text-gray-500 text-sm sm:text-sm md:text-lg">{% trans "حذف" %}</span>
+                        <span class="Vazir col-span-6 inline-block text-right mr-6 text-gray-500 text-sm sm:text-sm md:text-lg">{% trans "Product Name" %}</span>
+                        <span class="Vazir col-span-2 inline-block text-center text-gray-500 text-sm sm:text-sm md:text-lg">{% trans "Price" %}</span>
+                        <span class="Vazir col-span-2 inline-block text-center text-gray-500 text-sm sm:text-sm md:text-lg">{% trans "Qty" %}</span>
+                        <span class="Vazir col-span-2 inline-block text-center text-gray-500 text-sm sm:text-sm md:text-lg">{% trans "Delete" %}</span>
                     </div>
                     <div id="cart">
                         {% for item in items %}
@@ -42,24 +42,24 @@
                     <div class="factor relative grid grid-cols-3 sm:grid-cols-6 gap-6 text-right mt-4 border-t-2 border-gray-600 pr-6 pt-6 text-white">
                         <div class="col-span-3 text-shadow-md pl-6 sm:pl-0">
                         <span class="block Vazir text-lg"><i
-                                class="gb gb_assessment text-3xl ml-2 mb-1"></i>{% trans "تعداد" %} : <span
+                                class="gb gb_assessment text-3xl ml-2 mb-1"></i>{% trans "Qty" %} : <span
                                 id="counter"></span></span>
                             <span class="block Vazir text-lg"><i
-                                    class="gb gb_attach_money text-3xl ml-2 mb-1"></i>{% trans "قیمت کلی" %} : <span
+                                    class="gb gb_attach_money text-3xl ml-2 mb-1"></i>{% trans "Total price" %} : <span
                                     id="total_price">{{ order.total_price }}</span></span>
                             <span class="block Vazir text-lg"><i
-                                    class="gb gb_money_off text-3xl ml-2 mb-1"></i>{% trans "تخفیف محصولات" %} : <span
+                                    class="gb gb_money_off text-3xl ml-2 mb-1"></i>{% trans "Total discount" %} : <span
                                     id="total_discount">{{ order.total_discount }}</span></span>
                             <div id="offcode-containar">
                                 {% if offcode %}
                                     <div id="offcode-main" class="bg-red-500 p-4 rounded-md my-4 relative">
                                         <a class="absolute left-4 cursor-pointer -top-4 border-4 border-red-500 bg-red-800 py-2 pl-3 pr-2 rounded-xl"
-                                           id="DisableOffer"><i class="gb gb_close ml-1 mb-1"></i>{% trans "لغو" %}</a>
+                                           id="DisableOffer"><i class="gb gb_close ml-1 mb-1"></i>{% trans "Cancel" %}</a>
                                         <span class="block Vazir text-lg"><i
-                                                class="gb gb_mode_edit text-3xl ml-2 mb-1"></i>{% trans "عنوان کد" %} : <span
+                                                class="gb gb_mode_edit text-3xl ml-2 mb-1"></i>{% trans "Code title" %} : <span
                                                 id="offcode_title">{{ offcode.title }}</span></span>
                                         <span class="block Vazir text-lg"><i
-                                                class="gb gb_monetization_on text-3xl ml-2 mb-1"></i>{% trans "میزان تخفیف کد" %} : <span
+                                                class="gb gb_monetization_on text-3xl ml-2 mb-1"></i>{% trans "Code discount rate" %} : <span
                                                 id="total_offcode">{{ order.total_offcode }}</span></span>
                                     </div>
                                 {% endif %}
@@ -67,27 +67,27 @@
                         </div>
                         <div class="col-span-3 text-shadow-md pl-6 pb-8 sm:pb-0 relative flex items-center justify-center">
                             <div class="">
-                                <span class="block irsans-b text-lg text-center">{% trans "قیمت نهایی" %} :</span>
+                                <span class="block irsans-b text-lg text-center">{% trans "Final price" %} :</span>
                                 <span class="block Vazir text-lg text-center text-4xl font-bold mt-8"><span
-                                        id="final">{{ order.final_price|sub:order.total_offcode }}</span> {% trans "تومان" %}</span>
+                                        id="final">{{ order.final_price|sub:order.total_offcode }}</span> {% trans "Toman" %}</span>
                             </div>
                         </div>
                     </div>
                     <div class="grid grid-cols-2 absolute w-full gap-4 bottom-0">
-                        <a href="{% url "final-cart" %}" class="block w-full bg-green-500 bg-opacity-80 text-shadow-md py-2 text-center mt-4 rounded-md text-white font-bold hover:bg-opacity-100 cursor-pointer m-2 ml-0 ">{% trans "ادامه" %}</a>
+                        <a href="{% url "final-cart" %}" class="block w-full bg-green-500 bg-opacity-80 text-shadow-md py-2 text-center mt-4 rounded-md text-white font-bold hover:bg-opacity-100 cursor-pointer m-2 ml-0 ">{% trans "Continue" %}</a>
                         <div class="pl-2 col-span-1">
                             <div class="grid grid-cols-12 gap-2">
-                                <input name="code" style="    padding: 10px 0;" id="code" type="text" placeholder="{% trans "کد تخفیف" %}"
+                                <input name="code" style="    padding: 10px 0;" id="code" type="text" placeholder="{% trans "Discount code" %}"
                                        class="bg-black bg-opacity-20 text-shadow-md py-2 text-center mt-4 rounded-md text-white hover:bg-opacity-100 col-span-9">
                                 <button id="offcode-btn"
-                                        class="bg-yellow-500 bg-opacity-80 text-shadow-md text-center mt-4 rounded-md text-white  hover:bg-opacity-100 cursor-pointer col-span-3">{% trans "اعمال" %}</button>
+                                        class="bg-yellow-500 bg-opacity-80 text-shadow-md text-center mt-4 rounded-md text-white  hover:bg-opacity-100 cursor-pointer col-span-3">{% trans "Apply" %}</button>
                             </div>
                         </div>
                     </div>
                 {% endif %}
             {% else %}
                 <center class="col-span-4"><h1
-                        class="text-gray-500 font-bold">{% trans "ابتدا وارد شوید یا ثبت نام کنید" %}</h1></center>
+                        class="text-gray-500 font-bold">{% trans "Login or register first" %}</h1></center>
             {% endif %}
         </div>
     </div>
@@ -200,7 +200,7 @@
                     Swal.fire({
                         position: 'top-center',
                         icon: 'success',
-                        title: '{% trans "کد تخفیف وارد شده اعمال شد" %}',
+                        title: '{% trans "The discount code entered was applied." %}',
                         showConfirmButton: false, timer: 3500, timerProgressBar: true,
                     })
 
@@ -209,9 +209,9 @@
 
                     $('#offcode-containar').html(
                         '<div id="offcode-main" class="bg-red-500 p-4 rounded-md my-4 relative">' +
-                        '<a class="absolute left-4 cursor-pointer -top-4 border-4 border-red-500 bg-red-800 py-2 pl-3 pr-2 rounded-xl" id="DisableOffer"><i class="gb gb_close ml-1 mb-1"></i>{% trans "لغو" %}</a>' +
-                        '<span class="block Vazir text-lg"><i class="gb gb_mode_edit text-3xl ml-2 mb-1"></i>{% trans "عنوان کد" %} : <span id="offcode_title">' + title_offcode + '</span></span>' +
-                        '<span class="block Vazir text-lg"><i class="gb gb_monetization_on text-3xl ml-2 mb-1"></i>{% trans "میزان تخفیف کد" %} : <span id="total_offcode"></span></span>' +
+                        '<a class="absolute left-4 cursor-pointer -top-4 border-4 border-red-500 bg-red-800 py-2 pl-3 pr-2 rounded-xl" id="DisableOffer"><i class="gb gb_close ml-1 mb-1"></i>{% trans "Cancel" %}</a>' +
+                        '<span class="block Vazir text-lg"><i class="gb gb_mode_edit text-3xl ml-2 mb-1"></i>{% trans "Code title" %} : <span id="offcode_title">' + title_offcode + '</span></span>' +
+                        '<span class="block Vazir text-lg"><i class="gb gb_monetization_on text-3xl ml-2 mb-1"></i>{% trans "Code discount rate" %} : <span id="total_offcode"></span></span>' +
                         '</div>'
                     )
 
@@ -230,7 +230,7 @@
                 Swal.fire({
                     position: 'top-center',
                     icon: 'error',
-                    title: '{% trans "کد تخفیف وارد شده نادرست است!" %}',
+                    title: '{% trans "The discount code entered is incorrect!" %}',
                     showConfirmButton: false, timer: 3500, timerProgressBar: true,
                 })
             })
@@ -270,19 +270,19 @@
         $('.deleter-ico').on('click', function () {
 
             Swal.fire({
-                title: '{% trans "آیا قصد حذف این محصول از سبد را دارید؟" %}',
+                title: '{% trans "Are you going to remove this product from the cart?" %}',
                 icon: 'warning',
                 showClass: {popup: 'animate__animated animate__flipInX'},
                 hideClass: {popup: 'animate__animated animate__flipOutX'},
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                cancelButtonText: '{% trans "لغو" %}',
-                confirmButtonText: '{% trans "بله حذف شود" %}'
+                cancelButtonText: '{% trans "Cancel" %}',
+                confirmButtonText: '{% trans "Yes delete" %}'
             }).then((result) => {
                 if (result.isConfirmed) {
                     Swal.fire({
-                        title: '{% trans "محصول مورد نظر با موفقیت از سبد شما حذف گردید" %}',
+                        title: '{% trans "The product was successfully removed from your cart." %}',
                         icon: 'success'
                     })
 
@@ -296,7 +296,7 @@
                     let item = $(this).parent()
 
                     if (item.parent().children('.item-in-cart').length === 1) {
-                        $('#cart').parent().html('<center class="col-span-4"><h1 class="text-gray-500 font-bold">{% trans "سبد خرید شما خالی است" %}</h1></center>')
+                        $('#cart').parent().html('<center class="col-span-4"><h1 class="text-gray-500 font-bold">{% trans "Your shopping cart is empty!" %}</h1></center>')
                     } else {
                         let el_counter = $('#counter')
                         let el_total_price = $('#total_price')

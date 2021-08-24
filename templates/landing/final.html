@@ -12,47 +12,47 @@
         }
     </style>
 {% endblock %}
-{% block title %}{% trans "پرداخت" %}{% endblock %}
+{% block title %}{% trans "Pay" %}{% endblock %}
 {% block offer %}{% endblock %}
 {% block body %}
     <div class="main relative">
         <div class="trs-all-300 grid grid-cols-1 sm:grid-cols-2 relative max-w-screen-lg relative mx-auto w-11/12 gap-8 rounded-md p-8 bg-black mt-16 bg-opacity-40 mb-8 z-10 filter ">
             <h3 class="text-center absolute mx-auto inset-x-0 -top-8 text-shadow-md">
                     <span class="irsans-b text-xl bg-black bg-opacity-40 rounded-t-md border-t border-r border-l border-black py-1 px-8 text-white">
-                    <i class="gb gb_assignment ml-3"></i>{% trans "انتخاب آدرس و پرداخت" %}</span>
+                    <i class="gb gb_assignment ml-3"></i>{% trans "Address selection and payment" %}</span>
             </h3>
             <div class="text-white col-span-2">
-                <h2 class="text-center irsans-b pb-4 text-shadow-md border-b text-xl border-white border-opacity-20">{% trans "آدرس ها" %}
+                <h2 class="text-center irsans-b pb-4 text-shadow-md border-b text-xl border-white border-opacity-20">{% trans "Addresses" %}
                     : </h2>
                 <a href="{% url "address" %}"
-                   class="text-right block irsans-b py-4 mb-6 text-yellow-400 hover:text-yellow-600 blink trs-all-300">{% trans "شما میتوانید آدرس های خود را در بخش پروفایل کاربری مدیریت کنید! - ورود به بخش آدرس ها‌" %}</a>
+                   class="text-right block irsans-b py-4 mb-6 text-yellow-400 hover:text-yellow-600 blink trs-all-300">{% trans "You can manage your addresses in the user profile section! - Enter the addresses section" %}</a>
                 <div class="grid grid-cols-2 gap-4 sm:gap-8">
                     {% if addresses %}
                         {% for address in addresses %}
                             <div id="{{ address.id }}"
                                  class="address Vazir bg-gray-700 rounded-md grid grid-cols-2 p-4 gap-4 cursor-pointer hover:bg-gray-600 trs-all-300">
-                                <p class="">{% trans "کشور" %} : {{ address.country }}</p>
-                                <p class="">{% trans "شهر" %} : {{ address.city }}</p>
-                                <p class="">{% trans "کدپستی" %} : {{ address.postal_code }}</p>
-                                <p class="">{% trans "پلاک" %} : {{ address.no }}</p>
-                                <p class="col-span-2">{% trans "آدرس" %} : {{ address.address }}</p>
+                                <p class="">{% trans "Country" %} : {{ address.country }}</p>
+                                <p class="">{% trans "City" %} : {{ address.city }}</p>
+                                <p class="">{% trans "Postal code" %} : {{ address.postal_code }}</p>
+                                <p class="">{% trans "No" %} : {{ address.no }}</p>
+                                <p class="col-span-2">{% trans "Address" %} : {{ address.address }}</p>
                             </div>
                         {% endfor %}
                     {% else %}
                         <center class="col-span-2">
-                            <h1 class="text-3xl text-gray-400 irsans-b text-shadow-md">{% trans "آدرسی برای نمایش وجود ندارد" %}</h1>
+                            <h1 class="text-3xl text-gray-400 irsans-b text-shadow-md">{% trans "There is no address to display!" %}</h1>
                         </center>
                     {% endif %}
                 </div>
             </div>
             <div class="text-white relative col-span-1">
-                <span class="block irsans-b text-lg text-center">{% trans "قیمت نهایی" %} : </span>
+                <span class="block irsans-b text-lg text-center">{% trans "Final price" %} : </span>
                 <span class="block Vazir text-lg text-center text-4xl font-bold mt-8"><span
-                        id="final">{{ order.final_price|sub:order.total_offcode }}</span> {% trans "تومان" %}</span>
+                        id="final">{{ order.final_price|sub:order.total_offcode }}</span> {% trans "Toman" %}</span>
             </div>
             <div class="text-white relative col-span-2 sm:col-span-1">
                 <button type="button" id="final_cart" disabled="disabled"
-                        class="cursor-not-allowed rounded-lg py-8 bg-yellow-600 border-b-2 border-yellow-700 irsans-b text-2xl block text-center hover:bg-yellow-800 trs-all-300 w-full">{% trans "پرداخت" %}</button>
+                        class="cursor-not-allowed rounded-lg py-8 bg-yellow-600 border-b-2 border-yellow-700 irsans-b text-2xl block text-center hover:bg-yellow-800 trs-all-300 w-full">{% trans "Pay" %}</button>
             </div>
         </div>
     </div>
@@ -87,8 +87,8 @@
                 }).done(function () {
                     Swal.fire({
                         icon: 'success',
-                        title: '{% trans "سفارش شما ثبت شد" %}',
-                        text: '{% trans "به صفحه رسید خود هدایت میشوید" %}',
+                        title: '{% trans "Your order has been registered!" %}',
+                        text: '{% trans "You will be redirected to your arrival page." %}',
                         showConfirmButton: false, timer: 3500, timerProgressBar: true,
                     })
                     setTimeout(function () {
@@ -97,8 +97,6 @@
                 })
             }
         })
-
-
     </script>
 {% endblock %}
 {% block click_item %}{% endblock %}

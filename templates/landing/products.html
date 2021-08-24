@@ -1,5 +1,6 @@
 {% extends "landing/base.html" %}
 {% load i18n %}
+{% block title %}{% trans "Products" %}{% endblock %}
 {% get_current_language as lang %}
 {% block body %}
     <div class="mt-4 mb-8 max-w-screen-lg w-11/12 mx-auto grid gap-4 grid-cols-1 sm:grid-cols-3 md:grid-cols-4"
@@ -15,7 +16,7 @@
                     <p class="p-4 bg-black bg-opacity-40 bg-strip-sm  text-justify text-white sm:text-sm">{{ i.short_description }}</p>
                     <div class="bg-black relative bg-strip-sm bg-opacity-30 text-center p-4 rounded-b-lg">
                         <span class="absolute text-2xl sm:text-sm md:text-lg right-4 {% if lang != "en-US" %}Vazir{% endif %} {% if i.discount %}md:bottom-3 bottom-3{% else %}md:bottom-6 bottom-7{% endif %} text-gray-400">
-                        <span class="block">{% trans "تومان" %}</span>
+                        <span class="block">{% trans "Toman" %}</span>
                             {% if i.discount_count %}
                                 <span class="line-through">{{ i.price }}</span>
                             {% endif %}
@@ -47,7 +48,7 @@
             </section>
         {% else %}
             <center class="col-span-4"><h1
-                    class="text-gray-500 font-bold">{% trans "آیتمی برای نمایش وجود ندارد!" %}</h1></center>
+                    class="text-gray-500 font-bold">{% trans "There is no item to display!" %}</h1></center>
         {% endif %}
     </div>
 {% endblock %}

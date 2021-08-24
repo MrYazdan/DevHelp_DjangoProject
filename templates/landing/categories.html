@@ -1,11 +1,12 @@
 {% extends "landing/base.html" %}
 {% load i18n %}
+{% block title %}{% trans "Categories" %}{% endblock %}
 {% get_current_language as lang %}
 {% block offer %}{% endblock %}
 {% block category_list %}{% endblock %}
 {% block body %}
     <center class="w-11/12 mx-auto max-w-screen-lg pb-2 mb-8 rounded-full border-b-2 border-gray-400"><h1
-            class="text-center text-white text-shadow-md text-4xl irsans-b">{% trans "دسته بندی ها" %}</h1></center>
+            class="text-center text-white text-shadow-md text-4xl irsans-b">{% trans "Categories" %}</h1></center>
     <div class="mt-4 mb-8 max-w-screen-lg w-11/12 mx-auto grid gap-8 grid-cols-1 sm:grid-cols-3 md:grid-cols-4"
          style="min-height: 50vh;">
         {% if object_list %}
@@ -42,7 +43,7 @@
             </section>
         {% else %}
             <center class="col-span-4"><h1
-                    class="text-gray-500 font-bold">{% trans "آیتمی برای نمایش وجود ندارد!" %}</h1></center>
+                    class="text-gray-500 font-bold">{% trans "There is no item to display!" %}</h1></center>
         {% endif %}
     </div>
 {% endblock %}

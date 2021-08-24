@@ -3,17 +3,17 @@
 {% load i18n %}
 {% block extra_head %}
 {% endblock %}
-{% block title %}{% trans "رسید پرداخت" %}{% endblock %}
+{% block title %}{% trans "Payment receipt" %}{% endblock %}
 {% block offer %}{% endblock %}
 {% block body %}
     <div class="main relative">
         <div class="trs-all-300 grid grid-cols-1 sm:grid-cols-2 relative max-w-screen-lg relative mx-auto w-11/12 gap-8 rounded-md p-8 bg-black mt-16 bg-opacity-40 mb-8 z-10 filter ">
             <h3 class="text-center absolute mx-auto inset-x-0 -top-8 text-shadow-md">
                 <span class="irsans-b text-xl bg-black bg-opacity-40 rounded-t-md border-t border-r border-l border-black py-1 px-8 text-white">
-                <i class="gb gb_assignment ml-3"></i>{% trans "رسید سفارش شما" %}</span>
+                <i class="gb gb_assignment ml-3"></i>{% trans "Receipt of your order" %}</span>
             </h3>
             <div class="text-white col-span-1 sm:col-span-2">
-                <h2 class="text-center irsans-b pb-4 text-shadow-md border-b text-xl border-white border-opacity-20">{% trans "شماره سفارش" %} : {{ order.recepie_id }}</h2>
+                <h2 class="text-center irsans-b pb-4 text-shadow-md border-b text-xl border-white border-opacity-20">{% trans "Receipt number" %} : {{ order.recepie_id }}</h2>
             </div>
             <div class="text-white col-span-1 sm:col-span-2 mt-8 blink">
                 <div class="swal2-icon swal2-success swal2-icon-show" style="display: flex;">
@@ -25,8 +25,8 @@
                 </div>
             </div>
             <div class="text-white col-span-1 sm:col-span-2">
-                <p class="text-center irsans-b p-2 sm:p-8">{% trans "سفارش شما ثبت گردید و از این پس داخل پروفایل شما قابل دسترسی است." %}</p>
-                <p class="text-center text-gray-300 Vazir px-2 sm:px-8">{% trans "از انتخاب تیم ما صمیمانه مچکریم!" %}</p>
+                <p class="text-center irsans-b p-2 sm:p-8">{% trans "Your order has been registered and is now available in your profile." %}</p>
+                <p class="text-center text-gray-300 Vazir px-2 sm:px-8">{% trans "We are sincere in choosing our team!" %}</p>
             </div>
         </div>
     </div>
@@ -61,8 +61,8 @@
                 }).done(function () {
                     Swal.fire({
                         icon: 'success',
-                        title: '{% trans "سفارش شما ثبت شد" %}',
-                        text: '{% trans "به صفحه رسید خود هدایت میشوید" %}',
+                        title: '{% trans "Your order has been registered!" %}',
+                        text: '{% trans "You will be redirected to your arrival page." %}',
                         showConfirmButton: false, timer: 3500, timerProgressBar: true,
                     })
                     setTimeout(function () {
@@ -71,8 +71,6 @@
                 })
             }
         })
-
-
     </script>
 {% endblock %}
 {% block click_item %}{% endblock %}

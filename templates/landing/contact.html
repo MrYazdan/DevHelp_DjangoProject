@@ -1,30 +1,29 @@
 {% extends "landing/base.html" %}
 {% load i18n %}
-{% block title %}{% trans "تماس با ما" %}{% endblock %}
+{% block title %}{% trans "Contact us" %}{% endblock %}
 {% load static %}
 {% block offer %}{% endblock %}
 {% block body %}
     <div class="mb-8 mt-4 text-white rounded-lg max-w-screen-lg w-11/12 mx-auto bg-black bg-opacity-20 text-lg">
         <div class="pt-2 pb-1 px-5">
             <form class=" mx-auto pt-4 mb-6">
-                {% csrf_token %}
                 <input type="hidden" hidden name="user" value="{{ user.id }}">
-                <input type="text" helper_name="{% trans "نام و نام خانوادگی" %}" placeholder="{% trans "لطفا نام و نام خانوادگی خود را وارد کنید" %}" name="name"
+                <input type="text" helper_name="{% trans "First name and Last name" %}" placeholder="{% trans "Please enter your first and last name" %}" name="name"
                        value="{{ user.get_full_name }}"
                        class="block w-full py-4 rounded-md px-3 bg-black bg-opacity-30 mb-4">
-                <input type="tel" helper_name="{% trans "شماره همراه" %}" placeholder="{% trans "لطفا شماره همراه خود را وارد کنید" %}" name="phone"
+                <input type="tel" helper_name="{% trans "Phone number" %}" placeholder="{% trans "Please enter your email (optional)" %}" name="phone"
                        value="{{ user.phone }}"
                        class="block w-full py-4 rounded-md px-3 bg-black bg-opacity-30 mb-4">
-                <input type="email" helper_name="{% trans "ایمیل" %}" placeholder="{% trans "لطفا ایمیل خود را وارد کنید (اختیاری)" %}" name="email"
+                <input type="email" helper_name="{% trans "Email" %}" placeholder="{% trans "" %}" name="email"
                        value="{{ user.email }}"
                        class="block w-full py-4 rounded-md px-3 bg-black bg-opacity-30 mb-4">
-                <textarea name="msg" helper_name="{% trans "پیام" %}" placeholder="{% trans "لطفا پیام خود را وارد کنید" %}" cols="30" rows="10"
+                <textarea name="msg" helper_name="{% trans "Message" %}" placeholder="{% trans "Please enter your message" %}" cols="30" rows="10"
                           class="block w-full py-4 rounded-md px-3 bg-black bg-opacity-30 mb-4"></textarea>
                 <div class="grid grid-cols-2 gap-2 ltr">
-                    <input type="reset" value="{% trans "پاکسازی" %}"
+                    <input type="reset" value="{% trans "Clear" %}"
                            class="text-center py-3 rounded-md trs-all-300 bg-yellow-600 hover:bg-yellow-700  text-shadow-md cursor-pointer">
                     <button onclick="MessageSender($(this))" type="button"
-                            class="text-center py-3 rounded-md trs-all-300 bg-green-600  hover:bg-green-700 text-shadow-md cursor-pointer">{% trans "ارسال" %}</button>
+                            class="text-center py-3 rounded-md trs-all-300 bg-green-600  hover:bg-green-700 text-shadow-md cursor-pointer">{% trans "Send" %}</button>
                 </div>
             </form>
         </div>
@@ -76,7 +75,7 @@
 
                     Swal.fire({
                         icon: 'error',
-                        title: '{% trans "ورودی هارا کنترل کنید!" %}',
+                        title: '{% trans "Control the inputs!" %}',
                         html: _text,
                         showConfirmButton: false, timer: 8500, timerProgressBar: true,
                     })
@@ -84,7 +83,7 @@
             }).done(function () {
                 Swal.fire({
                     icon: 'success',
-                    title: '{% trans "پیام شما با موفقیت ارسال شد!" %}',
+                    title: '{% trans "Your message has been successfully sent!" %}',
                     showConfirmButton: false, timer: 3500, timerProgressBar: true,
                 })
             })

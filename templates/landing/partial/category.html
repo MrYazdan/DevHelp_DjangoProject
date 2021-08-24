@@ -1,9 +1,9 @@
 {% load i18n %}
 <div class="mx-auto max-w-screen-lg w-11/12">
     <div class="mostly-views trs-all-300 grid grid-cols-6 sm:{% if categories|length < 12 %}grid-cols-6 gap-8{% else %}grid-cols-12 gap-4{% endif %} relative rounded-md overflow-hidden py-4">
-        <div timer="1000" timer-dot="1000"
+        <div timer="3000" timer-dot="1000"
              class="col-span-6 sm:col-span-12 flex absolute bg-gray-900 irsans-b inset-0 text-white items-center justify-center my-4 rounded bg-opacity-95 text-sm sm:text-lg md:text-xl">
-            {% trans "درحال بارگزاری پربازدید ترین دسته بندی ها" %}
+            {% trans "Uploading the latest categories" %}
         </div>
         {% for cat in categories %}
             <a hover-class="animate__animated animate__jello animate__infinite" title="{{ cat.name }}"

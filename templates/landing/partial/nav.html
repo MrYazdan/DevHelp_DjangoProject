@@ -2,10 +2,10 @@
 {% get_current_language as lang %}
 <nav class="block p-4 mt-4 mb-8 bg-black bg-opacity-20 rounded-md max-w-screen-lg w-11/12 mx-auto {% if lang == "fa-IR" %}Vazir{% endif %} ">
     <div class="float-right mb-4 sm:mb-0">
-        <a href="{% url "cart" %}" class="float-right trs-all-300 hover:text-yellow-400 ml-6 text-gray-300 text-shadow-md"><i class="gb gb_local_mall ml-2"></i>{% trans "سبد خرید" %}</a>
+        <a href="{% url "cart" %}" class="float-right trs-all-300 hover:text-yellow-400 ml-6 text-gray-300 text-shadow-md"><i class="gb gb_local_mall ml-2"></i>{% trans "Cart" %}</a>
         {% if user %}
-            <a href="{% url "profile" %}" class="float-right trs-all-300 hover:text-green-400 ml-6 text-gray-300 text-shadow-md"><i class="gb gb_assignment ml-2"></i>{% trans "پروفایل کاربری" %}</a>
-            <a href="{% url "logout" %}" class="float-right trs-all-300 hover:text-red-400 ml-6 text-gray-300 text-shadow-md"><i class="gb gb_close ml-2"></i>{% trans "خروج" %}</a>
+            <a href="{% url "profile" %}" class="float-right trs-all-300 hover:text-green-400 ml-6 text-gray-300 text-shadow-md"><i class="gb gb_assignment ml-2"></i>{% trans "Profile" %}</a>
+            <a href="{% url "logout" %}" class="float-right trs-all-300 hover:text-red-400 ml-6 text-gray-300 text-shadow-md"><i class="gb gb_close ml-2"></i>{% trans "Logout" %}</a>
         {% endif %}
     </div>
     <div class="float-left">
@@ -13,9 +13,9 @@
             <span class="float-left text-gray-300 text-shadow-md">{{ user }}<i class="gb gb_account_box mr-2"></i></span>
         {% else %}
             <span class="float-right trs-all-300 text-gray-300 text-shadow-md"><i class="gb gb_lock_open ml-1"></i>
-                <a class="trs-all-300 hover:text-pink-400" href="{% url "login" %}">{% trans "ورود" %}</a>
+                <a class="trs-all-300 hover:text-pink-400" href="{% url "login" %}">{% trans "Login" %}</a>
                 <i class="gb mx-1">/</i>
-                <a class="trs-all-300 hover:text-blue-400" href="{% url "register" %}">{% trans "ثبت نام" %}</a>
+                <a class="trs-all-300 hover:text-blue-400" href="{% url "register" %}">{% trans "Register" %}</a>
             </span>
         {% endif %}
     </div>
