@@ -1,15 +1,15 @@
 {% extends 'landing/base.html' %}
 {% load i18n %}
-{% block title %}{% trans "ورود" %}{% endblock %}
+{% block title %}{% trans "Login" %}{% endblock %}
 {% block offer %}{% endblock %}
 {% block click_item %}{% endblock %}
 {% block body %}
     <div class="mb-8 mt-4 text-white bg-black rounded-lg bg-opacity-50 max-w-screen-lg  mx-auto p-8 pb-10" style="min-height: 50vh;">
         <a href="{% url 'register' %}"
-           class="text-white text-opacity-50 mb-12 hover:text-blue-400 trs-all-300 block">{% trans "اگر حساب کاربری ندارید اقدام کنید - ایجاد حساب کاربری" %}</a>
+           class="text-white text-opacity-50 mb-12 hover:text-blue-400 trs-all-300 block">{% trans "If you do not have an account take action - Create an account" %}</a>
 
         <h1 class="text-center text-2xl"><i
-                class="gb gb_assignment_ind ml-2 text-5xl"></i>{% trans "ورود به حساب کاربری" %}</h1>
+                class="gb gb_assignment_ind ml-2 text-5xl"></i>{% trans "Login" %}</h1>
         <form action="{% url 'login' %}" method="post" class=" mx-auto sm:w-6/12 pt-4 mb-6">
             {% csrf_token %}
             {{ login_form.phone }}
@@ -21,13 +21,13 @@
                 <p style="color: #ff2b2b;">{{ error }}</p>
             {% endfor %}
             <div class="grid grid-cols-2 gap-2 ltr">
-                <input type="reset" value="{% trans "پاکسازی" %}"
+                <input type="reset" value="{% trans "Clear" %}"
                        class="text-center py-3 rounded-md trs-all-300 bg-yellow-600 hover:bg-yellow-700  text-shadow-md cursor-pointer">
-                <input type="submit" value="{% trans "ورود" %}"
+                <input type="submit" value="{% trans "Login" %}"
                        class="text-center py-3 rounded-md trs-all-300 bg-green-600  hover:bg-green-700 text-shadow-md cursor-pointer">
             </div>
             <a href="{% url 'forget_password' %}" class="text-white text-opacity-50 mt-4 block"><i
-                    class="gb ml-2 blinker-i">*</i>{% trans "فراموشی رمز عبور" %}</a>
+                    class="gb ml-2 blinker-i">*</i>{% trans "Password recovery" %}</a>
         </form>
     </div>
 {% endblock %}

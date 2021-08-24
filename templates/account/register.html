@@ -1,13 +1,13 @@
 {% extends 'landing/base.html' %}
 {% load i18n %}
-{% block title %}{% trans "ثبت نام" %}{% endblock %}
+{% block title %}{% trans "Register" %}{% endblock %}
 {% block offer %}{% endblock %}
 {% block click_item %}{% endblock %}
 {% block body %}
     <div class="mb-8 mt-4 text-white bg-black rounded-lg bg-opacity-50 max-w-screen-lg  mx-auto p-8 pb-10">
         <a href="{% url "login" %}"
-           class="text-white text-opacity-50 mb-12 hover:text-blue-400 trs-all-300 block">{% trans "اگر حساب کاربری دارید اقدام کنید - ورود به حساب کاربری" %}</a>
-        <h1 class="text-center text-2xl"><i class="gb gb_assignment_ind ml-2 text-5xl"></i>{% trans "ثبت نام" %}</h1>
+           class="text-white text-opacity-50 mb-12 hover:text-blue-400 trs-all-300 block">{% trans "If you have an account take action - Log in" %}</a>
+        <h1 class="text-center text-2xl"><i class="gb gb_assignment_ind ml-2 text-5xl"></i>{% trans "Register" %}</h1>
         <form action="{% url 'register' %}" method="post" class="mx-auto sm:w-6/12 pt-4 mb-6">
             {% csrf_token %}
             {{ register_form.phone }}
@@ -27,9 +27,9 @@
                 <p style="color: #ff2b2b;margin-bottom: 15px;margin-right: 10px;">{{ error }}</p>
             {% endfor %}
             <div class="grid grid-cols-2 gap-2 ltr">
-                <input type="reset" value="{% trans "پاکسازی" %}"
+                <input type="reset" value="{% trans "Clear" %}"
                        class="text-center py-3 rounded-md trs-all-300 bg-yellow-600 hover:bg-yellow-700  text-shadow-md cursor-pointer">
-                <input type="submit" value="{% trans "ثبت نام" %}"
+                <input type="submit" value="{% trans "Register" %}"
                        class="text-center py-3 rounded-md trs-all-300 bg-green-600  hover:bg-green-700 text-shadow-md cursor-pointer">
             </div>
         </form>

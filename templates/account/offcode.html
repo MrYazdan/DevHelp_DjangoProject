@@ -1,41 +1,39 @@
 {% extends 'landing/base.html' %}
 {% load jformat %}
 {% load i18n %}
-{% block title %}{% trans "تخفیف های من" %}{% endblock %}
+{% block title %}{% trans "My discount codes" %}{% endblock %}
 {% block offer %}{% endblock %}
 {% block click_item %}{% endblock %}
 {% block body %}
     <div class="trs-all-300 relative max-w-screen-lg relative mx-auto w-11/12 gap-4 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 rounded-md bg-black mt-8 bg-opacity-30 mb-8 z-10 overflow-hidden">
         <div class="right bg-black bg-opacity-30 border-l border-white border-opacity-30">
             <a href="{% url "profile" %}" id="account"
-               class="block cursor-pointer text-shadow-md text-white irsans-b py-5 text-center border-b border-white border-opacity-30 trs-all-300 bg-white bg-opacity-0 hover:bg-opacity-10">{% trans "پروفایل کاربری" %}</a>
+               class="block cursor-pointer text-shadow-md text-white irsans-b py-5 text-center border-b border-white border-opacity-30 trs-all-300 bg-white bg-opacity-0 hover:bg-opacity-10">{% trans "User profile" %}</a>
             <a href="{% url "address" %}" id="addrss"
-               class="cursor-pointer block text-shadow-md text-white irsans-b py-5 text-center border-b border-white border-opacity-30 trs-all-300 bg-white bg-opacity-0 hover:bg-opacity-10">{% trans "آدرس های ثبت شده" %}</a>
+               class="cursor-pointer block text-shadow-md text-white irsans-b py-5 text-center border-b border-white border-opacity-30 trs-all-300 bg-white bg-opacity-0 hover:bg-opacity-10">{% trans "Registered addresses" %}</a>
             <a href="{% url "user_orders" %}" id="order"
-               class="cursor-pointer block text-shadow-md text-white irsans-b py-5 text-center border-b border-white border-opacity-30 trs-all-300 bg-white bg-opacity-0 hover:bg-opacity-10">{% trans "سفارش های ثبت شده" %}</a>
+               class="cursor-pointer block text-shadow-md text-white irsans-b py-5 text-center border-b border-white border-opacity-30 trs-all-300 bg-white bg-opacity-0 hover:bg-opacity-10">{% trans "Registered orders" %}</a>
             <a href="{% url "user_offcode" %}" id="offcode"
-               class="cursor-pointer block text-shadow-md text-white irsans-b py-5 text-center border-b border-white border-opacity-30 trs-all-300 bg-white bg-opacity-10">{% trans "کد های تخفیف فعال" %}</a>
+               class="cursor-pointer block text-shadow-md text-white irsans-b py-5 text-center border-b border-white border-opacity-30 trs-all-300 bg-white bg-opacity-10">{% trans "Active discount codes" %}</a>
         </div>
         <div id="main" class="left col-span-1 sm:col-span-2 md:col-span-3 py-4 sm:py-8 pl-4 sm:pl-8 pr-4" style="min-height: 40vh">
             {% if object_list %}
                 <div class="grid grid-cols-1 gap-4 sm:gap-8">
                     {% for offcode in object_list %}
                         <div class="relative block text-white rounded-md trs-all-300 h-32 bg-red-500 hover:bg-red-600">
-                            <span class="absolute inset-x-0 top-2 text-xl font-bold mx-auto text-center text-shadow-md Vazir rounded-full">{% trans "حد استفاده" %} : {{ offcode.count_use }}</span>
-                            <span class="absolute right-6 top-10 text-shadow-md ">{% trans "کد" %} : <span class="ltr irsans-b px-4 py-1 rounded-lg border-dashed border-2 border-white bg-black bg-opacity-20">{{ offcode.code }}</span></span>
-                            <span class="absolute right-6 top-20 text-shadow-md Vazir">{% trans "درصد" %} : {{ offcode.percent }}</span>
-                            <span class="absolute left-6 top-10 text-shadow-md Vazir">{% trans "تاریخ انقضا" %} : {{ offcode.active_to|jformat:"%d / %m / %Y" }}</span>
-                            <span class="absolute left-6 top-20 text-shadow-md Vazir">{% trans "حداکثر تخفیف" %} : {{ offcode.max_price }}</span>
+                            <span class="absolute inset-x-0 top-2 text-xl font-bold mx-auto text-center text-shadow-md Vazir rounded-full">{% trans "Use limit" %} : {{ offcode.count_use }}</span>
+                            <span class="absolute right-6 top-10 text-shadow-md ">{% trans "Code" %} : <span class="ltr irsans-b px-4 py-1 rounded-lg border-dashed border-2 border-white bg-black bg-opacity-20">{{ offcode.code }}</span></span>
+                            <span class="absolute right-6 top-20 text-shadow-md Vazir">{% trans "Percent" %} : {{ offcode.percent }}</span>
+                            <span class="absolute left-6 top-10 text-shadow-md Vazir">{% trans "Expiration date" %} : {{ offcode.active_to|jformat:"%d / %m / %Y" }}</span>
+                            <span class="absolute left-6 top-20 text-shadow-md Vazir">{% trans "Maximum discount" %} : {{ offcode.max_price }}</span>
                         </div>
                     {% endfor %}
                 </div>
             {% else %}
                 <center class="col-span-2">
-                    <h1 class="text-3xl text-gray-400 irsans-b text-shadow-md">{% trans "کد تخفیف فعالی برای نمایش وجود ندارد" %}</h1>
+                    <h1 class="text-3xl text-gray-400 irsans-b text-shadow-md">{% trans "There is no active discount code to display!" %}</h1>
                 </center>
             {% endif %}
         </div>
     </div>
-{% endblock %}
-{% block extra_foot %}
 {% endblock %}
