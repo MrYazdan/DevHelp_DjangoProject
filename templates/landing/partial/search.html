@@ -1,16 +1,17 @@
 {% load static %}
 {% load i18n %}
+{% get_current_language as lang %}
 <form class="mt-8 mb-4 mx-auto max-w-screen-lg trs-all-300 w-11/12 relative">
     <div id="spiner-search" class="absolute inset-0 flex justify-center trs-all-300 items-center invisible z-30">
         <i class="gb block text-5xl gb_cached gb_animate_spin text-white text-shadow-md"></i>
     </div>
     <div id="filter-search" class="grid grid-cols-12 gap-0 w-full trs-all-300 z-20 filter relative">
         <label for="search"
-               class="col-span-2 md:col-span-1 bg-white bg-opacity-10 rounded-r-md text-white text-center leading-10 px-3 py-2">
+               class="col-span-2 md:col-span-1 bg-white bg-opacity-10 {% if lang == "en-US" %}rounded-l-md{% else %}rounded-r-md{% endif %}  text-white text-center leading-10 px-3 py-2">
             <i class="gb gb_search gb_s36"></i>
         </label>
         <input id="search" type="text" placeholder="{% trans "Search" %} ..."
-               class="col-span-10 md:col-span-11 search-bar-input leading-10 relative text-white irsans-b bg-white bg-opacity-10 text-2xl px-4 pb-4 rounded-l-md border-r-4 ">
+               class="col-span-10 md:col-span-11 search-bar-input leading-10 relative text-white irsans-b bg-white bg-opacity-10 text-2xl px-4 pb-4  {% if lang == "en-US" %}border-l-4 rounded-r-md{% else %}rounded-l-md border-r-4{% endif %} ">
         <div id="search_box" class="col-span-12 relative -top-4 hidden">
             <div class="w-full p-4">
                 <div class="bg-white rounded-b-md bg-opacity-10 p-4 pb-1">
@@ -53,10 +54,10 @@
 
                         search_box.children("div").children("div").append(
                             '<a href="' + v["product_url"] + '" class="item-search bg-black grid grid-cols-12 rounded-md mb-4 w-full bg-opacity-10 p-4 hover:bg-opacity-20 trs-all-300">' +
-                            '<img src="' + v["image"] + '" class="float-right col-span-3 rounded-md" style="height: 100%">' +
-                            '<div class="float-right mr-6 inline col-span-9">' +
+                            '<img src="' + v["image"] + '" class="{% if lang == "en-US" %}float-left{% else %}float-right{% endif %} col-span-3 rounded-md" style="height: 100%">' +
+                            '<div class="{% if lang == "en-US" %}float-left ml-6{% else %}float-right mr-6{% endif %} inline col-span-9">' +
                             '<h1 class="Vazir font-bold text-shadow-md text-xl text-white">' + v["title"] + '</h1>' +
-                            '<p class="float-right text-gray-300 irsans-b">{% trans "Category" %} : ' + v["category"]["name"] + '</p>' +
+                            '<p class="{% if lang == "en-US" %}float-left{% else %}float-right{% endif %} text-gray-300 irsans-b">{% trans "Category" %} : ' + v["category"]["name"] + '</p>' +
                             '<br><br>' +
                             '<p class="Vazir text-gray-300">' + v['short_description'] + '</p>' +
                             '</div>' +

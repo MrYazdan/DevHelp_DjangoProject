@@ -18,6 +18,33 @@
     <!-- header refrense -->
     {% include "landing/layout/_Head.html" %}
     <!-- external header -->
+    <!-- language style customizer: -->
+    {% if lang == "en-US" %}
+        <style>
+            * {
+                direction: ltr !important;
+            }
+
+            *:not(center) {
+                 text-align: left;
+            }
+
+            center , center * {
+                text-align: center;
+            }
+
+            i {
+                margin-left: 5px;
+                margin-right: 5px;
+                margin-top: -3px;
+            }
+
+            .Vazir, .Vazir *:not(i) {
+                font-family: sans-serif !important;
+            }
+
+        </style>
+    {% endif %}
     {% block extra_head %}{% endblock %}
 </head>
 <body>
