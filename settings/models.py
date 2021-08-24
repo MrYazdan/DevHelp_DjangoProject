@@ -86,7 +86,8 @@ class Site(models.Model):
         upload_to=Controllers.Image.img_renamer, verbose_name=_("Large Logo"), null=True, blank=True, default="",
         help_text=_("This is large image logo for website"))
     footer_msg_fa = models.CharField(max_length=360, null=True, blank=True, verbose_name=_("Persian Footer Message"),
-                                     default=_("لطفا در قسمت ادمین - قسمت پیام پایینی - پیام مورد نظر خود را وارد کنید"),
+                                     default=_(
+                                         "Please enter your desired message in the admin field - bottom message field"),
                                      help_text=_("This is persian footer message"))
     footer_msg_en = models.CharField(max_length=360, null=True, blank=True, verbose_name=_("English Footer Message"),
                                      default="Please complete footer message in admin - settings",

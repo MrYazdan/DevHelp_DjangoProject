@@ -59,6 +59,7 @@ def recepie(request, **kwargs):
         context = {
             "order": order,
             "items": order.orderitem_set.all(),
+            "status": order.status,
         }
         return render(request, "landing/recepie.html", context)
 

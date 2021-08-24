@@ -24,53 +24,26 @@
                     <div class="swal2-success-circular-line-right" style="background-color: rgba(255, 255, 255, 0);"></div>
                 </div>
             </div>
-            <div class="text-white col-span-1 sm:col-span-2">
+            <div class="text-white col-span-1 sm:col-span-2 pb-8 border-b border-gray-600">
                 <p class="text-center irsans-b p-2 sm:p-8">{% trans "Your order has been registered and is now available in your profile." %}</p>
                 <p class="text-center text-gray-300 Vazir px-2 sm:px-8">{% trans "We are sincere in choosing our team!" %}</p>
             </div>
+            <div class="text-white col-span-1 sm:col-span-2 pb-8">
+                <h2 class="text-center irsans-b pb-4 mb-3 text-shadow-md text-xl">{% trans "Order status" %} : {{ status.state }}</h2>
+                {% for item in items %}
+                    <a class="w-full inline-block p-4 bg-black bg-opacity-10 rounded-lg hover:bg-opacity-30 trs-all-300 mb-4">
+                        <span class="float-right">( {{ item.product.title }} ) x {{ item.count }}</span>
+                        <span class="float-left">{{ item.price }}</span>
+                    </a>
+                {% endfor %}
+                <h2 class="irsans-b pb-4 mb-3 text-shadow-md text-xl">{% trans "Total price" %} : {{ order.total_price }}</h2>
+                <h2 class="irsans-b pb-4 mb-3 text-shadow-md text-xl">{% trans "Total discount" %} : {{ order.total_discount }}</h2>
+                <h2 class="irsans-b pb-4 mb-3 text-shadow-md text-xl">{% trans "Total discount code" %} : {{ order.total_offcode }}</h2>
+                <hr>
+                <span class="block text-lg text-center text-shadow-md text-4xl font-bold mt-8">{% trans "Final price" %} : <span
+                                        id="final">{{ order.final_price|sub:order.total_offcode }}</span> {% trans "Toman" %}</span>
+            </div>
         </div>
     </div>
-{% endblock %}
-{% block extra_foot %}
-    <script>
-        function csrfSafeMethod(method) {
-            // these HTTP methods do not require CSRF protection
-            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-        }
-
-        $.ajaxSetup({
-            beforeSend: function (xhr, settings) {
-                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                    xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
-                }
-            }
-        });
-
-        $('.address').click(function () {
-            $("#final_cart").removeAttr("disabled").removeClass("cursor-not-allowed")
-            $(this).addClass("selected")
-            $('.address').not(this).removeClass("selected")
-        })
-
-        $("#final_cart").click(function () {
-            if (!($(this).attr("disabled") || $(this).hasClass("cursor-not-allowed"))) {
-                $.ajax({
-                    url: "{% url "final-cart" %}",
-                    type: "POST",
-                    data: {'address_id': $(".address.selected").attr("id")},
-                }).done(function () {
-                    Swal.fire({
-                        icon: 'success',
-                        title: '{% trans "Your order has been registered!" %}',
-                        text: '{% trans "You will be redirected to your arrival page." %}',
-                        showConfirmButton: false, timer: 3500, timerProgressBar: true,
-                    })
-                    setTimeout(function () {
-                        window.location.replace("{% url "recepie" order.recepie_id %}")
-                    }, 3600)
-                })
-            }
-        })
-    </script>
 {% endblock %}
 {% block click_item %}{% endblock %}
