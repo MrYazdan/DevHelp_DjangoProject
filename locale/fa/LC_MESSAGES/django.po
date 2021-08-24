@@ -688,7 +688,7 @@ msgstr "متن فارسی پایینی"
 #: settings/models.py:90
 msgid ""
 "Please enter your desired message in the admin field - bottom message field"
-msgstr "لطفاً پیام مورد نظر خود را در قسمت ادمین - قسمت پایین پیام وارد کنید"
+msgstr ""
 
 #: settings/models.py:91
 msgid "This is persian footer message"
