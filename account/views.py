@@ -58,7 +58,7 @@ def forget_password(request):
             # send mail
             print(f"Sendig mail! for {user[0].phone}")
         else:
-            forget_form.add_error('phone', _('کاربری با مشخصات وارد شده وجود ندارد!'))
+            forget_form.add_error('phone', _('There is no user with the entered profile!'))
 
     context = {
         'forget_form': forget_form

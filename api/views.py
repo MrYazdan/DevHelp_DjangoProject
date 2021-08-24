@@ -70,8 +70,6 @@ class AddressListView(ListCreateAPIView):
         super().perform_create(serializer)
 
 
-
-
 class AddressDetailView(RetrieveUpdateDestroyAPIView):
     serializer_class = AddressSerializer
     permission_classes = [permissions.IsAuthenticated]
