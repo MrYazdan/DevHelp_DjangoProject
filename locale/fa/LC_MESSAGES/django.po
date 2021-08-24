@@ -21,1036 +21,1036 @@ msgstr ""
 
 #: account/forms.py:9 account/forms.py:29
 msgid "Please enter your mobile number"
-msgstr ""
+msgstr "لطفا شماره موبایل خود را وارد کنید"
 
 #: account/forms.py:14 account/forms.py:80
 msgid "Please enter your password"
-msgstr ""
+msgstr "لطفا رمز عبور خود را وارد کنید"
 
 #: account/forms.py:22 account/views.py:25 account/views.py:61
 msgid "There is no user with the entered profile!"
-msgstr ""
+msgstr "هیچ کاربری با مشخصات وارد شده وجود ندارد!"
 
 #: account/forms.py:34 account/forms.py:72
 msgid "Please enter your email"
-msgstr ""
+msgstr "لطفا ایمیل خود را وارد کنید"
 
 #: account/forms.py:37 account/forms.py:52 account/forms.py:75
 msgid "The entered email is not valid"
-msgstr ""
+msgstr "ایمیل وارد شده معتبر نیست"
 
 #: account/forms.py:45
 msgid "There is no user with the entered contact number!"
-msgstr ""
+msgstr "هیچ کاربری با شماره تماس وارد شده وجود ندارد!"
 
 #: account/forms.py:55 account/forms.py:96
 msgid "Email characters must be less than 40"
-msgstr ""
+msgstr "نویسه های ایمیل باید کمتر از 40 باشد"
 
 #: account/forms.py:66
 msgid "The number of characters entered can not be more than 11"
-msgstr ""
+msgstr "تعداد نویسه های وارد شده نباید بیش از 11 باشد"
 
 #: account/forms.py:67
 msgid "The number of characters entered can not be less than 8"
-msgstr ""
+msgstr "تعداد نویسه های وارد شده نباید کمتر از 8 باشد"
 
 #: account/forms.py:85
 msgid "Please enter your password again"
-msgstr ""
+msgstr "لطفاً رمز عبور خود را دوباره وارد کنید"
 
 #: account/forms.py:93
 msgid "The entered email is duplicate"
-msgstr ""
+msgstr "ایمیل وارد شده تکراری است"
 
 #: account/forms.py:105
 msgid "This user has already registered"
-msgstr ""
+msgstr "این کاربر قبلاً ثبت نام کرده است"
 
 #: account/forms.py:116
 msgid "Passwords are different"
-msgstr ""
+msgstr "رمزهای عبور متفاوت است"
 
 #: api/views.py:58
 msgid "Password updated successfully."
-msgstr ""
+msgstr "رمز عبور با موفقیت به روز شد."
 
 #: api/views.py:91
 msgid "You have an unpaid order."
-msgstr ""
+msgstr "شما یک سفارش بدون پرداخت دارید."
 
 #: api/views.py:115
 msgid "This order is closed."
-msgstr ""
+msgstr "این سفارش بسته شده است."
 
 #: category/models.py:10
 msgid "Category FA Name"
-msgstr ""
+msgstr "دسته به فارسی"
 
 #: category/models.py:11
 msgid "This is persian name category item"
-msgstr ""
+msgstr "نام دسته به فارسی است"
 
 #: category/models.py:16
 msgid "Category EN Name"
-msgstr ""
+msgstr "دسته به انگلیسی"
 
 #: category/models.py:17
 msgid "This is english name category item"
-msgstr ""
+msgstr "نام دسته به انگلیسی است"
 
 #: category/models.py:22
 msgid "Category image"
-msgstr ""
+msgstr "تصویر دسته"
 
 #: category/models.py:23
 msgid "This is image of category item"
-msgstr ""
+msgstr "این تصویر این دسته است"
 
 #: category/models.py:25 products/models.py:145 settings/models.py:18
 msgid "Link"
-msgstr ""
+msgstr "لینک"
 
 #: category/models.py:26
 msgid "This is url or link of category -> /category/'url'"
-msgstr ""
+msgstr "آدرس اینترنتی اتصال به صفحه دسته بندی ماست -> /category/'آدرس'"
 
 #: category/models.py:30 products/models.py:113 settings/models.py:54
 msgid "English description"
-msgstr ""
+msgstr "جزئیات انگلیسی"
 
 #: category/models.py:31
 msgid "This is english description for this category"
-msgstr ""
+msgstr "این جزییات انگلیسی از دسته است"
 
 #: category/models.py:35 products/models.py:117 settings/models.py:58
 msgid "Persian description"
-msgstr ""
+msgstr "جزئیات فارسی"
 
 #: category/models.py:36
 msgid "This is persian description for this category"
-msgstr ""
+msgstr "این جزییات فارسی از دسته است"
 
 #: category/models.py:52 templates/landing/partial/search.html:59
 #: templates/landing/product_detail.html:12
 msgid "Category"
-msgstr ""
+msgstr "دسته"
 
 #: category/models.py:53 templates/landing/categories.html:3
 #: templates/landing/categories.html:9
 #: templates/landing/layout/_ClickItem.html:11
 msgid "Categories"
-msgstr ""
+msgstr "دسته ها"
 
 #: core/models.py:36
 msgid "Created time"
-msgstr ""
+msgstr "زمان ساخته شده"
 
 #: core/models.py:37
 msgid "This is created time"
-msgstr ""
+msgstr "زمان ایجاد این آیتم است"
 
 #: core/models.py:41
 msgid "Modified time"
-msgstr ""
+msgstr "زمان بروزرسانی"
 
 #: core/models.py:42
 msgid "This is modified time"
-msgstr ""
+msgstr "این زمان بروزرسانی آیتم است"
 
 #: core/models.py:46
 msgid "Deleted status"
-msgstr ""
+msgstr "وضعیت پاک شدن"
 
 #: core/models.py:47
 msgid "This is deleted status"
-msgstr ""
+msgstr "این وضعیت پاک شدن است"
 
 #: core/models.py:51
 msgid "Active status"
-msgstr ""
+msgstr "وضعیت فعال"
 
 #: core/models.py:52
 msgid "This is active status"
-msgstr ""
+msgstr "این وضعیت فعال شدن است"
 
 #: core/serializers.py:22
 msgid "Your old password was entered incorrectly. Please enter it again."
-msgstr ""
+msgstr "گذرواژه قدیمی شما اشتباه وارد شده است. لطفاً دوباره آن را وارد کنید."
 
 #: core/serializers.py:27
 msgid "The two password fields didn't match."
-msgstr ""
+msgstr "دو فیلد رمز عبور مطابقت ندارند."
 
 #: core/serializers.py:29
 msgid "The new password is the same as your current password."
-msgstr ""
+msgstr "رمز جدید همان رمز فعلی شما است."
 
 #: order/models.py:11
 msgid "English Order Status State"
-msgstr ""
+msgstr "وضعیت سفارش خرید به انگلیسی"
 
 #: order/models.py:12
 msgid "This is english order status state"
-msgstr ""
+msgstr "این وضعیت سفارش خرید به انگلیسی است"
 
 #: order/models.py:13
 msgid "Persian Order Status State"
-msgstr ""
+msgstr "وضعیت سفارش خرید به فارسی"
 
 #: order/models.py:14
 msgid "This is persian order status state"
-msgstr ""
+msgstr "این وضعیت سفارش خرید به فارسی است"
 
 #: order/models.py:16
 msgid "English state description"
-msgstr ""
+msgstr "جزئیات وضعیت انگلیسی"
 
 #: order/models.py:17 products/models.py:114
 msgid "This is english description of product item"
-msgstr ""
+msgstr "این جزئیات وضعیت انگلیسی است"
 
 #: order/models.py:19
 msgid "Persian state description"
-msgstr ""
+msgstr "جزئیات وضعیت فارسی"
 
 #: order/models.py:20 products/models.py:118
 msgid "This is persian description of product item"
-msgstr ""
+msgstr "این جزئیات وضعیت فارسی است"
 
 #: order/models.py:23
 msgid "Order Status"
-msgstr ""
+msgstr "وضعیت سفارش"
 
 #: order/models.py:24
 msgid "Order Statuses"
-msgstr ""
+msgstr "وضعیت های سفارش"
 
 #: order/models.py:39
 msgid "Order Owner"
-msgstr ""
+msgstr "خریدار"
 
 #: order/models.py:40
 msgid "This is owner for buy cart item"
-msgstr ""
+msgstr "این خریدار این سفارش است"
 
 #: order/models.py:41
 msgid "Status State"
-msgstr ""
+msgstr "حالت وضعییت"
 
 #: order/models.py:42
 msgid "This is status for paid order"
-msgstr ""
+msgstr "این حالت وضعیت است"
 
 #: order/models.py:44
 msgid "Payment Datetime"
-msgstr ""
+msgstr "تاریخ و زمان پرداخت"
 
 #: order/models.py:45
 msgid "This is payment datetime"
-msgstr ""
+msgstr "این تاریخ کامل زمان پرداخت است"
 
 #: order/models.py:47
 msgid "User address"
-msgstr ""
+msgstr "آدرس کاربر"
 
 #: order/models.py:47
 msgid "This is user address for your order"
-msgstr ""
+msgstr "این آدرس کاربر است"
 
 #: order/models.py:48
 msgid "Recepie ID"
-msgstr ""
+msgstr "شماره شفارش"
 
 #: order/models.py:49
 msgid "This is recepie id for this order"
-msgstr ""
+msgstr "این شماره سفارش است"
 
 #: order/models.py:53
 msgid "Order Cart"
-msgstr ""
+msgstr "سبد خرید"
 
 #: order/models.py:54
 msgid "Order Carts"
-msgstr ""
+msgstr "سبد های خرید"
 
 #: order/models.py:85
 #: venv/lib/python3.9/site-packages/django/forms/formsets.py:405
 #: venv/lib/python3.9/site-packages/django/forms/formsets.py:412
 msgid "Order"
-msgstr ""
+msgstr "سفارش"
 
 #: order/models.py:86
 msgid "This is order cart"
-msgstr ""
+msgstr "این سبد خرید است"
 
 #: order/models.py:87 products/models.py:149
 msgid "Product"
-msgstr ""
+msgstr "محصول"
 
 #: order/models.py:88
 msgid "This is product in cart"
-msgstr ""
+msgstr "این محصول سبد است"
 
 #: order/models.py:89 templates/landing/cart.html:25
 #: templates/landing/product_detail.html:16
 msgid "Price"
-msgstr ""
+msgstr "قیمت"
 
 #: order/models.py:89
 msgid "This is price of this product"
-msgstr ""
+msgstr "این قیمت محصول است"
 
 #: order/models.py:90
 msgid "Count"
-msgstr ""
+msgstr "تعداد"
 
 #: order/models.py:90
 msgid "This is count of this product"
-msgstr ""
+msgstr "این تعداد این محصول است"
 
 #: order/models.py:93
 msgid "Order Item"
-msgstr ""
+msgstr "محصول سفارش"
 
 #: order/models.py:94
 msgid "Order Items"
-msgstr ""
+msgstr "محصولات سفارش"
 
 #: products/models.py:22 products/models.py:97
 msgid "English title"
-msgstr ""
+msgstr "عنوان انگلیسی"
 
 #: products/models.py:22
 msgid "This is english name for discount item"
-msgstr ""
+msgstr "این عنوان انگلیسی از تخفیف است"
 
 #: products/models.py:24 products/models.py:101
 msgid "Persian title"
-msgstr ""
+msgstr "عنوان فارسی"
 
 #: products/models.py:24
 msgid "This is persian name for discount item"
-msgstr ""
+msgstr "عنوان فارسی از تخفیف است"
 
 #: products/models.py:25
 msgid "From datetime"
-msgstr ""
+msgstr "از تاریخ و زمان"
 
 #: products/models.py:26
 msgid "This is start discount datetime "
-msgstr ""
+msgstr "تاریخ شروع و فعالسازی تخفیف"
 
 #: products/models.py:27
 msgid "Expire datetime"
-msgstr ""
+msgstr "تاریخ و زمان انقضا"
 
 #: products/models.py:28
 msgid "This is expire discount datetime "
-msgstr ""
+msgstr "تاریخ و زمان انقضا تخفیف و باطل شدن"
 
 #: products/models.py:29
 msgid "Is Active"
-msgstr ""
+msgstr "فعال"
 
 #: products/models.py:29
 msgid "This is time "
-msgstr ""
+msgstr "فعال در این زمان"
 
 #: products/models.py:30
 msgid "Count of use"
-msgstr ""
+msgstr "حد استفاده مجاز"
 
 #: products/models.py:31
 msgid "This is count for use off code and expire"
-msgstr ""
+msgstr "این حد استغاده از کد تخفیف و سپس باطل شدن آن است"
 
 #: products/models.py:33
 msgid "Max Discount Price"
-msgstr ""
+msgstr "بیشترین حد تخفیف"
 
 #: products/models.py:34
 msgid "This is max discount price item"
-msgstr ""
+msgstr "این بیشترین حد تخفیف اعمال شده است"
 
 #: products/models.py:35
 msgid "Discount Percent"
-msgstr ""
+msgstr "درصد تخفیف"
 
 #: products/models.py:36
 msgid "This is discount percent"
-msgstr ""
+msgstr "این درصد تخفیف است"
 
 #: products/models.py:65
 msgid "Code for discount"
-msgstr ""
+msgstr "کد برای تخفیف"
 
 #: products/models.py:66
 msgid "This is unique code for discount"
-msgstr ""
+msgstr "این کدی یونیک برای تخفیف است"
 
 #: products/models.py:67
 msgid "For users"
-msgstr ""
+msgstr "برای کاربران"
 
 #: products/models.py:68
 msgid "this is off code availble for selected users"
-msgstr ""
+msgstr "مجاز برای کاربرانی که انتخاب شده باشند"
 
 #: products/models.py:76
 msgid "OFFCode"
-msgstr ""
+msgstr "کد تخفیف"
 
 #: products/models.py:77
 msgid "OFFCodes"
-msgstr ""
+msgstr "کد های تخفیف"
 
 #: products/models.py:98
 msgid "This is english name of product item"
-msgstr ""
+msgstr "این نام انگلیسی محصول است"
 
 #: products/models.py:102
 msgid "This is persian name of product item"
-msgstr ""
+msgstr "این نام فارسی محصول است"
 
 #: products/models.py:105
 msgid "English short description"
-msgstr ""
+msgstr "جزئیات کوتاه انگلیسی"
 
 #: products/models.py:106
 msgid "This is english short description of product item"
-msgstr ""
+msgstr "این جزئیات کوتاه انگلیسی محصول است"
 
 #: products/models.py:109
 msgid "Persian short description"
-msgstr ""
+msgstr "جزئیات کوتاه فارسی"
 
 #: products/models.py:110
 msgid "This is persian short description of product item"
-msgstr ""
+msgstr "این جزئیات کوتاه فارسی محصول است"
 
 #: products/models.py:120
 msgid "Price item"
-msgstr ""
+msgstr "قیمت"
 
 #: products/models.py:120
 msgid "This is price item"
-msgstr ""
+msgstr "این قیمت محصول است"
 
 #: products/models.py:121 templates/landing/product_detail.html:18
 msgid "Discount"
-msgstr ""
+msgstr "تخفیف"
 
 #: products/models.py:122
 msgid "This is discount for product item"
-msgstr ""
+msgstr "این تخفیف صادر شده برای محصول است"
 
 #: products/models.py:125
 msgid "Product Image"
-msgstr ""
+msgstr "تصویر محصول"
 
 #: products/models.py:126
 msgid "This is image of product item"
-msgstr ""
+msgstr "این تصویر محصول است"
 
 #: products/models.py:130
 msgid "Category of product"
-msgstr ""
+msgstr "دسته بندی محصول"
 
 #: products/models.py:131
 msgid "This is category of product"
-msgstr ""
+msgstr "این دسته بندی محصول است"
 
 #: products/models.py:134
 msgid "View counts"
-msgstr ""
+msgstr "تعداد بازدید"
 
 #: products/models.py:135
 msgid "This is count of view products"
-msgstr ""
+msgstr "این تعداد بازدید از محصول است"
 
 #: products/models.py:138
 msgid "Offer"
-msgstr ""
+msgstr "فروش ویژه"
 
 #: products/models.py:139
 msgid "This is status of offer product"
-msgstr ""
+msgstr "وضعیت فروش ویژه بودن یا نبودن محصول"
 
 #: products/models.py:141
 msgid "Count In Inventory"
-msgstr ""
+msgstr "تعداد در انبار"
 
 #: products/models.py:142
 msgid "This is count of item in inventory"
-msgstr ""
+msgstr "این تعداد باقیمانده در انبار است"
 
 #: products/models.py:143
 msgid "Count Of Buy"
-msgstr ""
+msgstr "تعداد خرید شده"
 
 #: products/models.py:144
 msgid "This is count of buy item"
-msgstr ""
+msgstr "این تعداد خریداری شده است"
 
 #: products/models.py:146
 msgid "This is url or link name item -> /products/'url'"
-msgstr ""
+msgstr "لینک دسترسی به محصول -> /products/'url'"
 
 #: products/models.py:150 templates/landing/products.html:3
 msgid "Products"
-msgstr ""
+msgstr "محصولات"
 
 #: settings/models.py:10
 msgid "Persian name"
-msgstr ""
+msgstr "نام فارسی"
 
 #: settings/models.py:11
 msgid "This is persian name of sochial accounts"
-msgstr ""
+msgstr "این نام فارسی از حساب اجتماعی است"
 
 #: settings/models.py:14
 msgid "English name"
-msgstr ""
+msgstr "نام انگلیسی"
 
 #: settings/models.py:15
 msgid "This is english name of sochial accounts"
-msgstr ""
+msgstr "این نام انگلیسی از حساب اجتماعی است"
 
 #: settings/models.py:19
 msgid "This is link of sochial accounts"
-msgstr ""
+msgstr "این لینک اتصال به حساب اجتماعی است"
 
 #: settings/models.py:22
 msgid "Icon"
-msgstr ""
+msgstr "آیکون"
 
 #: settings/models.py:23
 msgid "This is icon of sochial accounts from gorbeh icon"
-msgstr ""
+msgstr "این شکلکی از فونت آیکون های گربه است که نمایان گر آدرس حساب اجتماعی است"
 
 #: settings/models.py:27
 msgid "SochialAccount"
-msgstr ""
+msgstr "حساب اجتماعی"
 
 #: settings/models.py:28
 msgid "SochialAccounts"
-msgstr ""
+msgstr "حساب های اجتماعی"
 
 #: settings/models.py:39
 msgid "Website Persian Title"
-msgstr ""
+msgstr "عنوان فارسی سایت"
 
 #: settings/models.py:40
 msgid "This is persian website title"
-msgstr ""
+msgstr "عنوان فارسی وبسایت است"
 
 #: settings/models.py:41
 msgid "Website English Title"
-msgstr ""
+msgstr "عنوان انگلیسی وبسایت"
 
 #: settings/models.py:42
 msgid "This is english website title"
-msgstr ""
+msgstr "عنوان انگلیسی وبسایت است"
 
 #: settings/models.py:43
 msgid "Website Persian Subtitle"
-msgstr ""
+msgstr "ریز عنوان فارسی وبسایت"
 
 #: settings/models.py:44
 msgid "This is persian website subtitle"
-msgstr ""
+msgstr "ریز عنوان فارسی وبسایت است"
 
 #: settings/models.py:45
 msgid "Website English Subtitle"
-msgstr ""
+msgstr "ریز عنوان انگلیسی وبسایت"
 
 #: settings/models.py:46
 msgid "This is english website subtitle"
-msgstr ""
+msgstr "ریز عنوان انگلیسی وبسایت است"
 
 #: settings/models.py:48
 msgid "Short Persian Description"
-msgstr ""
+msgstr "جزيیات کوتاه فارسی"
 
 #: settings/models.py:49
 msgid "This is persian short description"
-msgstr ""
+msgstr "این جزئیات کوتاه فارسی وبسایت است"
 
 #: settings/models.py:51
 msgid "Short English Description"
-msgstr ""
+msgstr "جزيیات کوتاه انگلیسی"
 
 #: settings/models.py:52
 msgid "This is english short description"
-msgstr ""
+msgstr "این جزئیات کوتاه انگلیسی وبسایت است"
 
 #: settings/models.py:55
 msgid "This is english description for website"
-msgstr ""
+msgstr "این جزئیات انگلیسی وبسایت است"
 
 #: settings/models.py:59
 msgid "This is persian description for website"
-msgstr ""
+msgstr "این جزئیات فارسی وبسایت است"
 
 #: settings/models.py:61 settings/models.py:64
 msgid "Please enter your persian site address"
-msgstr ""
+msgstr "لطفا آدرس فارسی مربوط به سایت را وارد کنید"
 
 #: settings/models.py:62
 msgid "Persian Address"
-msgstr ""
+msgstr "آدرس فارسی"
 
 #: settings/models.py:63
 msgid "This is persian address for your website"
-msgstr ""
+msgstr "این آدرس فارسی وبسایت است"
 
 #: settings/models.py:65
 msgid "English Address"
-msgstr ""
+msgstr "آدرس انگلیسی"
 
 #: settings/models.py:66
 msgid "This is english address for your website"
-msgstr ""
+msgstr "این آدرس انگلیسی وبسایت است"
 
 #: settings/models.py:67
 msgid "Website Link"
-msgstr ""
+msgstr "لینک وبسایت"
 
 #: settings/models.py:68
 msgid "Please complete site url"
-msgstr ""
+msgstr "این لینک کامل وبسایت است"
 
 #: settings/models.py:69
 msgid "This is url or link your website without 'http://'"
-msgstr ""
+msgstr "این آدرس اتصال به وبسایت بدون http یا https است"
 
 #: settings/models.py:70
 msgid "Site Version"
-msgstr ""
+msgstr "نسخه سایت"
 
 #: settings/models.py:71
 msgid "This is site version - default = 1.0"
-msgstr ""
+msgstr "این نسخه سایت است"
 
 #: settings/models.py:72
 msgid "Phone Number"
-msgstr ""
+msgstr "شماره تماس"
 
 #: settings/models.py:73
 msgid "This is phone number for your website"
-msgstr ""
+msgstr "این شماره تماس وبسایت است"
 
 #: settings/models.py:74
 msgid "Mobile Phone Number"
-msgstr ""
+msgstr "شماره موبایل"
 
 #: settings/models.py:75
 msgid "This is mobile phone number for your website"
-msgstr ""
+msgstr "این شماره موبایل وبسایت است"
 
 #: settings/models.py:76
 msgid "Email Address"
-msgstr ""
+msgstr "ایمیل"
 
 #: settings/models.py:77
 msgid "This is email address for your website"
-msgstr ""
+msgstr "این ایمیل آدرس وبسایت است"
 
 #: settings/models.py:79
 msgid "This is persian about text for your website"
-msgstr ""
+msgstr "این درباره ی ما فارسی وبسایت است"
 
 #: settings/models.py:81
 msgid "This is english about text for your website"
-msgstr ""
+msgstr "این درباره ی ما انگلیسی وبسایت است"
 
 #: settings/models.py:83
 msgid "Small Logo"
-msgstr ""
+msgstr "لوگو کوچک"
 
 #: settings/models.py:84
 msgid "This is small image logo for website"
-msgstr ""
+msgstr "این لوگو کوچک سایت است"
 
 #: settings/models.py:86
 msgid "Large Logo"
-msgstr ""
+msgstr "لوگو بزرگ"
 
 #: settings/models.py:87
 msgid "This is large image logo for website"
-msgstr ""
+msgstr "این لوگو بزرگ سایت است"
 
 #: settings/models.py:88
 msgid "Persian Footer Message"
-msgstr ""
+msgstr "متن فارسی پایینی"
 
 #: settings/models.py:90
 msgid ""
 "Please enter your desired message in the admin field - bottom message field"
-msgstr ""
+msgstr "لطفاً پیام مورد نظر خود را در قسمت ادمین - قسمت پایین پیام وارد کنید"
 
 #: settings/models.py:91
 msgid "This is persian footer message"
-msgstr ""
+msgstr "این متن پایینی فارسی سایت است"
 
 #: settings/models.py:92
 msgid "English Footer Message"
-msgstr ""
+msgstr "متن انگلیسی پایینی"
 
 #: settings/models.py:94
 msgid "This is english footer message"
-msgstr ""
+msgstr "این متن پایینی انگلیسی سایت است"
 
 #: settings/models.py:97
 msgid "Site Setting"
-msgstr ""
+msgstr "تنظیم سایت"
 
 #: settings/models.py:98
 msgid "Site Settings"
-msgstr ""
+msgstr "تنظیمات سایت"
 
 #: settings/models.py:141
 msgid "User contact"
-msgstr ""
+msgstr "تماس کاربر"
 
 #: settings/models.py:142
 msgid "This user id to send message"
-msgstr ""
+msgstr "این آیدی ارسال کننده پیام است"
 
 #: settings/models.py:143
 msgid "Sender Name"
-msgstr ""
+msgstr "نام ارسال کننده"
 
 #: settings/models.py:143
 msgid "This is name of sender message"
-msgstr ""
+msgstr "این نام ارسال کننده است"
 
 #: settings/models.py:145
 msgid "Phone number must be entered in the true format."
-msgstr ""
+msgstr "شماره تماس باید در فرمت درست وارد شود"
 
 #: settings/models.py:146
 msgid "Phone"
-msgstr ""
+msgstr "شماره تماس"
 
 #: settings/models.py:147
 msgid "This is phone number of sender"
-msgstr ""
+msgstr "این شماره تماس ارسال کننده است"
 
 #: settings/models.py:148 templates/account/profile.html:41
 #: templates/landing/contact.html:17
 msgid "Email"
-msgstr ""
+msgstr "ایمیل"
 
 #: settings/models.py:148
 msgid "This is mail address of sender"
-msgstr ""
+msgstr "این ایمیل ارسال کننده است"
 
 #: settings/models.py:150 templates/landing/contact.html:20
 msgid "Message"
-msgstr ""
+msgstr "پیام"
 
 #: settings/models.py:150
 msgid "This is message of sender"
-msgstr ""
+msgstr "این پیام ارسال کننده است"
 
 #: settings/models.py:153
 msgid "Contact Message"
-msgstr ""
+msgstr "تماس"
 
 #: settings/models.py:154
 msgid "Contact Messages"
-msgstr ""
+msgstr "تماس ها"
 
 #: templates/account/address.html:3 templates/landing/final.html:25
 msgid "Addresses"
-msgstr ""
+msgstr "آدرس ها"
 
 #: templates/account/address.html:10 templates/account/offcode.html:11
 #: templates/account/paid.html:11 templates/account/profile.html:10
 msgid "User profile"
-msgstr ""
+msgstr "پروفایل کاربری"
 
 #: templates/account/address.html:12 templates/account/offcode.html:13
 #: templates/account/paid.html:13 templates/account/profile.html:12
 msgid "Registered addresses"
-msgstr ""
+msgstr "آدرس های ثبت شده"
 
 #: templates/account/address.html:14 templates/account/offcode.html:15
 #: templates/account/paid.html:15 templates/account/profile.html:14
 msgid "Registered orders"
-msgstr ""
+msgstr "سفارشات ثبت شده"
 
 #: templates/account/address.html:16 templates/account/offcode.html:17
 #: templates/account/paid.html:17 templates/account/profile.html:16
 msgid "Active discount codes"
-msgstr ""
+msgstr "کد های تخفیف فعال"
 
 #: templates/account/address.html:23 templates/account/address.html:49
 #: templates/landing/final.html:34
 msgid "Country"
-msgstr ""
+msgstr "کشور"
 
 #: templates/account/address.html:24 templates/account/address.html:53
 #: templates/landing/final.html:35
 msgid "City"
-msgstr ""
+msgstr "شهر"
 
 #: templates/account/address.html:25 templates/account/address.html:63
 #: templates/landing/final.html:36
 msgid "Postal code"
-msgstr ""
+msgstr "کد پستی"
 
 #: templates/account/address.html:26 templates/account/address.html:68
 #: templates/landing/final.html:37
 #: venv/lib/python3.9/site-packages/django/forms/widgets.py:716
 msgid "No"
-msgstr ""
+msgstr "پلاک"
 
 #: templates/account/address.html:27 templates/account/address.html:58
 #: templates/landing/about.html:11 templates/landing/final.html:38
 msgid "Address"
-msgstr ""
+msgstr "آدرس"
 
 #: templates/account/address.html:32 templates/landing/final.html:43
 msgid "There is no address to display!"
-msgstr ""
+msgstr "آدرسی برای نمایش وجود ندارد!"
 
 #: templates/account/address.html:36
 msgid "Register a new address"
-msgstr ""
+msgstr "ثبت آدرس جدید"
 
 #: templates/account/address.html:39
 msgid "Latitude"
-msgstr ""
+msgstr "عرض جغرافیایی"
 
 #: templates/account/address.html:43 templates/account/address.html:48
 msgid "(Optional)"
-msgstr ""
+msgstr "(اختیاری)"
 
 #: templates/account/address.html:44
 msgid "Longitude"
-msgstr ""
+msgstr "طول جغرافیایی"
 
 #: templates/account/address.html:52
 msgid "Please enter your country"
-msgstr ""
+msgstr "لطفا کشور خود را وارد کنید"
 
 #: templates/account/address.html:57
 msgid "Please enter your city"
-msgstr ""
+msgstr "لطفا شهر خود را وارد کنید"
 
 #: templates/account/address.html:62
 msgid "Please enter your address"
-msgstr ""
+msgstr "لطفا آدرس خود را وارد کنید"
 
 #: templates/account/address.html:67
 msgid "Please enter your zip code"
-msgstr ""
+msgstr "لطفا کد پستی خود را وارد کنید"
 
 #: templates/account/address.html:72
 msgid "Please enter your license plate"
-msgstr ""
+msgstr "لطفا پلاک خود را وارد کنید"
 
 #: templates/account/address.html:75 templates/account/profile.html:47
 msgid "Save"
-msgstr ""
+msgstr "ذخیره"
 
 #: templates/account/address.html:129 templates/account/profile.html:116
 #: templates/account/profile.html:153 templates/landing/contact.html:78
 msgid "Control the inputs!"
-msgstr ""
+msgstr "ورودی هارا کنترل کنید!"
 
 #: templates/account/address.html:137
 msgid "New address added!"
-msgstr ""
+msgstr "آدرس جدید افزوده شد!"
 
 #: templates/account/forget_password.html:3
 #: templates/account/forget_password.html:12 templates/account/login.html:30
 msgid "Password recovery"
-msgstr ""
+msgstr "بازیابی رمز عبور"
 
 #: templates/account/forget_password.html:9 templates/account/login.html:9
 msgid "If you do not have an account take action - Create an account"
-msgstr ""
+msgstr "گر حساب ندارید اقدام کنید - یک حساب ایجاد کنید"
 
 #: templates/account/forget_password.html:24 templates/account/login.html:24
 #: templates/account/register.html:30 templates/landing/contact.html:23
 #: venv/lib/python3.9/site-packages/django/forms/widgets.py:403
 msgid "Clear"
-msgstr ""
+msgstr "پاکسازی"
 
 #: templates/account/forget_password.html:26
 msgid "Send recovery email"
-msgstr ""
+msgstr "ارسال ایمیل بازیابی"
 
 #: templates/account/login.html:3 templates/account/login.html:12
 #: templates/account/login.html:26 templates/landing/partial/nav.html:16
 msgid "Login"
-msgstr ""
+msgstr "ورود"
 
 #: templates/account/offcode.html:4
 msgid "My discount codes"
-msgstr ""
+msgstr "کد های تخفیف من"
 
 #: templates/account/offcode.html:24
 msgid "Use limit"
-msgstr ""
+msgstr "حد استفاده"
 
 #: templates/account/offcode.html:25
 msgid "Code"
-msgstr ""
+msgstr "کد"
 
 #: templates/account/offcode.html:26
 msgid "Percent"
-msgstr ""
+msgstr "درصد"
 
 #: templates/account/offcode.html:27
 msgid "Expiration date"
-msgstr ""
+msgstr "تاریخ انقضا"
 
 #: templates/account/offcode.html:28
 msgid "Maximum discount"
-msgstr ""
+msgstr "حداکثر تخفیف"
 
 #: templates/account/offcode.html:34
 msgid "There is no active discount code to display!"
-msgstr ""
+msgstr "هیچ کد تخفیف فعال برای نمایش وجود ندارد!"
 
 #: templates/account/paid.html:4
 msgid "Orders"
-msgstr ""
+msgstr "سفارشات"
 
 #: templates/account/paid.html:23
 msgid "Show details"
-msgstr ""
+msgstr "نمایش جزئیات"
 
 #: templates/account/paid.html:24
 msgid "Order number"
-msgstr ""
+msgstr "شماره سفارش"
 
 #: templates/account/paid.html:31
 msgid "There is no paid order for the show!"
-msgstr ""
+msgstr "هیچ سفارش پولی برای نمایش وجود ندارد!"
 
 #: templates/account/profile.html:3 templates/landing/partial/nav.html:7
 msgid "Profile"
-msgstr ""
+msgstr "پروفایل"
 
 #: templates/account/profile.html:20
 msgid "User information"
-msgstr ""
+msgstr "اطلاعات کاربری"
 
 #: templates/account/profile.html:22
 msgid "First name"
-msgstr ""
+msgstr "نام"
 
 #: templates/account/profile.html:26
 msgid "Please enter your first name"
-msgstr ""
+msgstr "لطفا نام خود را وارد کنید"
 
 #: templates/account/profile.html:27
 msgid "Last name"
-msgstr ""
+msgstr "نام خانوادگی"
 
 #: templates/account/profile.html:31
 msgid "Please enter your last name"
-msgstr ""
+msgstr "لطفا نام خانوادگی خود را وارد کنید"
 
 #: templates/account/profile.html:32
 msgid "National code"
-msgstr ""
+msgstr "کد ملی"
 
 #: templates/account/profile.html:35
 msgid "Please enter your national code"
-msgstr ""
+msgstr "لطفا کد ملی خود را وارد کنید"
 
 #: templates/account/profile.html:36 templates/landing/about.html:10
 #: templates/landing/contact.html:14
 msgid "Phone number"
-msgstr ""
+msgstr "شماره تماس"
 
 #: templates/account/profile.html:39 templates/account/profile.html:43
 msgid "Uneditable"
-msgstr ""
+msgstr "غیر قابل ویرایش"
 
 #: templates/account/profile.html:52
 msgid "Change Password"
-msgstr ""
+msgstr "تغییر رمز عبور"
 
 #: templates/account/profile.html:54
 msgid "Old password"
-msgstr ""
+msgstr "رمز عبور قدیمی"
 
 #: templates/account/profile.html:58
 msgid "Please enter your old password"
-msgstr ""
+msgstr "لطفا رمز قدیمی خود را وارد کنید"
 
 #: templates/account/profile.html:59
 msgid "New password"
-msgstr ""
+msgstr "رمز عبور جدید"
 
 #: templates/account/profile.html:63
 msgid "Please enter your new password"
-msgstr ""
+msgstr "لطفا رمز جدید خود را وارد کنید"
 
 #: templates/account/profile.html:65
 msgid "Confirm password"
-msgstr ""
+msgstr "تکرار رمز عبور جدید"
 
 #: templates/account/profile.html:68
 msgid "Please enter your confirm password"
-msgstr ""
+msgstr "لطفا تکرار رمز جدید خود را وارد کنید"
 
 #: templates/account/profile.html:71 templates/admin/base.html:125
 msgid "Change password"
-msgstr ""
+msgstr "تغییر رمز"
 
 #: templates/account/profile.html:124
 msgid "Changes were applied!"
-msgstr ""
+msgstr "تغییرات اعمال شد!"
 
 #: templates/account/profile.html:161
 msgid "New password changed successfully!"
-msgstr ""
+msgstr "پسورد جدید با موفقیت تغییر یافت!"
 
 #: templates/account/profile.html:162
 msgid "Redirect to login page, please log in again"
-msgstr ""
+msgstr "هدایت به صفحه ورود ، لطفاً دوباره وارد شوید"
 
 #: templates/account/register.html:3 templates/account/register.html:10
 #: templates/account/register.html:32 templates/landing/partial/nav.html:18
 msgid "Register"
-msgstr ""
+msgstr "ثبت نام"
 
 #: templates/account/register.html:9
 msgid "If you have an account take action - Log in"
-msgstr ""
+msgstr "اگر حساب کاربری دارید اقدام کنید - وارد شوید"
 
 #: templates/admin/base.html:111
 msgid "Welcome,"
-msgstr ""
+msgstr "خوش آمدید ،"
 
 #: templates/admin/base.html:116
 msgid "View site"
-msgstr ""
+msgstr "نمایش وبسایت"
 
 #: templates/admin/base.html:121
 msgid "Documentation"
-msgstr ""
+msgstr "مستندات"
 
 #: templates/admin/base.html:127
 msgid "Log out"
-msgstr ""
+msgstr "خروج"
 
 #: templates/admin/base.html:138 templates/landing/shop.html:3
 msgid "Home"
-msgstr ""
+msgstr "خانه"
 
 #: templates/admin/base_site.html:4 templates/admin/base_site.html:7
 msgid "Assistant Developer Admin Panel"
-msgstr ""
+msgstr "پنل ادمین دولوپر کمکی"
 
 #: templates/admin/nav_sidebar.html:2
 msgid "Toggle navigation"
@@ -1058,139 +1058,139 @@ msgstr ""
 
 #: templates/landing/about.html:3 templates/landing/partial/header.html:15
 msgid "About us"
-msgstr ""
+msgstr "درباره ما"
 
 #: templates/landing/cart.html:4 templates/landing/cart.html:21
 #: templates/landing/partial/nav.html:5
 msgid "Cart"
-msgstr ""
+msgstr "سبد خرید"
 
 #: templates/landing/cart.html:17 templates/landing/cart.html:299
 msgid "Your shopping cart is empty!"
-msgstr ""
+msgstr "سبد خرید شما خالی است!"
 
 #: templates/landing/cart.html:24
 msgid "Product Name"
-msgstr ""
+msgstr "نام محصول"
 
 #: templates/landing/cart.html:26 templates/landing/cart.html:45
 msgid "Qty"
-msgstr ""
+msgstr "تعداد"
 
 #: templates/landing/cart.html:27
 #: venv/lib/python3.9/site-packages/django/forms/formsets.py:417
 msgid "Delete"
-msgstr ""
+msgstr "حذف"
 
 #: templates/landing/cart.html:48 templates/landing/recepie.html:39
 msgid "Total price"
-msgstr ""
+msgstr "قیمت کلی"
 
 #: templates/landing/cart.html:51 templates/landing/recepie.html:40
 msgid "Total discount"
-msgstr ""
+msgstr "مجموع تخفیف"
 
 #: templates/landing/cart.html:57 templates/landing/cart.html:212
 #: templates/landing/cart.html:280
 msgid "Cancel"
-msgstr ""
+msgstr "لغو"
 
 #: templates/landing/cart.html:59 templates/landing/cart.html:213
 msgid "Code title"
-msgstr ""
+msgstr "عنوان کد"
 
 #: templates/landing/cart.html:62 templates/landing/cart.html:214
 msgid "Code discount rate"
-msgstr ""
+msgstr "مقدار تخفیف کد"
 
 #: templates/landing/cart.html:70 templates/landing/final.html:49
 #: templates/landing/recepie.html:43
 msgid "Final price"
-msgstr ""
+msgstr "قیمت نهایی"
 
 #: templates/landing/cart.html:72 templates/landing/final.html:51
 #: templates/landing/partial/offer.html:17 templates/landing/products.html:19
 #: templates/landing/products_no_offer.html:31
 #: templates/landing/recepie.html:44
 msgid "Toman"
-msgstr ""
+msgstr "تومان"
 
 #: templates/landing/cart.html:77
 msgid "Continue"
-msgstr ""
+msgstr "ادامه"
 
 #: templates/landing/cart.html:80
 msgid "Discount code"
-msgstr ""
+msgstr "کد تخفیف"
 
 #: templates/landing/cart.html:83
 msgid "Apply"
-msgstr ""
+msgstr "تایید"
 
 #: templates/landing/cart.html:90
 msgid "Login or register first"
-msgstr ""
+msgstr "ابتدا وارد شوید یا ثبت نام کنید"
 
 #: templates/landing/cart.html:203
 msgid "The discount code entered was applied."
-msgstr ""
+msgstr "کد تخفیف وارد شده اعمال شد."
 
 #: templates/landing/cart.html:233
 msgid "The discount code entered is incorrect!"
-msgstr ""
+msgstr "کد تخفیف وارد شده نادرست است!"
 
 #: templates/landing/cart.html:273
 msgid "Are you going to remove this product from the cart?"
-msgstr ""
+msgstr "آیا قصد دارید این محصول را از سبد خرید حذف کنید؟"
 
 #: templates/landing/cart.html:281
 msgid "Yes delete"
-msgstr ""
+msgstr "بله ، حذف شود"
 
 #: templates/landing/cart.html:285
 msgid "The product was successfully removed from your cart."
-msgstr ""
+msgstr "محصول با موفقیت از سبد خرید شما حذف شد."
 
 #: templates/landing/categories.html:46 templates/landing/products.html:51
 #: templates/landing/products_no_offer.html:63
 msgid "There is no item to display!"
-msgstr ""
+msgstr "هیچ موردی برای نمایش وجود ندارد!"
 
 #: templates/landing/contact.html:3 templates/landing/partial/header.html:11
 msgid "Contact us"
-msgstr ""
+msgstr "تماس با ما"
 
 #: templates/landing/contact.html:11
 msgid "First name and Last name"
-msgstr ""
+msgstr "نام و نام خانوادگی"
 
 #: templates/landing/contact.html:11
 msgid "Please enter your first and last name"
-msgstr ""
+msgstr "لطفا نام و نام خانوادگی خود را وارد کنید"
 
 #: templates/landing/contact.html:14
 msgid "Please enter your email (optional)"
-msgstr ""
+msgstr "لطفا ایمیل خود را وارد کنید (اختیاری)"
 
 #: templates/landing/contact.html:20
 msgid "Please enter your message"
-msgstr ""
+msgstr "لطفا پیام خود را وارد کنید"
 
 #: templates/landing/contact.html:26
 msgid "Send"
-msgstr ""
+msgstr "ارسال"
 
 #: templates/landing/contact.html:86
 msgid "Your message has been successfully sent!"
-msgstr ""
+msgstr "پیام شما با موفقیت ارسال شد!"
 
 #: templates/landing/final.html:15 templates/landing/final.html:55
 msgid "Pay"
-msgstr ""
+msgstr "پرداخت"
 
 #: templates/landing/final.html:22
 msgid "Address selection and payment"
-msgstr ""
+msgstr "انتخاب آدرس و روش پرداخت"
 
 #: templates/landing/final.html:28
 msgid ""
@@ -1200,104 +1200,104 @@ msgstr ""
 
 #: templates/landing/final.html:90
 msgid "Your order has been registered!"
-msgstr ""
+msgstr "سفارش شما ثبت شد!"
 
 #: templates/landing/final.html:91
 msgid "You will be redirected to your arrival page."
-msgstr ""
+msgstr "شما به صفحه ورود خود هدایت می شوید."
 
 #: templates/landing/layout/_ClickItem.html:5
 msgid "All products developer assistance"
-msgstr ""
+msgstr "همه محصولات دولوپر کمکی"
 
 #: templates/landing/layout/_ClickItem.html:7
 msgid "Diverse products, required for every taste"
-msgstr ""
+msgstr "محصولات متنوع ، مورد نیاز برای هر سلیقه"
 
 #: templates/landing/layout/_ClickItem.html:13
 msgid "Access to all product groups"
-msgstr ""
+msgstr "دسترسی به همه گروه های محصول"
 
 #: templates/landing/partial/category.html:6
 msgid "Uploading the latest categories"
-msgstr ""
+msgstr "بارگذاری جدیدترین دسته ها"
 
 #: templates/landing/partial/header.html:19
 msgid "Account"
-msgstr ""
+msgstr "حساب کاربری"
 
 #: templates/landing/partial/nav.html:8
 msgid "Logout"
-msgstr ""
+msgstr "خروج"
 
 #: templates/landing/partial/offer.html:8
 #: templates/landing/products_no_offer.html:21
 msgid "Special sale"
-msgstr ""
+msgstr "فروش ویژه"
 
 #: templates/landing/partial/search.html:12
 msgid "Search"
-msgstr ""
+msgstr "جستجو"
 
 #: templates/landing/partial/search.html:76
 msgid "Nothing found :("
-msgstr ""
+msgstr "چیزی یافت نشد :("
 
 #: templates/landing/product_detail.html:13
 msgid "Update"
-msgstr ""
+msgstr "بروزرسانی"
 
 #: templates/landing/product_detail.html:14
 msgid "Inventory"
-msgstr ""
+msgstr "موجودی انبار"
 
 #: templates/landing/product_detail.html:15
 msgid "Number purchased"
-msgstr ""
+msgstr "تعداد خرید"
 
 #: templates/landing/product_detail.html:20
 msgid "Views"
-msgstr ""
+msgstr "بازدید"
 
 #: templates/landing/product_detail.html:24
 msgid "Add to cart"
-msgstr ""
+msgstr "افزودن به سبد خرید"
 
 #: templates/landing/products_no_offer.html:12
 msgid "About the category"
-msgstr ""
+msgstr "درباره این دسته"
 
 #: templates/landing/recepie.html:6
 msgid "Payment receipt"
-msgstr ""
+msgstr "رسید پرداخت"
 
 #: templates/landing/recepie.html:13
 msgid "Receipt of your order"
-msgstr ""
+msgstr "رسید سفارش شما"
 
 #: templates/landing/recepie.html:16
 msgid "Receipt number"
-msgstr ""
+msgstr "شماره رسید"
 
 #: templates/landing/recepie.html:28
 msgid "Your order has been registered and is now available in your profile."
-msgstr ""
+msgstr "سفارش شما ثبت شده است و اکنون در نمایه شما موجود است."
 
 #: templates/landing/recepie.html:29
 msgid "We are sincere in choosing our team!"
-msgstr ""
+msgstr "از انتخاب تیم ما صمیمانه مچکریم!"
 
 #: templates/landing/recepie.html:32
 msgid "Order status"
-msgstr ""
+msgstr "وضعیت سفارش"
 
 #: templates/landing/recepie.html:41
 msgid "Total discount code"
-msgstr ""
+msgstr "مقدار تخفیف کد"
 
 #: venv/lib/python3.9/site-packages/django/contrib/messages/apps.py:7
 msgid "Messages"
-msgstr ""
+msgstr "پیام ها"
 
 #: venv/lib/python3.9/site-packages/django/contrib/sitemaps/apps.py:8
 msgid "Site Maps"
