@@ -1,5 +1,6 @@
 {% extends 'landing/base.html' %}
 {% load i18n %}
+{% get_current_language as lang %}
 {% block title %}{% trans "Addresses" %}{% endblock %}
 {% block offer %}{% endblock %}
 {% block click_item %}{% endblock %}
@@ -9,23 +10,24 @@
             <a href="{% url "profile" %}" id="account"
                class="block cursor-pointer text-shadow-md text-white irsans-b py-5 text-center border-b border-white border-opacity-30 trs-all-300 bg-white bg-opacity-0 hover:bg-opacity-10">{% trans "User profile" %}</a>
             <a href="{% url "address" %}" id="addrss"
-                 class="cursor-pointer block text-shadow-md text-white irsans-b py-5 text-center border-b border-white border-opacity-30 trs-all-300 bg-white bg-opacity-10">{% trans "Registered addresses" %}</a>
+               class="cursor-pointer block text-shadow-md text-white irsans-b py-5 text-center border-b border-white border-opacity-30 trs-all-300 bg-white bg-opacity-10">{% trans "Registered addresses" %}</a>
             <a href="{% url "user_orders" %}" id="order"
-                 class="cursor-pointer block text-shadow-md text-white irsans-b py-5 text-center border-b border-white border-opacity-30 trs-all-300 bg-white bg-opacity-0 hover:bg-opacity-10">{% trans "Registered orders" %}</a>
+               class="cursor-pointer block text-shadow-md text-white irsans-b py-5 text-center border-b border-white border-opacity-30 trs-all-300 bg-white bg-opacity-0 hover:bg-opacity-10">{% trans "Registered orders" %}</a>
             <a href="{% url "user_offcode" %}" id="offcode"
-                 class="cursor-pointer block text-shadow-md text-white irsans-b py-5 text-center border-b border-white border-opacity-30 trs-all-300 bg-white bg-opacity-0 hover:bg-opacity-10">{% trans "Active discount codes" %}</a>
+               class="cursor-pointer block text-shadow-md text-white irsans-b py-5 text-center border-b border-white border-opacity-30 trs-all-300 bg-white bg-opacity-0 hover:bg-opacity-10">{% trans "Active discount codes" %}</a>
         </div>
-        <div id="main" class="left col-span-1 sm:col-span-2 md:col-span-3 py-4 pt-0 pl-4 pr-4 sm:pr-0">
+        <div id="main"
+             class="left col-span-1 sm:col-span-2 md:col-span-3 py-4 pt-0 {% if lang == "en-US" %}pr-4 pl-4 sm:pl-0 {% else %}pl-4 pr-4 sm:pr-0 {% endif %}">
             {% if object_list %}
                 {% for address in object_list %}
-                    <div id="{{ address.id }}"
-                         class="address text-white Vazir mt-5 bg-gray-700 rounded-md grid grid-cols-2 p-4 gap-4 cursor-pointer hover:bg-gray-600 trs-all-300 selected">
-                        <p class="">{% trans "Country" %} : {{ address.country }}</p>
-                        <p class="">{% trans "City" %} : {{ address.city }}</p>
-                        <p class="">{% trans "Postal code" %} : {{ address.postal_code }}</p>
-                        <p class="">{% trans "No" %} : {{ address.no }}</p>
-                        <p class="col-span-2">{% trans "Address" %} : {{ address.address }}</p>
-                    </div>
+                    <a id="{{ address.id }}" onclick="AddressEditable($(this))"
+                       class="address text-white Vazir mt-5 bg-gray-700 rounded-md grid grid-cols-2 p-4 gap-4 cursor-pointer hover:bg-gray-600 trs-all-300 selected">
+                        <p class="country">{% trans "Country" %} : <span>{{ address.country }}</span></p>
+                        <p class="city">{% trans "City" %} : <span>{{ address.city }}</span></p>
+                        <p class="postal">{% trans "Postal code" %} : <span>{{ address.postal_code }}</span></p>
+                        <p class="no">{% trans "No" %} : <span>{{ address.no }}</span></p>
+                        <p class="address col-span-2">{% trans "Address" %} : <span>{{ address.address }}</span></p>
+                    </a>
                 {% endfor %}
             {% else %}
                 <center class="col-span-2">
@@ -46,7 +48,8 @@
                     <input class="trs-all-300 inline-block py-4 w-full rounded-md px-3 bg-black bg-opacity-30 mb-4 text-white"
                            type="number" id="lng" name="lng"
                            placeholder="{% trans "(Optional)" %}"><br>
-                    <label for="country" class="inline-block w-full mb-2 mr-3 text-white">{% trans "Country" %} : </label>
+                    <label for="country" class="inline-block w-full mb-2 mr-3 text-white">{% trans "Country" %}
+                        : </label>
                     <input class="trs-all-300 inline-block py-4 w-full rounded-md px-3 bg-black bg-opacity-30 mb-4 text-white"
                            type="text" id="country" name="country"
                            placeholder="{% trans "Please enter your country" %}"><br>
@@ -141,6 +144,97 @@
                         window.location.replace("{% url "address" %}");
                     }
                 })
+            })
+        }
+
+        function AddressEditable(_this) {
+            let addrs_id = _this.attr("id")
+            let country = _this.children("p.country").children("span").text()
+            let city = _this.children("p.city").children("span").text()
+            let postal = _this.children("p.postal").children("span").text()
+            let no = _this.children("p.no").children("span").text()
+            let address = _this.children("p.address").children("span").text()
+
+            Swal.fire({
+                title: '{% trans 'تغییر در آدرس' %}',
+                html:
+                    '<input id="swal-input1" placeholder="{% trans "Please enter your country" %}" value="' + country + '" class="swal2-input rtl text-right">' +
+                    '<input id="swal-input2" placeholder="{% trans "Please enter your country" %}" value="' + city + '" class="swal2-input rtl text-right">' +
+                    '<input id="swal-input3" placeholder="{% trans "Please enter your podtal code" %}" value="' + no + '" class="swal2-input rtl text-right">' +
+                    '<input id="swal-input4" placeholder="{% trans "Please enter your zip code" %}" value="' + postal + '" class="swal2-input rtl text-right">' +
+                    '<input id="swal-input5" placeholder="{% trans "Please enter your address" %}" value="' + address + '" class="swal2-input rtl text-right">',
+                focusConfirm: false,
+                showDenyButton: true,
+                confirmButtonText: '{% trans "Update" %}',
+                denyButtonText: '{% trans "Delete" %}',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "{% url "api:address" %}detail/" + addrs_id,
+                        type: 'PATCH', contentType: 'application/json',
+                        data: JSON.stringify({
+                            'country': $('#swal-input1').val(),
+                            'city': $('#swal-input2').val(),
+                            'no': Number($('#swal-input3').val()),
+                            'postal_code': $('#swal-input4').val(),
+                            'address': $('#swal-input5').val(),
+                        }),
+                        error: function (xhr, status, error) {
+                            let err = JSON.parse(xhr.responseText);
+                            let _text = ""
+                            $.each(err, function (k, v) {
+                                _text += "<p>" + k + v + "</p>"
+                            })
+
+                            Swal.fire({
+                                icon: 'error',
+                                title: '{% trans "Control the inputs!" %}',
+                                html: _text,
+                                showConfirmButton: false, timer: 8500, timerProgressBar: true,
+                            })
+                        }
+                    }).done(function () {
+                        Swal.fire({
+                            icon: 'success',
+                            title: '{% trans "Updated!" %}',
+                            showConfirmButton: false, timer: 3000, timerProgressBar: true,
+                        }).then((result) => {
+                            if (result.dismiss) {
+                                window.location.replace("{% url "address" %}");
+                            }
+                        })
+                    })
+
+                } else if (result.isDenied) {
+                    $.ajax({
+                        url: "{% url "api:address" %}detail/" + addrs_id,
+                        type: 'DELETE',
+                        error: function (xhr, status, error) {
+                            let err = JSON.parse(xhr.responseText);
+                            let _text = ""
+                            $.each(err, function (k, v) {
+                                _text += "<p>" + k + v + "</p>"
+                            })
+
+                            Swal.fire({
+                                icon: 'error',
+                                title: '{% trans "Control the inputs!" %}',
+                                html: _text,
+                                showConfirmButton: false, timer: 8500, timerProgressBar: true,
+                            })
+                        }
+                    }).done(function () {
+                        Swal.fire({
+                            icon: 'success',
+                            title: '{% trans "Deleted!" %}',
+                            showConfirmButton: false, timer: 3000, timerProgressBar: true,
+                        }).then((result) => {
+                            if (result.dismiss) {
+                                window.location.replace("{% url "address" %}");
+                            }
+                        })
+                    })
+                }
             })
         }
     </script>

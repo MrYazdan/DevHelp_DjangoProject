@@ -60,6 +60,7 @@ class BaseModel(models.Model):
 
     def deleter(self):
         self.is_deleted = True
+        self.save()
 
 
 class CustomUserManager(UserManager):

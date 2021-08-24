@@ -36,9 +36,9 @@
                         <span class="float-left">{{ item.price }}</span>
                     </a>
                 {% endfor %}
-                <h2 class="irsans-b pb-4 mb-3 text-shadow-md text-xl">{% trans "Total price" %} : {{ order.total_price }}</h2>
-                <h2 class="irsans-b pb-4 mb-3 text-shadow-md text-xl">{% trans "Total discount" %} : {{ order.total_discount }}</h2>
-                <h2 class="irsans-b pb-4 mb-3 text-shadow-md text-xl">{% trans "Total discount code" %} : {{ order.total_offcode }}</h2>
+                <h2 class="irsans-b pb-4 mb-3 text-shadow-md text-xl">{% trans "Total price" %} : {{ order.total_price }} <span class="mx-2 opacity-50">{% trans "Toman" %}</span></h2>
+                <h2 class="irsans-b pb-4 mb-3 text-shadow-md text-xl">{% trans "Total discount" %} : {{ order.total_discount }} <span class="mx-2 opacity-50">{% trans "Toman" %}</span></h2>
+                <h2 class="irsans-b pb-4 mb-3 text-shadow-md text-xl">{% trans "Total discount code" %} : {{ order.total_offcode }} <span class="mx-2 opacity-50">{% trans "Toman" %}</span></h2>
                 <hr>
                 <span class="block text-lg text-center text-shadow-md text-4xl font-bold mt-8">{% trans "Final price" %} : <span
                                         id="final">{{ order.final_price|sub:order.total_offcode }}</span> {% trans "Toman" %}</span>
