@@ -2,12 +2,13 @@ import uuid
 from jdatetime import datetime as dt
 from django.db import models
 from django_jalali.db import models as jmodels
-from core.models import User, BaseModel, Address
-from products.models import Product, OffCode
+from core.models import User, LogicalModel, Address, TimeStampMixin
+from discount.models import OffCode
+from products.models import Product
 from django.utils.translation import gettext_lazy as _, get_language
 
 
-class Status(BaseModel):
+class Status(LogicalModel):
     state_en = models.CharField(verbose_name=_("English Order Status State"), max_length=90,
                                 help_text=_("This is english order status state"))
     state_fa = models.CharField(verbose_name=_("Persian Order Status State"), max_length=90,
@@ -35,7 +36,7 @@ class Status(BaseModel):
         return self.state
 
 
-class Order(BaseModel):
+class Order(LogicalModel, TimeStampMixin):
     owner = models.ForeignKey(to=User, on_delete=models.CASCADE, verbose_name=_("Order Owner"),
                               help_text=_("This is owner for buy cart item"))
     status = models.ForeignKey(verbose_name=_("Status State"), to=Status, on_delete=models.CASCADE,
@@ -45,9 +46,9 @@ class Order(BaseModel):
                                               help_text=_("This is payment datetime"))
     address = models.ForeignKey(to=Address, on_delete=models.SET_NULL, null=True, blank=True,
                                 verbose_name=_("User address"), help_text=_("This is user address for your order"))
-    recepie_id = models.CharField(max_length=64, verbose_name=_("Recepie ID"),
-                                  help_text=_("This is recepie id for this order"), default="".join(
-            list(filter(lambda x: x.isnumeric(), str(uuid.uuid4()).split("-")[0]))))
+    recepie_id = models.CharField(
+        max_length=64, verbose_name=_("Recepie ID"), help_text=_("This is recepie id for this order"),
+        default=f"{owner.phone[-2:]}{owner.id}{id}", unique=True)
 
     class Meta:
         verbose_name = _('Order Cart')
@@ -73,6 +74,7 @@ class Order(BaseModel):
         return sum([order_item.final_price for order_item in self.orderitem_set.all()])
 
     def paid(self):
+        # TODO : Remove status id
         self.status = Status.objects.get(id=2)
         self.payment_datetime = dt.now()
         self.save()
@@ -81,7 +83,7 @@ class Order(BaseModel):
         return str(self.owner.username)
 
 
-class OrderItem(BaseModel):
+class OrderItem(LogicalModel):
     order = models.ForeignKey(to=Order, on_delete=models.CASCADE, verbose_name=_("Order"),
                               help_text=_("This is order cart"))
     product = models.ForeignKey(to=Product, on_delete=models.CASCADE, verbose_name=_("Product"),
@@ -106,4 +108,4 @@ class OrderItem(BaseModel):
         return self.product.discount_count * self.count
 
     def __str__(self):
-        return f"item: {self.order.owner}"
+        return f"({self.order.recepie_id}) : {self.product.title}"

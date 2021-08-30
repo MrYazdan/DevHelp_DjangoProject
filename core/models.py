@@ -1,4 +1,5 @@
 from django.contrib.auth.models import AbstractUser, UserManager
+from django.core import validators
 from django.core.validators import MinLengthValidator
 from django.db import models
 from django_jalali.db import models as jmodels
@@ -9,7 +10,7 @@ from django.utils.translation import gettext_lazy as _
 class BaseManager(models.Manager):
 
     def get_queryset(self):
-        return super().get_queryset().filter(is_deleted=False, is_active=True)
+        return super().get_queryset().filter(is_deleted=False)
 
     # define method for access all querysets
     def get_archive(self):
@@ -19,28 +20,13 @@ class BaseManager(models.Manager):
     def get_deleted_list(self):
         return super().get_queryset().filter(is_deleted=True)
 
-    # define active profile item
-    def get_active_list(self):
-        return self.get_queryset().filter(is_active=True)
-
     # define deactive profile item
     def get_deactive_list(self):
         return self.get_queryset().filter(is_active=False)
 
 
-# BaseModel :
-class BaseModel(models.Model):
-    # usually columns
-    create_time = jmodels.jDateTimeField(
-        auto_now_add=True,
-        verbose_name=_("Created time"),
-        help_text=_("This is created time")
-    )
-    modify_time = jmodels.jDateTimeField(
-        auto_now=True,
-        verbose_name=_("Modified time"),
-        help_text=_("This is modified time")
-    )
+# Logical Model :
+class LogicalModel(models.Model):
     is_deleted = models.BooleanField(
         default=False,
         verbose_name=_("Deleted status"),
@@ -52,7 +38,6 @@ class BaseModel(models.Model):
         help_text=_("This is active status")
     )
 
-    # initilize manager
     objects = BaseManager()
 
     class Meta:
@@ -61,6 +46,26 @@ class BaseModel(models.Model):
     def deleter(self):
         self.is_deleted = True
         self.save()
+
+    def deactive(self):
+        self.is_active = False
+        self.save()
+
+
+class TimeStampMixin(models.Model):
+    create_time = jmodels.jDateTimeField(
+        auto_now_add=True,
+        verbose_name=_("Created time"),
+        help_text=_("This is created time")
+    )
+    modify_time = jmodels.jDateTimeField(
+        auto_now=True,
+        verbose_name=_("Modified time"),
+        help_text=_("This is modified time")
+    )
+
+    class Meta:
+        abstract = True
 
 
 class CustomUserManager(UserManager):
@@ -77,13 +82,20 @@ class CustomUserManager(UserManager):
 class User(AbstractUser):
     USERNAME_FIELD = 'phone'
 
-    phone = models.CharField(max_length=11, unique=True)
-    ncode = models.CharField(max_length=10, validators=[MinLengthValidator(10)], unique=True, null=True, blank=True)
+    phone = models.CharField(max_length=11, unique=True, validators=[
+        validators.RegexValidator(regex='^(\+98|0)?9\d{9}$',
+                                  message=_("Phone number must be entered in the true IR (iran) format."),
+                                  code=_('invalid IR phone number'))
+    ])
+    ncode = models.CharField(max_length=10, validators=[
+        MinLengthValidator(10),
+
+    ], unique=True, null=True, blank=True)
 
     objects = CustomUserManager()
 
 
-class Address(models.Model):
+class Address(LogicalModel):
     owner = models.ForeignKey(to="User", on_delete=models.CASCADE)
     lat = models.FloatField(null=True, blank=True, default=None)
     lng = models.FloatField(null=True, blank=True, default=None)

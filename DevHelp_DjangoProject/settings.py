@@ -41,12 +41,15 @@ INSTALLED_APPS = [
     'mathfilters',
     'rest_framework',
     'django_jalali',
+    'thumbnails',
 
     # my applications
     'api',
     'account',
     'category',
     'core',
+    'discount',
+    'image',
     'order',
     'products',
     'settings',
@@ -105,6 +108,44 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+THUMBNAILS = {
+    'METADATA': {
+        'BACKEND': 'thumbnails.backends.metadata.DatabaseBackend',
+    },
+    'STORAGE': {
+        'BACKEND': 'django.core.files.storage.FileSystemStorage',
+        # You can also use Amazon S3 or any other Django storage backends
+    },
+    'SIZES': {
+        'small': {
+            'PROCESSORS': [
+                {'PATH': 'thumbnails.processors.resize', 'width': 10, 'height': 10},
+                {'PATH': 'thumbnails.processors.crop', 'width': 80, 'height': 80}
+            ],
+            'POST_PROCESSORS': [
+                {
+                    'PATH': 'thumbnails.post_processors.optimize',
+                    'png_command': 'optipng -force -o7 "%(filename)s"',
+                    'jpg_command': 'jpegoptim -f --strip-all "%(filename)s"',
+                },
+            ],
+        },
+        'large': {
+            'PROCESSORS': [
+                {'PATH': 'thumbnails.processors.resize', 'width': 20, 'height': 20},
+                {'PATH': 'thumbnails.processors.flip', 'direction': 'horizontal'}
+            ],
+        },
+        'watermarked': {
+            'PROCESSORS': [
+                {'PATH': 'thumbnails.processors.resize', 'width': 20, 'height': 20},
+                # Only supports PNG. File must be of the same size with thumbnail (20 x 20 in this case)
+                {'PATH': 'thumbnails.processors.add_watermark', 'watermark_path': 'watermark.png'}
+            ],
+        }
+    }
+}
 
 LOGIN_URL = "/account/login"
 LOGIN_REDIRECT_URL = '/'

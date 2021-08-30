@@ -1,98 +1,18 @@
 from django.db import models
-from django_jalali.db import models as jmodels
-from core.models import BaseModel
+from core.models import LogicalModel, TimeStampMixin
 from core.models import User
 from category.models import Category
 from django.utils.translation import gettext_lazy as _, get_language
-from jdatetime import datetime as dt
 from core.utils import *
-
-
-class DiscountManager(models.Manager):
-
-    def get_queryset(self):
-        return super().get_queryset().filter(active=True)
-
-    def get_all(self):
-        return super().get_queryset()
-
-
-class Discount(models.Model):
-    title_en = models.CharField(
-        max_length=150, verbose_name=_("English title"), help_text=_("This is english name for discount item"))
-    title_fa = models.CharField(
-        max_length=150, verbose_name=_("Persian title"), help_text=_("This is persian name for discount item"))
-    active_from = jmodels.jDateTimeField(auto_now_add=True, verbose_name=_("From datetime"),
-                                         help_text=_("This is start discount datetime "))
-    active_to = jmodels.jDateTimeField(verbose_name=_("Expire datetime"),
-                                       help_text=_("This is expire discount datetime "))
-    active = models.BooleanField(default=True, verbose_name=_("Is Active"), help_text=_("This is time "))
-    count_use = models.PositiveIntegerField(default=1, verbose_name=_("Count of use"),
-                                            help_text=_("This is count for use off code and expire"))
-    last_used = jmodels.jDateTimeField(default=None, null=True, blank=True)
-    max_price = models.PositiveIntegerField(verbose_name=_("Max Discount Price"), default=None, null=True, blank=True,
-                                            help_text=_("This is max discount price item"))
-    percent = models.PositiveIntegerField(verbose_name=_("Discount Percent"),
-                                          help_text=_("This is discount percent"))
-
-    objects = DiscountManager()
-
-    @property
-    def title(self):
-        return self.title_en if get_language() == "en-US" else self.title_fa
-
-    def deactive(self):
-        self.active = False
-        self.save()
-
-    def final_discount(self, price: int):
-        _max = self.max_price
-        _discount = round((self.percent * price) / 100)
-        return _max if _discount >= _max else _discount
-
-    def expire_checker(self):
-        now = dt.now()
-        if self.active_from <= now < self.active_to:
-            return True
-        self.deactive()
-        return False
-
-    def __str__(self):
-        return self.title
-
-
-class OffCode(Discount):
-    code = models.CharField(max_length=80, verbose_name=_("Code for discount"), default=str(uuid.uuid4()).split("-")[0],
-                            help_text=_("This is unique code for discount"), unique=True)
-    for_users = models.ManyToManyField(User, default=None, null=True, blank=True, verbose_name=_("For users"),
-                                       help_text=_("this is off code availble for selected users"))
-
-    # for_products = models.ManyToManyField(User, default=None, null=True, blank=True, verbose_name=_("For users"),
-    #                                    help_text=_("this is off code availble for selected users"))
-    # for_categories = models.ManyToManyField(User, default=None, null=True, blank=True, verbose_name=_("For users"),
-    #                                    help_text=_("this is off code availble for selected users"))
-
-    class Meta:
-        verbose_name = _("OFFCode")
-        verbose_name_plural = _("OFFCodes")
-
-    def checker(self, user: User):
-        return (user in self.for_users.all()) and self.active
+from discount.models import Discount
+from image.models import MultiImages
 
 
 class ExtraProductManager(models.Manager):
-
-    def get_queryset(self):
-        return super().get_queryset().filter(is_deleted=False, is_active=True)
-
-    def get_product_by_id(self, product_id):
-        return self.get_queryset().filter(id=product_id)
-
-    def get_product_by_category_url(self, category_url):
-        return self.get_queryset().filter(category__url=category_url)
+    pass
 
 
-class Product(BaseModel):
+class Product(LogicalModel, TimeStampMixin):
     title_en = models.CharField(
         max_length=150, verbose_name=_("English title"),
         help_text=_("This is english name of product item")
@@ -120,11 +40,8 @@ class Product(BaseModel):
     price = models.PositiveIntegerField(verbose_name=_("Price item"), help_text=_("This is price item"))
     discount = models.ForeignKey(to=Discount, on_delete=models.SET_NULL, verbose_name=_("Discount"),
                                  help_text=_("This is discount for product item"), null=True, blank=True, default=None)
-    image = models.ImageField(
-        upload_to=Controllers.Image.img_renamer,
-        verbose_name=_("Product Image"),
-        help_text=_("This is image of product item")
-    )
+    image = models.OneToOneField(MultiImages, on_delete=models.CASCADE, verbose_name=_("Product Images"),
+                                 help_text=_("This is images list of product item"))
     category = models.ForeignKey(
         to=Category, on_delete=models.CASCADE,
         verbose_name=_("Category of product"),
@@ -138,12 +55,12 @@ class Product(BaseModel):
         default=False, verbose_name=_("Offer"),
         help_text=_("This is status of offer product")
     )
-    count_inventory = models.PositiveIntegerField(verbose_name=_("Count In Inventory"),
+    count_inventory = models.PositiveIntegerField(verbose_name=_("Count In Inventory"), default=1,
                                                   help_text=_("This is count of item in inventory"))
     count_buy = models.PositiveIntegerField(verbose_name=_("Count Of Buy"), default=0,
                                             help_text=_("This is count of buy item"))
-    url = models.SlugField(verbose_name=_("Link"), default=Controllers.Product.url_creator, unique=True,
-                           help_text=_("This is url or link name item -> /products/'url'"))
+    url = models.URLField(verbose_name=_("Link"), default=Controllers.Product.url_creator, unique=True,
+                          help_text=_("This is url or link name item -> /products/'url'"))
 
     class Meta:
         verbose_name = _("Product")
@@ -170,10 +87,6 @@ class Product(BaseModel):
     @property
     def discount_count(self):
         return self.discount.final_discount(self.price) if self.discount else 0
-
-    @property
-    def product_url(self):
-        return f"/products/{self.url}"
 
     @property
     def viewed(self):

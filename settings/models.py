@@ -1,31 +1,35 @@
 from django.core import validators
 from django.db import models
-from core.models import BaseModel, User
+from core.models import LogicalModel, User, TimeStampMixin
 from django.utils.translation import gettext_lazy as _, get_language
 from core.utils import Controllers
 
 
-class SochialAccount(BaseModel):
+class SochialAccount(LogicalModel, TimeStampMixin):
     name_fa = models.CharField(
-        max_length=50, verbose_name=_("Persian name"),
+        max_length=60, verbose_name=_("Persian name"),
         help_text=_("This is persian name of sochial accounts")
     )
     name_en = models.CharField(
-        max_length=50, verbose_name=_("English name"),
+        max_length=60, verbose_name=_("English name"),
         help_text=_("This is english name of sochial accounts")
     )
-    url = models.CharField(
-        max_length=50, verbose_name=_("Link"),
-        help_text=_("This is link of sochial accounts")
+    url = models.URLField(
+        max_length=120, verbose_name=_("Link"),
+        help_text=_("This is link of sochial accounts -> sample : 'https://instagram.com/myaccounts' ")
     )
     gb_ico = models.CharField(
-        max_length=50, verbose_name=_("Icon"),
-        help_text=_("This is icon of sochial accounts from gorbeh icon")
+        max_length=50, verbose_name=_("Icon"), validators=[
+            validators.RegexValidator(regex='^(\+98|0)?9\d{9}$',
+                                      message=_('GB Icon must be start with "gb_" and  end with alphabet char'),
+                                      code=_('invalid gb ico'))
+        ],
+        help_text=_("This is icon of sochial accounts from gorbeh icon -> sample : 'gb_telegram' ")
     )
 
     class Meta:
-        verbose_name = _("SochialAccount")
-        verbose_name_plural = _("SochialAccounts")
+        verbose_name = _("Sochial Account")
+        verbose_name_plural = _("Sochial Accounts")
 
     @property
     def name(self):
@@ -35,7 +39,7 @@ class SochialAccount(BaseModel):
         return self.name
 
 
-class Site(models.Model):
+class Site(LogicalModel, TimeStampMixin):
     title_fa = models.CharField(max_length=90, verbose_name=_("Website Persian Title"),
                                 help_text=_("This is persian website title"))
     title_en = models.CharField(max_length=90, verbose_name=_("Website English Title"),
@@ -64,17 +68,21 @@ class Site(models.Model):
     address_en = models.CharField(max_length=400, blank=True, default=_("Please enter your persian site address"),
                                   null=True, verbose_name=_("English Address"),
                                   help_text=_("This is english address for your website"))
-    url = models.CharField(max_length=90, verbose_name=_("Website Link"), blank=True, null=True,
-                           default=_("Please complete site url"),
-                           help_text=_("This is url or link your website without 'http://'"))
+    url = models.URLField(max_length=90, verbose_name=_("Website Link"), blank=True, null=True,
+                          default=_("Please complete site url"),
+                          help_text=_("This is url or link your website without 'http://'"))
     version = models.FloatField(verbose_name=_("Site Version"), default=1.0,
                                 help_text=_("This is site version - default = 1.0"))
-    phone = models.CharField(max_length=11, null=True, blank=True, verbose_name=_("Phone Number"),
-                             help_text=_("This is phone number for your website"))
-    mobile = models.CharField(max_length=11, null=True, blank=True, verbose_name=_("Mobile Phone Number"),
-                              help_text=_("This is mobile phone number for your website"))
-    email = models.CharField(max_length=80, null=True, blank=True, verbose_name=_("Email Address"),
-                             help_text=_("This is email address for your website"))
+    phone = models.CharField(validators=[
+        validators.RegexValidator(regex='^(\+98|0)?9\d{9}$',
+                                  message=_("Phone number must be entered in the true IR (iran) format."),
+                                  code=_('invalid IR phone number'))
+    ],
+        max_length=13, verbose_name=_("Phone"),
+        help_text=_("This is IR phone number of sender"))
+
+    email = models.EmailField(max_length=80, null=True, blank=True, verbose_name=_("Email Address"),
+                              help_text=_("This is email address for your website"))
     about_fa = models.TextField(verbose_name="Persian About-us", default="Please enter persian about-us text",
                                 help_text=_("This is persian about text for your website"), null=True, blank=True)
     about_en = models.TextField(verbose_name="English About-us", default="Please enter english about-us text",
@@ -131,24 +139,38 @@ class Site(models.Model):
 
     @property
     def full_title(self):
-        return self.title + " " + self.sub_title
+        return f"{self.title} {self.sub_title}"
 
     def __str__(self):
-        return self.title
+        return self.full_title
 
 
-class Contact(models.Model):
+class Contact(TimeStampMixin):
+    is_read = models.BooleanField(default=False, verbose_name=_("Readed"), help_text=_("This is Readed Message"))
     user = models.ForeignKey(to=User, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_("User contact"),
                              help_text=_("This user id to send message"))
     name = models.CharField(max_length=50, verbose_name=_("Sender Name"), help_text=_("This is name of sender message"))
-    phone_regex = validators.RegexValidator(regex=r'^\+?1?\d{10,13}$',
-                                            message=_("Phone number must be entered in the true format."))
-    phone = models.CharField(validators=[phone_regex], max_length=17, verbose_name=_("Phone"),
-                             help_text=_("This is phone number of sender"))
-    email = models.CharField(max_length=80, verbose_name=_("Email"), help_text=_("This is mail address of sender"),
-                             null=True, blank=True, validators=[validators.EmailValidator])
+    phone = models.CharField(validators=[
+        validators.RegexValidator(regex='^(\+98|0)?9\d{9}$',
+                                  message=_("Phone number must be entered in the true IR (iran) format."),
+                                  code=_('invalid IR phone number'))
+    ],
+        max_length=13, verbose_name=_("Phone"),
+        help_text=_("This is IR phone number of sender"))
+    email = models.EmailField(max_length=80, verbose_name=_("Email"), help_text=_("This is mail address of sender"),
+                              null=True, blank=True)
     msg = models.TextField(verbose_name=_("Message"), help_text=_("This is message of sender"))
 
-    class Meta:
-        verbose_name = _("Contact Message")
-        verbose_name_plural = _("Contact Messages")
+    def read_msg(self):
+        self.is_read = True
+        self.save()
+        return True
+
+
+class Meta:
+    verbose_name = _("Contact Message")
+    verbose_name_plural = _("Contact Messages")
+
+
+def __str__(self):
+    return self.name

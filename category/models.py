@@ -1,10 +1,10 @@
 from django.db import models
-from core.models import BaseModel
+from core.models import LogicalModel, TimeStampMixin
 from django.utils.translation import gettext_lazy as _, get_language
 from core.utils import *
 
 
-class Category(BaseModel):
+class Category(LogicalModel, TimeStampMixin):
     name_fa = models.CharField(
         max_length=150,
         verbose_name=_("Category FA Name"),
@@ -22,19 +22,16 @@ class Category(BaseModel):
         verbose_name=_("Category image"),
         help_text=_("This is image of category item")
     )
-    url = models.SlugField(unique=True, verbose_name=_("Link"),
-                           help_text=_("This is url or link of category -> /category/'url'")
-                           )
+    url = models.URLField(unique=True, verbose_name=_("Link"),
+                          help_text=_("This is url or link of category -> /category/'url'"))
     description_en = models.TextField(
         default="This is test english category description", blank=True, null=True,
         verbose_name=_("English description"),
-        help_text=_("This is english description for this category")
-    )
+        help_text=_("This is english description for this category"))
     description_fa = models.TextField(
         default="این متن تست برای توضیحات بخش دسته بندی است", blank=True, null=True,
         verbose_name=_("Persian description"),
-        help_text=_("This is persian description for this category")
-    )
+        help_text=_("This is persian description for this category"))
 
     @property
     def description(self):
@@ -43,10 +40,6 @@ class Category(BaseModel):
     @property
     def name(self):
         return self.name_en if get_language() == "en-US" else self.name_fa
-
-    @property
-    def url_full(self):
-        return f"/category/{self.url}"
 
     class Meta:
         verbose_name = _("Category")
