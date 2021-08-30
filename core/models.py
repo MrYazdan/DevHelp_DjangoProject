@@ -51,6 +51,10 @@ class LogicalModel(models.Model):
         self.is_active = False
         self.save()
 
+    def activate(self):
+        self.is_active = True
+        self.save()
+
 
 class TimeStampMixin(models.Model):
     create_time = jmodels.jDateTimeField(
