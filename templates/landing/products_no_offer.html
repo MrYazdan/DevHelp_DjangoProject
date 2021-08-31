@@ -16,12 +16,12 @@
         {% endif %}
         {% if object_list %}
             {% for i in object_list %}
-                <a href="{{ i.product_url }}" class="relative rounded-lg block">
+                <a href="{% url "add_to_cart" i.url %}" class="relative rounded-lg block">
                     {% if i.is_offer %}
                         <div class="ribbon ribbon-r"><span>{% trans "Special sale" %}</span></div>
                     {% endif %}
                     <div class="relative">
-                        <img src="{{ i.image.url }}" alt="{{ i.title_en }}"
+                        <img src="{{ i.image.default }}" alt="{{ i.title_en }}"
                              class=" border-8 border-red-500 rounded-t-lg">
                         <h3 class="yekan-b absolute bg-black trs-all-300 bg-opacity-70 text-white text-2xl sm:text-sm md:text-lg lg:text-2xl pr-2 pl-5 sm:py-1 lg:py-2 py-2 bottom-0 right-0 rounded-tl-3xl">{{ i.title }}</h3>
                     </div>

@@ -13,6 +13,7 @@ class CategoryProductShow(ListView):
 
     def get_context_data(self, *args, object_list=None, **kwargs):
         kwargs["category"] = Category.objects.filter(url=self.kwargs["url"]).first()
+        kwargs["title_page"] = Category.objects.filter(url=self.kwargs["url"]).first().name
         return super().get_context_data(object_list=object_list, **kwargs)
 
 

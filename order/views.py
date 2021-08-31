@@ -39,7 +39,7 @@ def add_to_cart(request, **kwargs):
             status = Status.objects.get(id=1)
             order = Order.objects.create(owner=request.user, status=status)
         # get products by id
-        product = Product.objects.get(id=request.GET.get('item_id'))
+        product = Product.objects.get(id=kwargs['id'])
         # check for orderitem in cart
         orderitem = order.orderitem_set.filter(product=product).first()
         if orderitem:

@@ -9,7 +9,7 @@
         <div class="relative pb-20 sm:border-l-2 px-4 border-opacity-10">
             <h1 class="text-center text-xl border-b border-opacity-10 pb-4 text-yellow-400">{{ object.title }}</h1>
             <div class="relative {% if lang != "en-US" %}Vazir{% endif %}">
-                <span class="block"><i class="gb gb_widgets ml-2"></i>{% trans "Category" %} : <a class="text-green-500" href="/category/{{ object.category.url }}">{{ object.category }}</a></span>
+                <span class="block"><i class="gb gb_widgets ml-2"></i>{% trans "Category" %} : <a class="text-green-500" href="{% url "category" object.category.url %}">{{ object.category }}</a></span>
                 <span class="block my-3"><i class="gb gb_refresh ml-2"></i>{% trans "Update" %} : {{ object.modify_time|jformat:"%d / %m / %Y" }}</span>
                 <span class="block my-3"><i class="gb gb_person_pin ml-2"></i>{% trans "Inventory" %} : {{ object.count_inventory }}</span>
                 <span class="block my-3"><i class="gb gb_local_offer ml-2"></i>{% trans "Number purchased" %} : {{ object.count_buy }}</span>
@@ -19,12 +19,12 @@
                 {% endif %}
                 <span class="block my-3"><i class="gb gb_remove_red_eye ml-2"></i>{% trans "Views" %} : {{ object.viewed }}</span>
             </div>
-            <a href="/cart/add?item_id={{ object.id }}"
+            <a href="{% url "add_to_cart" object.id %}"
                class="absolute block bottom-4 right-0 left-0 z-20 mx-4 text-center bg-blue-500 text-white rounded-lg py-2"
                title="{% trans "Add to cart" %}"><i class="gb gb_add_circle_outline ml-1 text-xl"></i>{% trans "Add to cart" %}</a>
         </div>
         <div class="py-7 px-6 col-span-2">
-            <img src="{{ object.image.url }}" alt="{{ object.title_en }}" class="w-full sm:w-auto block rounded-lg">
+            <img src="{{ object.image.default }}" alt="{{ object.title_en }}" style="width:100%" class="sm:w-auto block rounded-lg">
             <p class="mt-8">{{ object.description }}</p>
         </div>
     </div>

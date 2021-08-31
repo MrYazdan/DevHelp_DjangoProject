@@ -59,8 +59,8 @@ class Product(LogicalModel, TimeStampMixin):
                                                   help_text=_("This is count of item in inventory"))
     count_buy = models.PositiveIntegerField(verbose_name=_("Count Of Buy"), default=0,
                                             help_text=_("This is count of buy item"))
-    url = models.URLField(verbose_name=_("Link"), default=Controllers.Product.url_creator, unique=True,
-                          help_text=_("This is url or link name item -> /products/'url'"))
+    url = models.SlugField(verbose_name=_("Link"), default=Controllers.Product.url_creator, unique=True,
+                           help_text=_("This is url or link name item -> /products/'url'"))
 
     class Meta:
         verbose_name = _("Product")
