@@ -9,7 +9,7 @@ class CategoryProductShow(ListView):
 
     def get_queryset(self):
         category_url = self.kwargs['url']
-        return Product.extra_objects.get_product_by_category_url(category_url)
+        return Product.objects.filter(category__url=category_url)
 
     def get_context_data(self, *args, object_list=None, **kwargs):
         kwargs["category"] = Category.objects.filter(url=self.kwargs["url"]).first()
@@ -18,5 +18,5 @@ class CategoryProductShow(ListView):
 
 class Categories(ListView):
     template_name = "landing/categories.html"
-    queryset = Category.objects.get_active_list()
+    queryset = Category.objects.all()
     paginate_by = 4

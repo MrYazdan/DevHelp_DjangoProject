@@ -2,7 +2,7 @@ from django.contrib.auth import mixins
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, ListView
 from order.models import Order
-from products.models import OffCode
+from discount.models import OffCode
 from .forms import LoginForm, RegisterForm, ForgetForm
 from django.contrib.auth import login, authenticate
 from core.models import User, Address

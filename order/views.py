@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from core.models import Address
 from order.models import Order, Status
-from products.models import Product, OffCode
+from products.models import Product
 from jdatetime import datetime as dt
 
 

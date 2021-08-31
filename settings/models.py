@@ -20,7 +20,7 @@ class SochialAccount(LogicalModel, TimeStampMixin):
     )
     gb_ico = models.CharField(
         max_length=50, verbose_name=_("Icon"), validators=[
-            validators.RegexValidator(regex='^(\+98|0)?9\d{9}$',
+            validators.RegexValidator(regex='^[g][b][_]{1}[a-z]\w+[a-z]+$',
                                       message=_('GB Icon must be start with "gb_" and  end with alphabet char'),
                                       code=_('invalid gb ico'))
         ],
@@ -164,7 +164,7 @@ class Contact(TimeStampMixin):
     def read_msg(self):
         self.is_read = True
         self.save()
-        return True
+        return self.is_read
 
 
 class Meta:

@@ -48,7 +48,7 @@ class Order(LogicalModel, TimeStampMixin):
                                 verbose_name=_("User address"), help_text=_("This is user address for your order"))
     recepie_id = models.CharField(
         max_length=64, verbose_name=_("Recepie ID"), help_text=_("This is recepie id for this order"),
-        default=f"{owner.phone[-2:]}{owner.id}{id}", unique=True)
+        unique=True)
 
     class Meta:
         verbose_name = _('Order Cart')

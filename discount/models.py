@@ -64,6 +64,8 @@ class OffCode(BaseDiscountModel):
                             help_text=_("This is unique code for discount"), unique=True)
     for_users = models.ManyToManyField(User, default=None, null=True, blank=True, verbose_name=_("For users"),
                                        help_text=_("this is off code availble for selected users"))
+    limit = models.PositiveIntegerField(verbose_name=_("Limit Use"), help_text=_("This is limit of use off code"),
+                                        default=1)
 
     class Meta:
         verbose_name = _("OFFCode")

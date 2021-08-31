@@ -12,7 +12,7 @@ class Comment(LogicalModel, TimeStampMixin):
                                 help_text=_("This is product for set comment for this"))
     reply = models.ForeignKey('Comment', null=True, blank=True, on_delete=models.SET_NULL, verbose_name=_("Reply"),
                               help_text=_("This is reply for this commnet"))
-    comment = models.TextField(max_length=1000, verbose_name=_("Comment Message"),
+    message = models.TextField(max_length=1000, verbose_name=_("Comment Message"),
                                help_text=_("This is comment message"))
 
     class Meta:

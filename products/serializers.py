@@ -1,7 +1,8 @@
 from rest_framework import serializers
 
 from core.serializers import UserSerializer
-from products.models import Product, Discount, OffCode
+from products.models import Product
+from discount.models import Discount, OffCode
 from category.serializers import CategorySerializer
 
 

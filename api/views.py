@@ -3,7 +3,8 @@ from rest_framework import status, response
 from order.serializer import OrderSerializer, OrderItemSerializer
 from settings.models import Contact
 from settings.serializers import ContactSerializer
-from products.models import Product, Discount, OffCode, Category
+from products.models import Product, Category
+from discount.models import Discount, OffCode
 from products.serializers import ProductSerializer, DiscountSerializer, OffCodeSerializer, CategorySerializer
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, RetrieveUpdateAPIView, \
     UpdateAPIView
