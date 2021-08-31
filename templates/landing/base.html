@@ -65,7 +65,9 @@
     {% render_partial "partial_offer" %}
 {% endblock %}
 <!-- body content -->
+<div id="body_block" style="min-height: 20vh;">
 {% block body %}{% endblock %}
+</div>
 <!-- click content -->
 {% block click_item %}
     {% include "landing/layout/_ClickItem.html" %}

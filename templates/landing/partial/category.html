@@ -1,15 +1,19 @@
 {% load i18n %}
 <div class="mx-auto max-w-screen-lg w-11/12">
-    <div class="mostly-views trs-all-300 grid grid-cols-6 sm:{% if categories|length < 12 %}grid-cols-6 gap-8{% else %}grid-cols-12 gap-4{% endif %} relative rounded-md overflow-hidden py-4">
-        <div timer="3000" timer-dot="1000"
-             class="col-span-6 sm:col-span-12 flex absolute bg-gray-900 irsans-b inset-0 text-white items-center justify-center my-4 rounded bg-opacity-95 text-sm sm:text-lg md:text-xl">
-            {% trans "Uploading the latest categories" %}
+    {% if categories|length %}
+        <div class="mostly-views trs-all-300 grid grid-cols-6 sm:{% if categories|length < 12 %}grid-cols-6 gap-8{% else %}grid-cols-12 gap-4{% endif %} relative rounded-md overflow-hidden py-4">
+            <div timer="3000" timer-dot="1000"
+                 class="col-span-6 sm:col-span-12 flex absolute bg-gray-900 irsans-b inset-0 text-white items-center justify-center my-4 rounded bg-opacity-95 text-sm sm:text-lg md:text-xl">
+                {% trans "Uploading the latest categories" %}
+            </div>
+            {% for cat in categories %}
+                <a hover-class="animate__animated animate__jello animate__infinite" title="{{ cat.name }}"
+                   href="{% url "category" cat.url %}">
+                    <img src="{{ cat.image.url }}" alt="{{ cat.name_en }}" class="rounded">
+                </a>
+            {% endfor %}
         </div>
-        {% for cat in categories %}
-            <a hover-class="animate__animated animate__jello animate__infinite" title="{{ cat.name }}"
-               href="{{ cat.url_full }}">
-                <img src="{{ cat.image.url }}" alt="{{ cat.name_en }}" class="rounded">
-            </a>
-        {% endfor %}
-    </div>
+    {% else %}
+        <h1 class="py-2 text-gray-500 text-center text-shadow-md font-bold">{% trans "There are no categories to display !" %}</h1>
+    {% endif %}
 </div>

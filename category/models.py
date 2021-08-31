@@ -22,8 +22,8 @@ class Category(LogicalModel, TimeStampMixin):
         verbose_name=_("Category image"),
         help_text=_("This is image of category item")
     )
-    url = models.URLField(unique=True, verbose_name=_("Link"),
-                          help_text=_("This is url or link of category -> /category/'url'"))
+    url = models.SlugField(unique=True, verbose_name=_("Link"),
+                           help_text=_("This is url or link of category -> /category/'url'"))
     description_en = models.TextField(
         default="This is test english category description", blank=True, null=True,
         verbose_name=_("English description"),

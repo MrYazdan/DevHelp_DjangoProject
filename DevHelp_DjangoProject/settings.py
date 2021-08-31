@@ -151,7 +151,7 @@ LOGIN_URL = "/account/login"
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
-LANGUAGE_CODE = 'en-US'
+LANGUAGE_CODE = 'fa-IR'
 
 TIME_ZONE = 'UTC'
 
