@@ -97,8 +97,7 @@ class User(AbstractUser):
     ])
     ncode = models.CharField(max_length=10, validators=[
         MinLengthValidator(10),
-
-    ], unique=True, null=True, blank=True)
+    ], unique=True, null=True, blank=True, default="")
 
     objects = CustomUserManager()
 

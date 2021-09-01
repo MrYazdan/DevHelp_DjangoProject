@@ -3,11 +3,12 @@
 {% block title %}{{ title_page }}{% endblock %}
 {% get_current_language as lang %}
 {% block offer %}{% endblock %}
+{% block click_item %}{% endblock %}
 {% block body %}
     <div class="mt-4 mb-8 max-w-screen-lg w-11/12 mx-auto grid gap-4 grid-cols-1 sm:grid-cols-3 md:grid-cols-4"
-         style="min-height: 50vh;">
+         style="min-height: 20vh;">
         {% if category %}
-            <div class="col-span-4 mb-10">
+            <div class="col-span-1 sm:col-span-3 md:col-span-4 mb-10">
                 <h1 class="font-bold irsans-b text-white text-shadow-md"><i
                         class="gb gb_info"></i>&#0160{% trans "About the category" %} {{ category.name }}</h1>
                 <hr class="border-b mb-4 rounded-full border-gray-600">
@@ -16,7 +17,7 @@
         {% endif %}
         {% if object_list %}
             {% for i in object_list %}
-                <a href="{% url "add_to_cart" i.url %}" class="relative rounded-lg block">
+                <a href="{% url "product" i.url %}" class="relative rounded-lg block">
                     {% if i.is_offer %}
                         <div class="ribbon ribbon-r"><span>{% trans "Special sale" %}</span></div>
                     {% endif %}
@@ -37,7 +38,7 @@
                     </div>
                 </a>
             {% endfor %}
-            <section class="container col-span-1 sm:md:col-span-3 md:col-span-4 text-center Vazir">
+            <section class="container col-span-1 sm:col-span-3 md:col-span-4 text-center Vazir">
                 <nav class="pagination block">
                     {% if page_obj.has_previous %}
                         <a href="?page={{ page_obj.previous_page_number }}" class="prev">&laquo;</a>
@@ -64,4 +65,3 @@
         {% endif %}
     </div>
 {% endblock %}
-{% block click_item %}{% endblock %}

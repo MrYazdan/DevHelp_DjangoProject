@@ -9,23 +9,56 @@
         <div class="relative pb-20 sm:border-l-2 px-4 border-opacity-10">
             <h1 class="text-center text-xl border-b border-opacity-10 pb-4 text-yellow-400">{{ object.title }}</h1>
             <div class="relative {% if lang != "en-US" %}Vazir{% endif %}">
-                <span class="block"><i class="gb gb_widgets ml-2"></i>{% trans "Category" %} : <a class="text-green-500" href="{% url "category" object.category.url %}">{{ object.category }}</a></span>
-                <span class="block my-3"><i class="gb gb_refresh ml-2"></i>{% trans "Update" %} : {{ object.modify_time|jformat:"%d / %m / %Y" }}</span>
-                <span class="block my-3"><i class="gb gb_person_pin ml-2"></i>{% trans "Inventory" %} : {{ object.count_inventory }}</span>
-                <span class="block my-3"><i class="gb gb_local_offer ml-2"></i>{% trans "Number purchased" %} : {{ object.count_buy }}</span>
+                <span class="block"><i class="gb gb_widgets ml-2"></i>{% trans "Category" %} : <a class="text-green-500"
+                                                                                                  href="{% url "category" object.category.url %}">{{ object.category }}</a></span>
+                <span class="block my-3"><i
+                        class="gb gb_refresh ml-2"></i>{% trans "Update" %} : {{ object.modify_time|jformat:"%d / %m / %Y" }}</span>
+                <span class="block my-3"><i
+                        class="gb gb_person_pin ml-2"></i>{% trans "Inventory" %} : {{ object.count_inventory }}</span>
+                <span class="block my-3"><i
+                        class="gb gb_local_offer ml-2"></i>{% trans "Number purchased" %} : {{ object.count_buy }}</span>
                 <span class="block my-3"><i class="gb gb_attach_money ml-2"></i>{% trans "Price" %} : {{ object.price }}</span>
                 {% if object.discount_count %}
-                    <span class="block my-3"><i class="gb gb_local_atm ml-2"></i>{% trans "Discount" %} : {{ object.discount_count }}</span>
+                    <span class="block my-3"><i
+                            class="gb gb_local_atm ml-2"></i>{% trans "Discount" %} : {{ object.discount_count }}</span>
                 {% endif %}
-                <span class="block my-3"><i class="gb gb_remove_red_eye ml-2"></i>{% trans "Views" %} : {{ object.viewed }}</span>
+                <span class="block my-3"><i
+                        class="gb gb_remove_red_eye ml-2"></i>{% trans "Views" %} : {{ object.viewed }}</span>
             </div>
             <a href="{% url "add_to_cart" object.id %}"
                class="absolute block bottom-4 right-0 left-0 z-20 mx-4 text-center bg-blue-500 text-white rounded-lg py-2"
-               title="{% trans "Add to cart" %}"><i class="gb gb_add_circle_outline ml-1 text-xl"></i>{% trans "Add to cart" %}</a>
+               title="{% trans "Add to cart" %}"><i
+                    class="gb gb_add_circle_outline ml-1 text-xl"></i>{% trans "Add to cart" %}</a>
         </div>
         <div class="py-7 px-6 col-span-2">
-            <img src="{{ object.image.default }}" alt="{{ object.title_en }}" style="width:100%" class="sm:w-auto block rounded-lg">
+            <img src="{{ object.image.default }}" alt="{{ object.title_en }}" style="width:100%"
+                 class="sm:w-auto block rounded-lg">
             <p class="mt-8">{{ object.description }}</p>
         </div>
+    </div>
+
+    <!-- comment -->
+    <div class="mb-10 p-6 text-white bg-black rounded-lg bg-opacity-50 max-w-screen-lg w-11/12 mx-auto">
+        <!-- show -->
+
+        <!-- form -->
+        <form class="w-full block grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <h2 class="text-shadow-md text-lg col-span-1 sm:col-span-2"><i
+                    class="gb gb_create gb_s24"></i>&#0160 {% trans "Add a new comment" %}</h2>
+            <input class="col-span-1 w-full block bg-white bg-opacity-10 rounded border border-gray-400 leading-normal resize-none w-full py-2 px-3 font-medium placeholder-gray-300 focus:outline-none"
+                   name="fullname" value="{{ user.get_full_name }}" placeholder="{% trans "Please enter your name" %}"
+                   required>
+            <input class="col-span-1 w-full block bg-white bg-opacity-10 rounded border border-gray-400 leading-normal resize-none w-full py-2 px-3 font-medium placeholder-gray-300 focus:outline-none"
+                   name="email" value="{{ user.enail }}" placeholder="{% trans "Please enter your email" %}"
+                   required>
+            <textarea
+                    class="col-span-1 sm:col-span-2 w-full block bg-white bg-opacity-10 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-300 focus:outline-none"
+                    name="message" placeholder="{% trans 'Type Your Comment' %}" required></textarea>
+            <div class="relative w-full h-8 col-span-1 sm:col-span-2">
+                <input type='submit'
+                       class="absolute text-yellow-900 font-bold left-0 bg-yellow-500 absolute py-2 px-4 border border-yellow-800 rounded-md hover:bg-yellow-600 trs-all-300 cursor-pointer"
+                       value='{% trans "Post Comment" %}'>
+            </div>
+        </form>
     </div>
 {% endblock %}
