@@ -1,5 +1,7 @@
 from time import sleep
 from rest_framework import status, response
+from account.models import Comment
+from account.serializers import CommentSerializer
 from order.serializer import OrderSerializer, OrderItemSerializer
 from settings.models import Contact
 from settings.serializers import ContactSerializer
@@ -7,12 +9,36 @@ from products.models import Product, Category
 from discount.models import Discount, OffCode
 from products.serializers import ProductSerializer, DiscountSerializer, OffCodeSerializer, CategorySerializer
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, RetrieveUpdateAPIView, \
-    UpdateAPIView
+    UpdateAPIView, ListAPIView, CreateAPIView
 from core.serializers import UserSerializer, AddressSerializer, ChangePasswordSerializer
 from core.models import User, Address
 from django.utils.translation import gettext_lazy as _, gettext as _g
 from .utils import *
 from api.permissions import *
+
+
+# Account
+class CommentListView(ListAPIView):
+    serializer_class = CommentSerializer
+
+    def get_queryset(self):
+        return Comment.objects.all() if self.request.user.is_superuser else Comment.objects.filter(is_accept=True)
+
+
+class CommentCreateView(CreateAPIView):
+    serializer_class = CommentSerializer
+
+
+class CommentDetailView(RetrieveUpdateDestroyAPIView):
+    serializer_class = CommentSerializer
+
+    def perform_update(self, serializer):
+        super().perform_update(serializer) if self.request.user.is_superuser else \
+            response.Response({"error": _("Your access is forbidden!")}, status=status.HTTP_403_FORBIDDEN)
+
+    def perform_destroy(self, instance):
+        super().perform_destroy(instance) if self.request.user.is_superuser else \
+            response.Response({"error": _("Your access is forbidden!")}, status=status.HTTP_403_FORBIDDEN)
 
 
 # Category
@@ -51,6 +77,7 @@ class UserDetailView(RetrieveUpdateAPIView):
 
 class ChangePasswordView(UpdateAPIView):
     serializer_class = ChangePasswordSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
     def update(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)

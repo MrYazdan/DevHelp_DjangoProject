@@ -3,6 +3,10 @@ from .views import *
 
 app_name = "api"
 urlpatterns = [
+    # Account
+    path('comments/list', CommentListView.as_view(), name='comment_list'),
+    path('comments/create', CommentCreateView.as_view(), name='comment_create'),
+    path('comments/details/<int:pk>', CommentDetailView.as_view(), name='comment_detail'),
     # Category
     path('categories/', CategoryListView.as_view()),
     path('categories/detail/<slug:url>', CategoryDetailView.as_view()),

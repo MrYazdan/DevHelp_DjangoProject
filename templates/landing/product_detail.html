@@ -40,9 +40,17 @@
     <!-- comment -->
     <div class="mb-10 p-6 text-white bg-black rounded-lg bg-opacity-50 max-w-screen-lg w-11/12 mx-auto">
         <!-- show -->
-
+        {% if comments %}
+            <div class="grid grid-cols-12 text-white">
+                {% for comment in comments %}
+                    <h1>{{ comment.message }}</h1>
+                {% endfor %}
+            </div>
+        {% endif %}
         <!-- form -->
-        <form class="w-full block grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <form action="{% url "api:comment_create" %}" method="post"
+              class="comment-form w-full block grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <input type="hidden" name="reply" value="">
             <h2 class="text-shadow-md text-lg col-span-1 sm:col-span-2"><i
                     class="gb gb_create gb_s24"></i>&#0160 {% trans "Add a new comment" %}</h2>
             <input class="col-span-1 w-full block bg-white bg-opacity-10 rounded border border-gray-400 leading-normal resize-none w-full py-2 px-3 font-medium placeholder-gray-300 focus:outline-none"
@@ -55,10 +63,70 @@
                     class="col-span-1 sm:col-span-2 w-full block bg-white bg-opacity-10 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-300 focus:outline-none"
                     name="message" placeholder="{% trans 'Type Your Comment' %}" required></textarea>
             <div class="relative w-full h-8 col-span-1 sm:col-span-2">
-                <input type='submit'
-                       class="absolute text-yellow-900 font-bold left-0 bg-yellow-500 absolute py-2 px-4 border border-yellow-800 rounded-md hover:bg-yellow-600 trs-all-300 cursor-pointer"
-                       value='{% trans "Post Comment" %}'>
+                <button type="button" onclick="CommentSender($(this))"
+                        class="absolute text-yellow-900 font-bold left-0 bg-yellow-500 absolute py-2 px-4 border border-yellow-800 rounded-md hover:bg-yellow-600 trs-all-300 cursor-pointer">
+                    {% trans "Post Comment" %}</button>
             </div>
         </form>
     </div>
+{% endblock %}
+{% block extra_foot %}
+    <script>
+        function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
+                }
+            }
+        });
+
+        let comment_form = $('.comment-form').clone()
+
+        function CommentSender(_this) {
+            const form = _this.parent().parent()
+            let fullname = form.children('input[name=fullname]').val()
+            let email = form.children('input[name=email]').val()
+            let product = Number('{{ object.id }}')
+            let reply = form.children('input[name=reply]').val()
+            let msg = form.children('textarea[name=message]').val()
+
+            $.ajax({
+                url: '{% url "api:comment_create" %}',
+                type: 'POST', contentType: 'application/json',
+                data: JSON.stringify({
+                    "fullname": fullname,
+                    "email": email,
+                    "product": product,
+                    "reply": reply,
+                    "message": msg
+                }),
+                error: function (xhr, status, error) {
+                    let err = JSON.parse(xhr.responseText);
+                    let _text = ""
+                    $.each(err, function (k, v) {
+                        let key = $("[name=" + k + "]").attr("name")
+                        _text += key + v + "\n"
+                    })
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: '{% trans "Control the inputs!" %}',
+                        text: _text,
+                        showConfirmButton: false, timer: 8500, timerProgressBar: true,
+                    })
+                }
+            }).done(function () {
+                Swal.fire({
+                    icon: 'success',
+                    title: '{% trans "Comment were posted!" %}',
+                    showConfirmButton: false, timer: 3500, timerProgressBar: true,
+                }).then((result) => {if (result.dismiss) {window.location.reload()}})
+            })
+        }
+    </script>
 {% endblock %}
