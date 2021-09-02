@@ -41,28 +41,105 @@
     <div class="mb-10 p-6 text-white bg-black rounded-lg bg-opacity-50 max-w-screen-lg w-11/12 mx-auto">
         <!-- show -->
         {% if comments %}
-            <div class="grid grid-cols-12 text-white">
+            <div class="grid grid-cols-12 gap-4 text-white border-b pb-6 mb-6 border-gray-600">
                 {% for comment in comments %}
-                    <h1>{{ comment.message }}</h1>
+                    <div class="col-span-12" comment-id="{{ comment.id }}">
+                        <h1 class="text-xl irsans-b relative text-shadow-md">
+                            <span class="absolute text-shadow-none Vazir text-gray-500 text-lg {% if lang == "en-US" %}right-0{% else %}left-0{% endif %}">{{ comment.create_time|jformat:"%d / %m / %Y" }}</span>
+                            <i class="gb gb_account_circle gb_s24"></i>&#0160{{ comment.fullname }} :</h1>
+                        <div class="px-4 border-t pb-20 border-gray-700 py-4 relative bg-strip-sm px-1 rounded-b-lg" style="min-height: 100px">{{ comment.message }}
+                            {% if comment.replies.all %}
+                                {% for reply1 in comment.replies.all %}
+                                    <div class="pt-6" comment-id="{{ reply1.id }}">
+                                        <h1 class="text-xl irsans-b relative text-shadow-md">
+                                            <span class="absolute text-shadow-none Vazir text-gray-500 text-lg {% if lang == "en-US" %}right-0{% else %}left-0{% endif %}">{{ reply1.create_time|jformat:"%d / %m / %Y" }}</span>
+                                            <i class="gb gb_account_circle gb_s24"></i>&#0160{{ reply1.fullname }} :</h1>
+                                        <div class="px-4 border-t pb-20 border-gray-700 py-4 relative bg-strip-sm px-1 rounded-b-lg" style="min-height: 100px">{{ reply1.message }}
+                                            {% if reply1.replies.all %}
+                                                {% for reply2 in reply1.replies.all %}
+                                                    <div class="pt-6" comment-id="{{ reply2.id }}">
+                                                        <h1 class="text-xl irsans-b relative text-shadow-md">
+                                                            <span class="absolute text-shadow-none Vazir text-gray-500 text-lg {% if lang == "en-US" %}right-0{% else %}left-0{% endif %}">{{ reply2.create_time|jformat:"%d / %m / %Y" }}</span>
+                                                            <i class="gb gb_account_circle gb_s24"></i>&#0160{{ reply2.fullname }} :</h1>
+                                                        <div class="px-4 border-t pb-20 border-gray-700 py-4 relative bg-strip-sm px-1 rounded-b-lg" style="min-height: 100px">{{ reply2.message }}
+                                                            {% if reply2.replies.all %}
+                                                                {% for reply3 in reply2.replies.all %}
+                                                                    <div class="pt-6" comment-id="{{ reply3.id }}">
+                                                                        <h1 class="text-xl irsans-b relative text-shadow-md">
+                                                                            <span class="absolute text-shadow-none Vazir text-gray-500 text-lg {% if lang == "en-US" %}right-0{% else %}left-0{% endif %}">{{ reply3.create_time|jformat:"%d / %m / %Y" }}</span>
+                                                                            <i class="gb gb_account_circle gb_s24"></i>&#0160{{ reply3.fullname }} :</h1>
+                                                                        <div class="px-4 border-t pb-20 border-gray-700 py-4 relative bg-strip-sm px-1 rounded-b-lg" style="min-height: 100px">{{ reply3.message }}
+                                                                            {% if reply3.replies.all %}
+                                                                                {% for reply4 in reply3.replies.all %}
+                                                                                    <div class="pt-6" comment-id="{{ reply4.id }}">
+                                                                                        <h1 class="text-xl irsans-b relative text-shadow-md">
+                                                                                            <span class="absolute text-shadow-none Vazir text-gray-500 text-lg {% if lang == "en-US" %}right-0{% else %}left-0{% endif %}">{{ reply4.create_time|jformat:"%d / %m / %Y" }}</span>
+                                                                                            <i class="gb gb_account_circle gb_s24"></i>&#0160{{ reply4.fullname }} :</h1>
+                                                                                        <div class="px-4 border-t pb-20 border-gray-700 py-4 relative bg-strip-sm px-1 rounded-b-lg" style="min-height: 100px">{{ reply4.message }}
+                                                                                            {% if reply4.replies.all %}
+                                                                                                {% for reply5 in reply4.replies.all %}
+                                                                                                    <div class="pt-6" comment-id="{{ reply5.id }}">
+                                                                                                        <h1 class="text-xl irsans-b relative text-shadow-md">
+                                                                                                            <span class="absolute text-shadow-none Vazir text-gray-500 text-lg {% if lang == "en-US" %}right-0{% else %}left-0{% endif %}">{{ reply5.create_time|jformat:"%d / %m / %Y" }}</span>
+                                                                                                            <i class="gb gb_account_circle gb_s24"></i>&#0160{{ reply5.fullname }} :</h1>
+                                                                                                        <div class="px-4 border-t pb-20 border-gray-700 py-4 relative bg-strip-sm px-1 rounded-b-lg" style="min-height: 100px">{{ reply5.message }}
+                                                                                                            {% if reply5.replies.all %}
+                                                                                                                {% for reply6 in reply5.replies.all %}
+                                                                                                                    <div class="pt-6" comment-id="{{ reply6.id }}">
+                                                                                                                        <h1 class="text-xl irsans-b relative text-shadow-md">
+                                                                                                                            <span class="absolute text-shadow-none Vazir text-gray-500 text-lg {% if lang == "en-US" %}right-0{% else %}left-0{% endif %}">{{ reply6.create_time|jformat:"%d / %m / %Y" }}</span>
+                                                                                                                            <i class="gb gb_account_circle gb_s24"></i>&#0160{{ reply6.fullname }} :</h1>
+                                                                                                                        <div class="px-4 border-t border-gray-700 py-4 relative bg-strip-sm px-1 rounded-b-lg" style="min-height: 100px">{{ reply6.message }}</div>
+                                                                                                                    </div>
+                                                                                                                {% endfor %}
+                                                                                                            {% endif %}
+                                                                                                            <button type="button" onclick="ReplyAlert($(this).parent().parent())" class="absolute bottom-4 text-shadow-none irsans-b trs-all-300 hover:bg-blue-600 hover:text-white text-gray-400 rounded-md bg-gray-700 py-2 px-3 text-lg {% if lang == "en-US" %}right-4{% else %}left-4{% endif %}">{% trans "Reply" %}</button>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                {% endfor %}
+                                                                                            {% endif %}
+                                                                                            <button type="button" onclick="ReplyAlert($(this).parent().parent())" class="absolute bottom-4 text-shadow-none irsans-b trs-all-300 hover:bg-blue-600 hover:text-white text-gray-400 rounded-md bg-gray-700 py-2 px-3 text-lg {% if lang == "en-US" %}right-4{% else %}left-4{% endif %}">{% trans "Reply" %}</button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                {% endfor %}
+                                                                            {% endif %}
+                                                                            <button type="button" onclick="ReplyAlert($(this).parent().parent())" class="absolute bottom-4 text-shadow-none irsans-b trs-all-300 hover:bg-blue-600 hover:text-white text-gray-400 rounded-md bg-gray-700 py-2 px-3 text-lg {% if lang == "en-US" %}right-4{% else %}left-4{% endif %}">{% trans "Reply" %}</button>
+                                                                        </div>
+                                                                    </div>
+                                                                {% endfor %}
+                                                            {% endif %}
+                                                            <button type="button" onclick="ReplyAlert($(this).parent().parent())" class="absolute bottom-4 text-shadow-none irsans-b trs-all-300 hover:bg-blue-600 hover:text-white text-gray-400 rounded-md bg-gray-700 py-2 px-3 text-lg {% if lang == "en-US" %}right-4{% else %}left-4{% endif %}">{% trans "Reply" %}</button>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            {% endif %}
+                                            <button type="button" onclick="ReplyAlert($(this).parent().parent())" class="absolute bottom-4 text-shadow-none irsans-b trs-all-300 hover:bg-blue-600 hover:text-white text-gray-400 rounded-md bg-gray-700 py-2 px-3 text-lg {% if lang == "en-US" %}right-4{% else %}left-4{% endif %}">{% trans "Reply" %}</button>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                            <button type="button" onclick="ReplyAlert($(this).parent().parent())" class="absolute bottom-4 text-shadow-none irsans-b trs-all-300 hover:bg-blue-600 hover:text-white text-gray-400 rounded-md bg-gray-700 py-2 px-3 text-lg {% if lang == "en-US" %}right-4{% else %}left-4{% endif %}">{% trans "Reply" %}</button>
+                        </div>
+                    </div>
                 {% endfor %}
             </div>
         {% endif %}
         <!-- form -->
         <form action="{% url "api:comment_create" %}" method="post"
-              class="comment-form w-full block grid grid-cols-1 sm:grid-cols-2 gap-6">
+              class="comment-form bg-strip-sm rounded-lg py-3 px-4 w-full block grid grid-cols-1 sm:grid-cols-2 gap-4">
             <input type="hidden" name="reply" value="">
-            <h2 class="text-shadow-md text-lg col-span-1 sm:col-span-2"><i
-                    class="gb gb_create gb_s24"></i>&#0160 {% trans "Add a new comment" %}</h2>
+            <h2 class="text-shadow-md text-lg text-center col-span-1 sm:col-span-2 mb-3 -mt-1">
+                <span class="rounded-b-lg bg-black bg-opacity-30 px-3 py-2"><i class="gb gb_create gb_s24"></i>&#0160 {% trans "Add a new comment" %}</span></h2>
             <input class="col-span-1 w-full block bg-white bg-opacity-10 rounded border border-gray-400 leading-normal resize-none w-full py-2 px-3 font-medium placeholder-gray-300 focus:outline-none"
                    name="fullname" value="{{ user.get_full_name }}" placeholder="{% trans "Please enter your name" %}"
                    required>
             <input class="col-span-1 w-full block bg-white bg-opacity-10 rounded border border-gray-400 leading-normal resize-none w-full py-2 px-3 font-medium placeholder-gray-300 focus:outline-none"
-                   name="email" value="{{ user.enail }}" placeholder="{% trans "Please enter your email" %}"
+                   name="email" value="{{ user.email }}" placeholder="{% trans "Please enter your email" %}"
                    required>
             <textarea
                     class="col-span-1 sm:col-span-2 w-full block bg-white bg-opacity-10 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-300 focus:outline-none"
-                    name="message" placeholder="{% trans 'Type Your Comment' %}" required></textarea>
-            <div class="relative w-full h-8 col-span-1 sm:col-span-2">
+                    name="message" placeholder="{% trans 'Please enter your comment' %}" required></textarea>
+            <div class="relative w-full h-8 col-span-1 sm:col-span-2 -mt-1 mb-2">
                 <button type="button" onclick="CommentSender($(this))"
                         class="absolute text-yellow-900 font-bold left-0 bg-yellow-500 absolute py-2 px-4 border border-yellow-800 rounded-md hover:bg-yellow-600 trs-all-300 cursor-pointer">
                     {% trans "Post Comment" %}</button>
@@ -126,6 +203,86 @@
                     title: '{% trans "Comment were posted!" %}',
                     showConfirmButton: false, timer: 3500, timerProgressBar: true,
                 }).then((result) => {if (result.dismiss) {window.location.reload()}})
+            })
+        }
+
+        function ReplyAlert(comment_main) {
+            let comment_id = Number(comment_main.attr("comment-id"))
+
+            Swal.fire({
+                title: '{% trans 'Reply Comment' %}',
+                html:
+                    '<input id="swal-input1" placeholder="{% trans "Please enter your name" %}" value="{{ user.get_full_name }}" class="swal2-input rtl">' +
+                    '<input id="swal-input2" placeholder="{% trans "Please enter your email" %}" value="{{ user.email }}" class="swal2-input rtl">' +
+                    '<textarea id="swal-input3" placeholder="{% trans "Please enter your comment" %}" class="swal2-textarea rtl text-right leading-normal resize-none w-full py-2 px-3" class="swal2-input rtl">',
+                focusConfirm: false,
+                showDenyButton: true,
+                confirmButtonText: '{% trans "Post Comment" %}',
+                denyButtonText: '{% trans "Cancel" %}',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "{% url "api:comment_create" %}",
+                        type: 'POST', contentType: 'application/json',
+                        data: JSON.stringify({
+                            'fullname': $('#swal-input1').val(),
+                            'email': $('#swal-input2').val(),
+                            'product': Number("{{ object.id }}"),
+                            'reply': comment_id,
+                            'message': $('#swal-input3').val(),
+                        }),
+                        error: function (xhr, status, error) {
+                            let err = JSON.parse(xhr.responseText);
+                            let _text = ""
+                            $.each(err, function (k, v) {
+                                _text += "<p>" + k + v + "</p>"
+                            })
+
+                            Swal.fire({
+                                icon: 'error',
+                                title: '{% trans "Control the inputs!" %}',
+                                html: _text,
+                                showConfirmButton: false, timer: 8500, timerProgressBar: true,
+                            })
+                        }
+                    }).done(function () {
+                        Swal.fire({
+                            icon: 'success',
+                            title: '{% trans "Comment were posted!" %}',
+                            showConfirmButton: false, timer: 3500, timerProgressBar: true,
+                        }).then((result) => {if (result.dismiss) {window.location.reload()}})
+                    })
+
+                } else if (result.isDenied) {
+                    $.ajax({
+                        url: "{% url "api:address" %}detail/" + addrs_id,
+                        type: 'DELETE',
+                        error: function (xhr, status, error) {
+                            let err = JSON.parse(xhr.responseText);
+                            let _text = ""
+                            $.each(err, function (k, v) {
+                                _text += "<p>" + k + v + "</p>"
+                            })
+
+                            Swal.fire({
+                                icon: 'error',
+                                title: '{% trans "Control the inputs!" %}',
+                                html: _text,
+                                showConfirmButton: false, timer: 8500, timerProgressBar: true,
+                            })
+                        }
+                    }).done(function () {
+                        Swal.fire({
+                            icon: 'success',
+                            title: '{% trans "Deleted!" %}',
+                            showConfirmButton: false, timer: 3000, timerProgressBar: true,
+                        }).then((result) => {
+                            if (result.dismiss) {
+                                window.location.replace("{% url "address" %}");
+                            }
+                        })
+                    })
+                }
             })
         }
     </script>
